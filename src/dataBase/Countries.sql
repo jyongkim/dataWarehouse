@@ -1,12 +1,4 @@
-CREATE TABLE IF NOT EXISTS `Countries` (
-  `id_region` INT,
-  `Code` VARCHAR(2) NOT NULL,
-  `Country` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`Code`),
-  FOREIGN KEY (`id_region`) REFERENCES Regions(`id_region`)
-);
-
-INSERT INTO `Countries` (`Code`,`Region`, `Country`) VALUES
+INSERT INTO 'Countries' ('Code', 'Country') VALUES
 ('AU', 'Australia'),
 ('CN', 'China'),
 ('JP', 'Japan'),
