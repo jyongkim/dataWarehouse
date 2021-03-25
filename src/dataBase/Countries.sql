@@ -1,4 +1,4 @@
-INSERT INTO 'Countries' ('Code', 'Country') VALUES
+INSERT INTO `Countries` (`id_country`, `Country`) VALUES
 ('AU', 'Australia'),
 ('CN', 'China'),
 ('JP', 'Japan'),
@@ -249,4 +249,5 @@ INSERT INTO 'Countries' ('Code', 'Country') VALUES
 ('GY', 'Guyana'),
 ('LA', 'Lao People''s Democratic Republic'),
 ('CU', 'Cuba'),
-('ET', 'Ethiopia');
+('ET', 'Ethiopia'),
+('AN', 'Antartida');
