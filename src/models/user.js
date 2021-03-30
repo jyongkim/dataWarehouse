@@ -11,19 +11,24 @@ let User = function(user) {
 User.create = (newUser, result) => {
     dbConn.query('INSERT INTO Users SET = ?', newUser, (err, res) => {
         err ? result(err, null) : result(null, res)
-    })
-}
+})}
 
 User.read = (result) => {
     dbConn.query('SELECT * FROM Users', (err, res) => {
         err ? result(err, null) : result(null, res)
-    })
-}
+})}
 
-User.update = () => {
-    
-}
+User.find = (id, result) => {
+    dbConn.query('SELECT * FROM Users WHERE id_user = ?', id, (err, res) => {
+        err ? result(err, null) : result(null, res)
+})}
 
-User.delete = () => {
-    
-}
+User.update = (id, user, result) => {
+    dbConn.query('UPDATE Users SET ? WHERE id_user = ?', [user, id], (err, res) => {
+        err ? result(err, null) : result(null, res)
+})}
+
+User.delete = (id, result) => {
+    dbConn.query('DELETE FROM Users WHERE id_user = ?', id, (err, res) => {
+        err ? result(err, null) : result(null, res)
+})}
