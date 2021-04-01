@@ -70,12 +70,14 @@ CREATE TABLE Contacts(
     `id_contact` INT AUTO_INCREMENT,
     `first_name` VARCHAR (50) NOT NULL,
     `last_name` VARCHAR (50) NOT NULL,
+    `doc_type` ENUM ('DNI', 'CI', 'Passport'),
+    `doc_num` VARCHAR (20),
     `position` VARCHAR (50) NOT NULL,
     `id_company` INT NOT NULL,
     `interest` ENUM ('0%', '25%', '50%', '75%', '100%'),
     `id_city` INT NOT NULL,
     PRIMARY KEY (`id_contact`),
-    UNIQUE KEY (`first_name`, `last_name`, `id_company`),
+    UNIQUE KEY (`doc_type`, `doc_num`),
     FOREIGN KEY (`id_city`) REFERENCES Cities (`id_city`)
 );
 
