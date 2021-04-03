@@ -9,7 +9,7 @@ let User = function(user) {
 }
 
 User.create = (newUser, result) => {
-    dbConn.query('INSERT INTO Users SET = ?', newUser, (err, res) => {
+    dbConn.query('INSERT INTO Users SET ?', newUser, (err, res) => {
         err ? result(err, null) : result(null, res)
 })}
 
@@ -29,6 +29,20 @@ User.update = (id, user, result) => {
 })}
 
 User.delete = (id, result) => {
+    // elimina las preferencias consultando contactos y consultando compañias
+    dbConn.query(`DELETE cp FROM contact_preferences AS cp
+    JOIN contacts AS con ON con.id_contact = cp.id_contact
+    JOIN companies AS com ON com.id_company = con.id_company
+    WHERE id_user = ?`, id)
+    // elimina los contactos consultando las compañias
+    dbConn.query(`DELETE con FROM contacts AS con
+    JOIN companies AS com ON con.id_company = com.id_company
+    WHERE id_user = ?`, id)
+    // elimina las compañias utilizando como referente el id_user
+    dbConn.query('DELETE FROM Companies WHERE id_user = ?', id)
+    // una vez eliminado todo, elimina el usuario y realiza el callback
     dbConn.query('DELETE FROM Users WHERE id_user = ?', id, (err, res) => {
         err ? result(err, null) : result(null, res)
 })}
+
+module.exports = User;
