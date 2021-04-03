@@ -1,4 +1,4 @@
-let dbConn = '';
+let dbConn = require('../dataBase/dbConn')
 
 let Company = function(company) {
     this.company = company.company

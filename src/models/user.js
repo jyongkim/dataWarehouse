@@ -1,4 +1,4 @@
-let dbConn = ''
+let dbConn = require('../dataBase/dbConn')
 
 let User = function(user) {
     this.id_role = user.id_role

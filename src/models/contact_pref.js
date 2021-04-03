@@ -1,4 +1,4 @@
-let dbConn = '';
+let dbConn = require('../dataBase/dbConn')
 
 let Preference = function(pref) {
     this.id_channel = pref.id_channel

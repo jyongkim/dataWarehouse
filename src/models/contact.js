@@ -1,4 +1,4 @@
-let dbConn = '';
+let dbConn = require('../dataBase/dbConn')
 
 let Contact = function(contact) {
     this.first_name = contact.first_name

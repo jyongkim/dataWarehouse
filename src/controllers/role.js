@@ -32,5 +32,4 @@ exports.delete = (req, res) => {
         err ? res.send(err) : res.send({
             message: 'El rol se eliminó con éxito.',
             data: role
-        })
-})}
+})})}

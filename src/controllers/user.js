@@ -37,5 +37,4 @@ exports.delete = (req, res) => {
         err ? res.send(err) : res.send({
             message: 'El usuario se eliminó con éxito.',
             data: user
-        })
-})}
+})})}
