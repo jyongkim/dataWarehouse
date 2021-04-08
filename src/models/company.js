@@ -16,8 +16,8 @@ Company.read = (id, result) => {
         err ? result(err, null) : result(null, res)
 })}
 
-Company.find = (id, company, result) => {
-    dbConn.query('SELECT * FROM Companies WHERE id_user = ? AND company LIKE ?', [id, '%' + company + '%'], (err, res) => {
+Company.find = (id, result) => {
+    dbConn.query('SELECT * FROM Companies WHERE id_company = ?', id, (err, res) => {
         err ? result(err, null) : result(null, res)
 })}
 
@@ -30,3 +30,5 @@ Company.delete = (id, result) => {
     dbConn.query('DELETE FROM Companies WHERE id_company = ?', id, (err, res) => {
         err ? result(err, null) : result(null, res)
 })}
+
+module.exports = Company;

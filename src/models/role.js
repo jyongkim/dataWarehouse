@@ -9,17 +9,19 @@ Role.create = (role, result) => {
         err ? result(err, null) : result(null, res)
 })}
 
-Roles.read = (result) => {
+Role.read = (result) => {
     dbConn.query('SELECT * FROM Roles', (err, res) => {
         err ? result(err, null) : result(null, res)
 })}
 
-Roles.update = (id, role, result) => {
+Role.update = (id, role, result) => {
     dbConn.query('UPDATE Roles SET ? WHERE id_role = ?', [role, id], (err, res) => {
         err ? result(err, null) : result(null, res)
 })}
 
-Roles.delete = (id, result) => {
+Role.delete = (id, result) => {
     dbConn.query('DELETE FROM Roles WHERE id_role = ?', id, (err, res) => {
         err ? result(err, null) : result(null, res)
 })}
+
+module.exports = Role;

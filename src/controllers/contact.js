@@ -16,11 +16,6 @@ exports.read = (req, res) => {
         err ? res.send(err) : res.send(contact)
 })}
 
-exports.find = (req, res) => {
-    Contact.find(req.params.id, req.body, (err, contact) => {
-        err ? res.send(err) : res.send(contact)
-})}
-
 exports.update = (req, res) => {
     (req.body.constructor == Object && Object.keys(req.body) == 0) ?
         res.status(400).send({

@@ -70,7 +70,7 @@ CREATE TABLE Contacts(
     `id_contact` INT AUTO_INCREMENT,
     `first_name` VARCHAR (50) NOT NULL,
     `last_name` VARCHAR (50) NOT NULL,
-    `doc_type` ENUM ('DNI', 'CI', 'Passport'),
+    `doc_type` ENUM ('ID', 'CI', 'Passport'),
     `doc_num` VARCHAR (20),
     `position` VARCHAR (50) NOT NULL,
     `id_company` INT NOT NULL,

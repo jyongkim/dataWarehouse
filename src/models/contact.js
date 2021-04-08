@@ -11,7 +11,7 @@ let Contact = function(contact) {
 }
 
 Contact.create = (id, newContact, result) => {
-    dbConn.query('INSERT INTO Contacts SET ? WHERE id_company = ?', [newContact, id], (err, res) => {
+    dbConn.query('INSERT INTO Contacts SET ?, id_company = ?', [newContact, id], (err, res) => {
         err ? result(err, null) : result(null, res)
 })}
 
@@ -34,3 +34,5 @@ Contact.delete = (id, result) => {
     dbConn.query('DELETE FROM Contacts WHERE id_contact = ?', id, (err, res) => {
         err ? result(err, null) : result(null, res)
 })}
+
+module.exports = Contact;
