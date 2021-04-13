@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const user = require('./routes/user');
 const company = require('./routes/company');
 const contact = require('./routes/contact');
@@ -7,7 +8,7 @@ const app = express();
 const port = process.env.PORT || 3200;
 
 // Endpoints.
-app.use(express.urlencoded({extended: true}));
+app.use(cors());
 app.use(express.json());
 app.listen(port, () => {console.log(`El puerto es: ${port}`)})
 app.get('/', (req, res) => {res.send({
