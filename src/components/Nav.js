@@ -5,9 +5,9 @@ class Nav extends React.Component{
         return (
             <nav>
                 <ul>
-                    <li><a href="">link1</a></li>
-                    <li><a href="">link2</a></li>
-                    <li><a href="">link3</a></li>
+                    {this.props.links.map((link, index) =>
+                        <li key={index}>{link}</li>
+                    )}
                 </ul>
             </nav>
         )}}
