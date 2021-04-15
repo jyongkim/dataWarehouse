@@ -16,9 +16,26 @@ Contact.create = (id, newContact, result) => {
 })}
 
 Contact.read = (id, result) => {
-    dbConn.query('SELECT * FROM Contacts WHERE id_company = ?', id, (err, res) => {
-        err ? result(err, null) : result(null, res)
-})}
+    dbConn.query(
+        `SELECT 
+            CONCAT(last_name," " ,first_name) AS contact,
+            CONCAT(country, " - ", region) AS region,
+            company,
+            position,
+            GROUP_CONCAT(channel) AS channel,
+            interest    
+                FROM contact_preferences AS cp
+                    JOIN contacts AS con ON con.id_contact = cp.id_contact
+                    JOIN companies AS com ON com.id_company = con.id_company
+                    JOIN users AS u ON u.id_user = com.id_user
+                    JOIN contact_channel AS cc ON cc.id_channel = cp.id_channel
+                    JOIN cities AS c ON c.id_city = con.id_city
+                    JOIN countries AS p ON p.id_country = c.id_country
+                    JOIN regions AS r ON r.id_region = p.id_region
+                GROUP BY cp.id_contact
+                ORDER BY last_name;`,
+id, (err, res) => err ? result(err, null) : result(null, res)
+)}
 
 Contact.find = (id, contact, result) => {
     dbConn.query('SELECT * FROM Contacts WHERE id_company = ? AND doc_num = ? AND id_city = ?', [id, contact.doc_num, contact.id_city], (err, res) => {
