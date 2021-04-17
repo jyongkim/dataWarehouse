@@ -1,33 +1,16 @@
-import React from 'react';
+import { Component } from 'react';
+import { Thead, Tbody } from './TableData';
 
-class Table extends React.Component{
+class Table extends Component{
     render() {
         return (
-            <table>
-                <thead>
-                    <th>Contacto</th>
-                    <th>Región/País</th>
-                    <th>Compañia</th>
-                    <th>Cargo</th>
-                    <th>Canal preferido</th>
-                    <th>Interes</th>
-                </thead>
-                <tbody>
-                    {   this.props.data.map((row, i) =>
-                        <tr key={i}>
-                            <td>
-                                <input type="checkbox" />
-                            </td>
-                            <td>{row.contact}</td>
-                            <td>{row.region}</td>
-                            <td>{row.company}</td>
-                            <td>{row.position}</td>
-                            <td>{row.channel}</td>
-                            <td>{row.interest}</td>
-                        </tr>
-                    )   }
-                </tbody>
-            </table>
+            this.props.data[0] ?
+            <table className="table">
+                <Thead title={this.props.data[0]} />
+                <Tbody data={this.props.data}/>
+            </table> : <p> No hay datos para mostrar. </p>
 )   }   }
+
+
 
 export default Table;

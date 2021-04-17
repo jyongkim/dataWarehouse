@@ -14,12 +14,33 @@ User.create = (newUser, result) => {
 })}
 
 User.read = (result) => {
-    dbConn.query('SELECT * FROM Users', (err, res) => {
+    dbConn.query(`SELECT
+    u.id_user AS ID,
+    role AS Rol,
+    user_name AS Usuario,
+    name AS Nombre,
+    COUNT(c.id_user) AS Compañías,
+    email AS "E-mail"
+    FROM Users AS u
+    JOIN Roles AS r ON u.id_role = r.id_role
+    JOIN Companies AS c ON c.id_user = u.id_user
+    GROUP BY c.id_user`, (err, res) => {
         err ? result(err, null) : result(null, res)
 })}
 
 User.find = (id, result) => {
-    dbConn.query('SELECT * FROM Users WHERE id_user = ?', id, (err, res) => {
+    dbConn.query(`SELECT
+    u.id_user AS ID,
+    role AS Rol,
+    user_name AS Usuario,
+    name AS Nombre,
+    COUNT(c.id_user) AS Compañías,
+    email AS "E-mail"
+    FROM Users AS u
+    JOIN Roles AS r ON u.id_role = r.id_role
+    JOIN Companies AS c ON c.id_user = u.id_user
+    WHERE u.id_user = ?
+    GROUP BY c.id_user`, id, (err, res) => {
         err ? result(err, null) : result(null, res)
 })}
 

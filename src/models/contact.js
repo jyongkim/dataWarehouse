@@ -18,12 +18,12 @@ Contact.create = (id, newContact, result) => {
 Contact.read = (id, result) => {
     dbConn.query(
         `SELECT 
-            CONCAT(last_name," " ,first_name) AS contact,
-            CONCAT(country, " - ", region) AS region,
-            company,
-            position,
-            GROUP_CONCAT(channel) AS channel,
-            interest    
+            CONCAT(last_name," " ,first_name) AS Contactos,
+            CONCAT(country, " - ", region) AS "País / Región",
+            company AS Compañía,
+            position AS Cargo,
+            GROUP_CONCAT(channel) AS "Canal preferido",
+            interest AS Interés    
                 FROM contact_preferences AS cp
                     JOIN contacts AS con ON con.id_contact = cp.id_contact
                     JOIN companies AS com ON com.id_company = con.id_company
