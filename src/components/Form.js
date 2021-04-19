@@ -1,13 +1,20 @@
 const Form = (props) => {
-    <form action={props.action} className={props.class}>
-        <FormFields  />
-    </form>
-}
+    return(
+        props.data.formData ?
+        <form className="form">
+            <FormFields data={props.data.formData} />
+            <button type="reset">Cancelar</button>
+            <button>Enviar</button>
+        </form> :
+        null
+)}
 
 const FormFields = (props) => {
-    <>
-        <label></label>
-        <input />
-    </>
-}
+    return(
+        props.data.map((field, i) => 
+            <div key={i}>
+                <label for={field.key}> {field.key}</label>
+                <input name={field.key} type={field.type} value={field.value || ''}/>
+            </div> 
+))}
 export default Form

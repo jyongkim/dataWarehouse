@@ -1,0 +1,127 @@
+{
+    "Login":{
+        "title": "Iniciar Sesión",
+        "formData": [
+            {
+                "key": "user_name",
+                "value": "jonathan_kim",
+                "type": "text"
+            },
+            {
+                "key": "user_name",
+                "value": "jonathan_kim",
+                "type": "password"
+            }
+        ]
+    },
+    "User": {
+        "title": "Creación/edición del usuario",
+        "formData": [
+            {
+                "key": "id_role",
+                "value": "1",
+                "type": "number"
+            },
+            {
+                "key": "name",
+                "value": "Jonathan Kim",
+                "type": "text"
+            },
+            {
+                "key": "user_name",
+                "value": "jonathankim",
+                "type": "text"
+            },
+            {
+                "key": "password",
+                "value": "987654",
+                "type": "password"
+            },
+            {
+                "key": "email",
+                "value": "123456@123456.com",
+                "type": "email"
+            }
+        ]
+    },
+    "Company": {
+        "title": "Creación/edición de la compañía",
+        "formData": [
+            {
+                "key": "company",
+                "value": " SpaceX",
+                "type": "text"
+            },
+            {
+                "key": "id_city",
+                "value": " 7308",
+                "type": "text"
+            },
+            {
+                "key": "address",
+                "value": " Reserva Ecológica",
+                "type": "text"
+            }
+        ]
+    },
+    "Contact": {
+        "title": "Creación/edición del contacto",
+        "formData": [
+            {
+                "key": "first_name",
+                "value": " Pepe",
+                "type": "text"
+            },
+            {
+                "key": "last_name",
+                "value": " Lui",
+                "type": "text"
+            },
+            {
+                "key": "doc_type",
+                "value": " 1",
+                "type": "text"
+            },
+            {
+                "key": "doc_num",
+                "value": " 123456789",
+                "type": "text"
+            },
+            {
+                "key": "position",
+                "value": " relative",
+                "type": "text"
+            },
+            {
+                "key": "interest",
+                "value": " 4",
+                "type": "range"
+            },
+            {
+                "key": "id_city",
+                "value": " 7308",
+                "type": "text"
+            }
+        ]
+    },
+    "Preference": {
+        "title": "Creación/edición de la preferencia",
+        "formData": [
+            {
+                "key": "id_channel",
+                "value": " 2",
+                "type": "text"
+            },
+            {
+                "key": "account",
+                "value": " @fulanodetal",
+                "type": "text"
+            },
+            {
+                "key": "preference",
+                "value": " 3",
+                "type": "range"
+            }
+        ]
+    }
+}
