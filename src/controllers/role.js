@@ -23,7 +23,7 @@ exports.update = (req, res) => {
             code: 'Error: 400.'
         }) : Role.update(req.params.id, req.body, (err, role) => {
             err ? res.send(err) : res.json({
-                message: '¡El rol se actualizó con éxito!',
+                message: 'El rol se actualizó con éxito.',
                 data: role
 })})}
 

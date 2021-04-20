@@ -23,7 +23,7 @@ exports.update = (req, res) => {
             code: 'Error: 400.'
         }) : Company.update(req.params.id, req.body, (err, company) => {
             err ? res.send(err) : res.json({
-                message: '¡La empresa se actualizó con éxito!',
+                message: 'La empresa se actualizó con éxito.',
                 data: company
 })})}
 

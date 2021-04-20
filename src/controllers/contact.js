@@ -7,7 +7,7 @@ exports.create = (req, res) => {
             code: 'Error: 400.'
         }) : Contact.create(req.params.id, req.body, (err, contact) => {
             err ? res.send(err) : res.json({
-                message: '¡El contacto se registró con éxito!',
+                message: 'El contacto se registró con éxito',
                 data: contact
 })})}
 
@@ -23,7 +23,7 @@ exports.update = (req, res) => {
             code: 'Error: 400.'
         }) : Contact.update(req.params.id, req.body, (err, contact) => {
             err ? res.send(err) : res.json({
-                message: '¡El contacto se actualizó con éxito!',
+                message: 'El contacto se actualizó con éxito.',
                 data: contact
 })})}
 

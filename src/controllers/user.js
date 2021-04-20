@@ -28,7 +28,7 @@ exports.update = (req, res) => {
             code: 'Error: 400.'
         }) : User.update(req.params.id, req.body, (err, user) => {
             err ? res.send(err) : res.json({
-                message: '¡El usuario se actualizó con éxito!',
+                message: 'El usuario se actualizó con éxito.',
                 data: user
 })})}
 

@@ -7,7 +7,7 @@ exports.create = (req, res) => {
             code: 'Error: 400.'
         }) : Pref.create(req.params.id, req.body, (err, pref) => {
             err ? res.send(err) : res.json({
-                message: '¡La preferencia se agregó con éxito!',
+                message: 'La preferencia se agregó con éxito.',
                 data: pref
 })})}
 
@@ -23,7 +23,7 @@ exports.update = (req, res) => {
             code: 'Error: 400.'
         }) : Pref.update(req.params.id, req.body, (err, pref) => {
             err ? res.send(err) : res.json({
-                message: '¡La preferencia se actualizó con éxito!',
+                message: 'La preferencia se actualizó con éxito.',
                 data: pref
 })})}
 

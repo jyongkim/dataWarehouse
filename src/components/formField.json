@@ -1,6 +1,6 @@
 {
     "Login":{
-        "title": "Iniciar Sesión",
+        "title": "Iniciar sesión",
         "formData": [
             {
                 "key": "user_name",
