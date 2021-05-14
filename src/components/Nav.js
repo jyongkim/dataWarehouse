@@ -2,7 +2,7 @@ import React from 'react';
 
 class Nav extends React.Component{
     render() {
-        return (
+         return (
             <nav>
                 <header>
                     <h1>Data Warehouse</h1>

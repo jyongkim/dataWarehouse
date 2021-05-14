@@ -25,6 +25,7 @@
 }
 
 nav {
+  height: 4rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -89,4 +90,13 @@ nav h1 {
   border-color: var(--cancel);
 }
 
+.menu li a:hover {
+  text-decoration: underline;
+  text-underline-offset: .9em;
+}
 
+.menu li a {
+  color:white;
+  text-decoration: none;
+
+}
