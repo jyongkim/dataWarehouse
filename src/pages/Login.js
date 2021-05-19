@@ -1,39 +1,131 @@
-import React from 'react';
-import { Form, Button, Container } from 'react-bootstrap';
-import './Login.css';
+import React, { useState, useRef } from "react";
+import Form from "react-validation/build/form";
+import Input from "react-validation/build/input";
+import CheckButton from "react-validation/build/button";
+import {Container} from 'react-bootstrap';
 
-export default function Login() {
+import AuthService from "../services/auth.service";
+
+const required = (value) => {
+    if (!value) {
+        return (
+            <div className="alert alert-danger" role="alert">
+                This field is required!
+            </div>
+        );
+    }
+};
+
+const Login = (props) => {
+    const form = useRef();
+    const checkBtn = useRef();
+
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState("");
+
+    const onChangeUsername = (e) => {
+        const username = e.target.value;
+        setUsername(username);
+    };
+
+    const onChangePassword = (e) => {
+        const password = e.target.value;
+        setPassword(password);
+    };
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+
+        setMessage("");
+        setLoading(true);
+
+        form.current.validateAll();
+
+        if (checkBtn.current.context._errors.length === 0) {
+            AuthService.login(username, password).then(
+                () => {
+                    props.history.push("/profile");
+                    window.location.reload();
+                },
+                (error) => {
+                    const resMessage =
+                        (error.response &&
+                            error.response.data &&
+                            error.response.data.message) ||
+                        error.message ||
+                        error.toString();
+
+                    setLoading(false);
+                    setMessage(resMessage);
+                }
+            );
+        } else {
+            setLoading(false);
+        }
+    };
+
     return (
         <Container>
             <div className="d-flex justify-content-center mt-5">
+                <div className="col-md-6">
+                    <div className="">
+                        {/* <img
+          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+          alt="profile-img"
+          className="profile-img-card"
+        /> */}
 
-                <Form action="/contact" className="col-4 ">
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>Usuario</Form.Label>
-                        <Form.Control type="text" placeholder="Ingrese Usuario" />
-                        <Form.Text className="text-muted">
-                            Ingrese su e-mail o nombre de usuario.
-                </Form.Text>
-                    </Form.Group>
+                        <Form onSubmit={handleLogin} ref={form}>
+                            <div className="form-group mt-1">
+                                <label htmlFor="username">Username</label>
+                                <Input
+                                    type="text"
+                                    className="form-control"
+                                    name="username"
+                                    value={username}
+                                    onChange={onChangeUsername}
+                                    validations={[required]}
+                                />
+                            </div>
 
-                    <Form.Group controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" />
-                    </Form.Group>
-                    <Form.Group controlId="formBasicCheckbox">
-                        <Form.Check type="checkbox" label="Recuérdame" />
-                    </Form.Group>
-                    <Button variant="primary" type="submit">
-                        Iniciar Sesión
-             </Button>
-                </Form>
+                            <div className="form-group mt-1">
+                                <label htmlFor="password">Password</label>
+                                <Input
+                                    type="password"
+                                    className="form-control"
+                                    name="password"
+                                    value={password}
+                                    onChange={onChangePassword}
+                                    validations={[required]}
+                                />
+                            </div>
+
+                            <div className="form-group mt-1">
+                                <button className="btn btn-primary btn-block" disabled={loading}>
+                                    {loading && (
+                                        <span className="spinner-border spinner-border-sm"></span>
+                                    )}
+                                    <span>Login</span>
+                                </button>
+                            </div>
+
+                            {message && (
+                                <div className="form-group">
+                                    <div className="alert alert-danger" role="alert">
+                                        {message}
+                                    </div>
+                                </div>
+                            )}
+                            <CheckButton style={{ display: "none" }} ref={checkBtn} />
+                        </Form>
+                    </div>
+                </div>
             </div>
-
 
         </Container>
     );
+};
 
-}
-
-
-
+export default Login;

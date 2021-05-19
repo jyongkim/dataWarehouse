@@ -2,6 +2,7 @@ import './App.css';
 import {useEffect,useState} from 'react';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
+import Register from './pages/Register';
 // import { Component } from 'react';
 // import Nav from './components/Nav';
 // import Form from './components/Form'
@@ -117,6 +118,9 @@ export default function App() {
           </Route>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/register">
+            <Register />
           </Route>
         </Switch>
       </div>
