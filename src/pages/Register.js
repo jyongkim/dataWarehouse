@@ -3,7 +3,6 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
-import {Container} from 'react-bootstrap';
 
 import AuthService from "../services/auth.service";
 
@@ -102,10 +101,8 @@ const Register = (props) => {
   };
 
   return (
-      <Container>
-          <div className="d-flex justify-content-center">
-          <div className="col-md-6">
-      <div className="">
+    <div className="col-md-12">
+      <div className="card card-container">
         {/* <img
           src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
           alt="profile-img"
@@ -171,9 +168,6 @@ const Register = (props) => {
         </Form>
       </div>
     </div>
-          </div>
-      </Container>
-    
   );
 };
 

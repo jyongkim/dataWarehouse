@@ -3,62 +3,7 @@ import {useEffect,useState} from 'react';
 import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Register from './pages/Register';
-// import { Component } from 'react';
-// import Nav from './components/Nav';
-// import Form from './components/Form'
-// import Table from './components/Table';
-// import formFields from './components/formField.json'
-
-// class App extends Component{
-//   constructor(props){
-//     super(props)
-//       this.state = {
-//         links: ['Contactos', 'Compañías', 'Usuarios','Región/Ciudad'],
-//         userId: 1,
-//         userData: [],
-//         formFields: formFields.Login,
-        
-//   }}
-//   getData = (url) => {
-//     let server = `http://localhost:3200/`
-//     fetch(server + url)
-//       .then(response => response.json())
-//       .then(data => {this.setState({userData: data})})
-//   }
-
-
-//   render(){
-//   // "render()" va a crear un componente.
-//     return(
-//       <> {/*React fragment*/}
-//         <Nav links = {this.state.links} /> {/*Props*/}
-//       <button onClick = {() =>{ 
-//         this.getData(`user/${this.state.userId}`)
-//         this.setState({formFields: formFields.User})
-//       }}>Usuarios</button>
-//       <button onClick = { () =>{ 
-//         this.getData(`company/${this.state.userId}`)
-//         this.setState({formFields: formFields.Company})
-//       }}> Compañías</button>
-//       <button onClick = {() =>{ 
-//         this.getData(`contact/${this.state.userId}`)
-//         this.setState({formFields: (formFields.Contact + formFields.Preference)})
-//       }}>Contactos</button>
-//       <Form data={this.state.formFields}/>
-//      
-//       </>
-//     )}
-//   componentDidUpdate(){
-//     return(
-//       console.log(this.state.formFields)
-//     )
-//   }
-//   componentDidMount(){
-//     return(
-//       console.log(formFields)
-//     )}}
-
-// export default App;
+import AuthService from './services/auth.service';
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -78,6 +23,26 @@ export default function App() {
         setContacts(data)})
     
   }, [])
+
+
+  const [showModeratorBoard, setShowModeratorBoard] = useState(false);
+  const [showAdminBoard, setShowAdminBoard] = useState(false);
+  const [currentUser, setCurrentUser] = useState(undefined);
+
+  useEffect(() => {
+    // const user = AuthService.getCurrentUser();
+
+    // if (user) {
+    //   setCurrentUser(user);
+    //   setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
+    //   setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
+    // }
+    setCurrentUser({})
+  }, []);
+
+  const logOut = () => {
+    AuthService.logout();
+  };
   return (
     <Router>
       <div>
@@ -98,6 +63,34 @@ export default function App() {
             <li>
               <Link to="/pref">Región/Ciudad</Link>
             </li>
+            {currentUser ? (
+          <div className="navbar-nav ml-auto">
+            <li className="nav-item">
+              <Link to={"/profile"} className="nav-link">
+                {currentUser.username}
+              </Link>
+            </li>
+            <li className="nav-item">
+              <a href="/login" className="nav-link" onClick={logOut}>
+                LogOut
+              </a>
+            </li>
+          </div>
+        ) : (
+          <div className="navbar-nav ml-auto">
+            <li className="nav-item">
+              <Link to={"/login"} className="nav-link">
+                Login
+              </Link>
+            </li>
+
+            <li className="nav-item">
+              <Link to={"/register"} className="nav-link">
+                Sign Up
+              </Link>
+            </li>
+          </div>
+        )}
           </ul>
         </nav>
         
