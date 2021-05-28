@@ -3,12 +3,27 @@
 
 const API_URL = "http://localhost:3200/auth/";
 
-const register = (username, email, password) => {
-  return fetch(API_URL + "signup", {
-    username,
-    email,
-    password,
+async function postData(url = '', data = {}) {
+  const response = await fetch(url, {
+    method: 'POST', 
+    mode: 'cors', 
+    cache: 'no-cache', 
+    credentials: 'same-origin', 
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+    body: JSON.stringify(data) 
   });
+  return response.json();
+}
+
+const register = (name,username, email, password) => {
+  return postData(API_URL+'signup', { name:name,
+                                      username: username,
+                                      email: email,
+                                      password: password});
 };
 
 const login = (username, password) => {
