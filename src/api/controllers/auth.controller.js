@@ -2,17 +2,17 @@ var jwt = require("jsonwebtoken");
 const config = require("../../config/auth.config.js");
 var bcrypt = require("bcryptjs");
 const User = require('../../models/user')
-
+const USER_ROLE = 3;
 exports.signup = (req, res) => {
   const user =  {
-    id_role : req.body.id_role,
-    user_name : req.body.user_name,
+    id_role : USER_ROLE,
+    user_name : req.body.username,
     name : req.body.name,
-    password : req.body.password,
+    password : bcrypt.hashSync(req.body.password, 8),
     email : req.body.email
   };
-  // Save User to Database
   User.create(user);
+  res.send({ message: "User was registered successfully!" });
 //   User.create({
 //     username: req.body.username,
 //     email: req.body.email,
@@ -58,17 +58,17 @@ exports.signin = (req, res) => {
           res.status(404).send({ message: "User Not found." });
         }
 
-    //   var passwordIsValid = bcrypt.compareSync(
-    //     req.body.password,
-    //     user.password
-    //   );
+      var passwordIsValid = bcrypt.compareSync(
+        req.body.password,
+        user.password
+      );
 
-    //   if (!passwordIsValid) {
-    //     return res.status(401).send({
-    //       accessToken: null,
-    //       message: "Invalid Password!"
-    //     });
-    //   }
+      if (!passwordIsValid) {
+        return res.status(401).send({
+          accessToken: null,
+          message: "Invalid Password!"
+        });
+      }
 
     //   var token = jwt.sign({ id: user.id }, config.secret, {
     //     expiresIn: 86400 // 24 hours
@@ -90,9 +90,9 @@ exports.signin = (req, res) => {
         //   accessToken: token
         // });
         res.status(200).send({
-          id: 1,
-          username: user.Usuario,
-          email: user.E-mail,
+          id: user.id,
+          username:user.username,
+          email:user.email,
           roles: [],
           accessToken: token
         });

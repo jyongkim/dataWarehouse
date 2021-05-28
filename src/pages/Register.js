@@ -26,6 +26,16 @@ const validEmail = (value) => {
   }
 };
 
+const vname = (value) => {
+  if (value.length < 3 || value.length > 20) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        The name must be between 3 and 20 characters.
+      </div>
+    );
+  }
+};
+
 const vusername = (value) => {
   if (value.length < 3 || value.length > 20) {
     return (
@@ -51,11 +61,17 @@ const Register = (props) => {
   const checkBtn = useRef();
 
   const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
 
+  
+  const onChangeName = (e) => {
+    const name = e.target.value;
+    setName(name);
+  };
   const onChangeUsername = (e) => {
     const username = e.target.value;
     setUsername(username);
@@ -80,23 +96,31 @@ const Register = (props) => {
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
-      AuthService.register(username, email, password).then(
-        (response) => {
-          setMessage(response.data.message);
-          setSuccessful(true);
-        },
-        (error) => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
+      console.log(username);
+    //  AuthService.register(username, email, password).then(
+    //    (response) => {
+    //       response.json();
+          
+    //     }//,
+    //     // (error) => {
+    //     //   const resMessage =
+    //     //     (error.response &&
+    //     //       error.response.data &&
+    //     //       error.response.data.message) ||
+    //     //     error.message ||
+    //     //     error.toString();
 
-          setMessage(resMessage);
-          setSuccessful(false);
-        }
-      );
+    //     //   setMessage(resMessage);
+    //     //   setSuccessful(false);
+    //     // }
+    //   ).then((data)=>{
+    //     setMessage(data.message);
+    //     setSuccessful(true);
+    //   });
+    const data = AuthService.register(name,username, email, password);
+    setMessage(data.message);
+    setSuccessful(true);
+
     }
   };
 
@@ -112,6 +136,17 @@ const Register = (props) => {
         <Form onSubmit={handleRegister} ref={form}>
           {!successful && (
             <div>
+               <div className="form-group">
+                <label htmlFor="username">Name</label>
+                <Input
+                  type="text"
+                  className="form-control"
+                  name="name"
+                  value={name}
+                  onChange={onChangeName}
+                  validations={[required, vname]}
+                />
+              </div>
               <div className="form-group">
                 <label htmlFor="username">Username</label>
                 <Input
