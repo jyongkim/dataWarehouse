@@ -8,7 +8,7 @@ exports.signup = (req, res) => {
     id_role : USER_ROLE,
     user_name : req.body.username,
     name : req.body.name,
-    password : bcrypt.hashSync(req.body.password, 8),
+    password : bcrypt.hashSync(req.body.password, 10),
     email : req.body.email
   };
   User.create(user);
@@ -53,16 +53,21 @@ exports.signin = (req, res) => {
   //     if (!user) {
   //       return res.status(404).send({ message: "User Not found." });
   //     }
+      console.log('username', req.body.username);
       User.findByUserName(req.body.username, (err, user) => {
+        
+
         if(err) {
+          console.log("error:",err);
           res.status(404).send({ message: "User Not found." });
         }
-
+      console.log('password',req.body.password);
+      console.log('hash',user[0].password);
       var passwordIsValid = bcrypt.compareSync(
         req.body.password,
-        user.password
+        user[0].password
       );
-
+      console.log('passwordvalid',passwordIsValid);
       if (!passwordIsValid) {
         return res.status(401).send({
           accessToken: null,

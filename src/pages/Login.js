@@ -5,6 +5,7 @@ import CheckButton from "react-validation/build/button";
 import {Container} from 'react-bootstrap';
 
 import AuthService from "../services/auth.service";
+import {useHistory} from "react-router-dom";
 
 const required = (value) => {
     if (!value) {
@@ -19,6 +20,8 @@ const required = (value) => {
 const Login = (props) => {
     const form = useRef();
     const checkBtn = useRef();
+    const history = useHistory();
+
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -46,8 +49,8 @@ const Login = (props) => {
         if (checkBtn.current.context._errors.length === 0) {
             AuthService.login(username, password).then(
                 () => {
-                    props.history.push("/profile");
-                    window.location.reload();
+                    history.push("/contact");
+                    //window.location.reload();
                 },
                 (error) => {
                     const resMessage =

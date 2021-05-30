@@ -49,21 +49,44 @@ User.find = (id, result) => {
 })}
 
 
+// User.findByUserName = (name, result) => {
+//     dbConn.query(`SELECT
+//     u.id_user AS ID,
+//     role AS Rol,
+//     user_name AS Usuario,
+//     name AS Nombre,
+//     password as Password,
+//     COUNT(c.id_user) AS Compañías,
+//     email AS "E-mail"
+//     FROM Users AS u
+//     JOIN Roles AS r ON u.id_role = r.id_role
+//     JOIN Companies AS c ON c.id_user = u.id_user
+//     WHERE u.user_name = ?
+//     GROUP BY c.id_user`, name, (err, res) => {
+//         err ? result(err, null) : result(null, res)
+// })}
+
+
+
 User.findByUserName = (name, result) => {
     dbConn.query(`SELECT
-    u.id_user AS ID,
-    role AS Rol,
-    user_name AS Usuario,
-    name AS Nombre,
-    COUNT(c.id_user) AS Compañías,
-    email AS "E-mail"
-    FROM Users AS u
-    JOIN Roles AS r ON u.id_role = r.id_role
-    JOIN Companies AS c ON c.id_user = u.id_user
-    WHERE u.user_name = ?
-    GROUP BY c.id_user`, name, (err, res) => {
+    id_user,
+    id_role,
+    user_name,
+    name,
+    password,
+    email
+    FROM users 
+    WHERE user_name = ?
+    `, [name], (err, res) => {
         err ? result(err, null) : result(null, res)
 })}
+
+
+
+
+
+
 
 User.update = (id, user, result) => {
     dbConn.query('UPDATE Users SET ? WHERE id_user = ?', [user, id], (err, res) => {

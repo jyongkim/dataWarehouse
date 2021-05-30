@@ -27,18 +27,11 @@ const register = (name,username, email, password) => {
 };
 
 const login = (username, password) => {
-  return fetch(API_URL + "signin", {
-      method:"POST",
-      mode: 'cors',
-      credentials: 'same-origin', 
-      body:{
-        username,
-        password,
-      }
-    })
-    .then(response=>response.json()
-    )
+   return postData(API_URL+'signin', {
+    username: username,
+    password: password})
     .then((data) => {
+      console.log('data:',data);
       if (data.accessToken) {
         localStorage.setItem("user", JSON.stringify(data));
       }
