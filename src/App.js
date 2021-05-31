@@ -1,9 +1,9 @@
 import './App.css';
 import {useEffect,useState} from 'react';
-import Contact from './pages/Contact';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import AuthService from './services/auth.service';
+import Contact from './Frontend/pages/Contact';
+import Login from './Frontend/pages/Login';
+import Register from './Frontend/pages/Register';
+import AuthService from './Frontend/services/auth.service';
 import React from "react";
 import {
   BrowserRouter as Router,
