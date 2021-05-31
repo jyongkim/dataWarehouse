@@ -46,7 +46,7 @@ CREATE TABLE Users(
     `id_role` INT NOT NULL,
     `user_name` VARCHAR (20) NOT NULL,
     `name` VARCHAR (50),
-    `password` VARCHAR (20) NOT NULL,
+    `password` VARCHAR (60) NOT NULL,
     `email` VARCHAR (100) NOT NULL,
     PRIMARY KEY (`id_user`),
     UNIQUE KEY (`user_name`),

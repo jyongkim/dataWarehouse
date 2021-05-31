@@ -4,11 +4,13 @@ var bcrypt = require("bcryptjs");
 const User = require('../../models/user')
 const USER_ROLE = 3;
 exports.signup = (req, res) => {
+  const passwordHash = bcrypt.hashSync(req.body.password, 10);
+  console.log('passwordhash:',passwordHash.length);
   const user =  {
     id_role : USER_ROLE,
     user_name : req.body.username,
     name : req.body.name,
-    password : bcrypt.hashSync(req.body.password, 10),
+    password : passwordHash,
     email : req.body.email
   };
   User.create(user);
@@ -56,27 +58,14 @@ exports.signin = (req, res) => {
       console.log('username', req.body.username);
       User.findByUserName(req.body.username, (err, user) => {
         
-
-        if(err) {
-          console.log("error:",err);
-          res.status(404).send({ message: "User Not found." });
-        }
-<<<<<<< HEAD
-      console.log('password',req.body.password);
-      console.log('hash',user[0].password);
+      if(err) {
+        console.log("error:",err);
+        res.status(404).send({ message: "User Not found." });
+      }
       var passwordIsValid = bcrypt.compareSync(
         req.body.password,
         user[0].password
       );
-      console.log('passwordvalid',passwordIsValid);
-=======
-
-      var passwordIsValid = bcrypt.compareSync(
-        req.body.password,
-        user.password
-      );
-
->>>>>>> 9ccb602de8751f403ade3c79bd7e415406d6d35a
       if (!passwordIsValid) {
         return res.status(401).send({
           accessToken: null,
@@ -84,9 +73,6 @@ exports.signin = (req, res) => {
         });
       }
 
-    //   var token = jwt.sign({ id: user.id }, config.secret, {
-    //     expiresIn: 86400 // 24 hours
-    //   });
       var token = jwt.sign({ id: user.id }, config.secret, {
         expiresIn: 86400 // 24 hours
       });
