@@ -11,6 +11,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import User from './Frontend/pages/User';
 
 export default function App() {
   const [contacts, setContacts] = useState([]);
@@ -104,7 +105,7 @@ export default function App() {
             <Users />
           </Route>
           <Route path="/users">
-            <Home />
+            <User />
           </Route>
           <Route path="/pref">
             <Home />
