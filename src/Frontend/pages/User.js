@@ -1,8 +1,10 @@
 import React from 'react';
 import './User.css';
-import { Table, Form, Button,Modal } from 'react-bootstrap';
+import { Table, Form, Button, Modal, OverlayTrigger, Tooltip } from 'react-bootstrap';
+
+
 import { useState, useEffect } from 'react';
-import { PencilSquare, ArrowDownUp, X } from 'react-bootstrap-icons';
+import { PencilSquare, ArrowDownUp, X, PersonPlus } from 'react-bootstrap-icons';
 
 export default function User() {
 
@@ -10,12 +12,14 @@ export default function User() {
 
     useEffect(() => {
         setUsuarios([{
+            Id:1,
             Nombre: 'Juan',
             Apellido: 'Perez',
             Email: 'juanperez@email.com',
             Perfil: 'Administrador'
         },
         {
+            id:2,
             Nombre: 'Alan',
             Apellido: 'Martinez',
             Email: 'alanmartinez@email.com',
@@ -72,7 +76,23 @@ export default function User() {
                 return 0
             })])
     }
-    return (
+    /** Modal  */
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    /** End Modal  */
+    /** Modal  */
+    const [showConfirm, setShowConfirm] = useState(false);
+    const handleCloseConfirm = () => setShowConfirm(false);
+    const handleShowConfirm = () => setShowConfirm(true);
+    /** End Modal  */
+    const handleDelete = (id) => {
+        setShowConfirm(true);
+        
+        //setUsuarios([...usuarios.filter(e=> e.Id != id)])
+    };
+    console.log(show)
+;    return (
         <div>
             <Table striped bordered hover className="users">
                 <thead>
@@ -101,21 +121,32 @@ export default function User() {
                                     {u.Perfil}
                                 </td>
                                 <td>
-                                    <PencilSquare style={{ cursor: 'pointer' }}></PencilSquare>
-                                    <X style={{ cursor: 'pointer', fontStyle: 'bold', fontSize: '20pt' }}></X>
+                                    <PencilSquare style={{ cursor: 'pointer' }} onClick={() =>handleShow()}></PencilSquare>
+                                    <X style={{ cursor: 'pointer', fontStyle: 'bold', fontSize: '20pt' }} onClick={()=> handleDelete(u.Id)}></X>
                                 </td>
                             </tr>
                         ))
                     }
                 </tbody>
             </Table>
-            <Modal.Dialog show={true}>
+            <OverlayTrigger
+            key="right"
+            placement="right"
+            overlay={
+                <Tooltip id={`tooltip-right`}>
+                    Agregar Nuevo
+                </Tooltip>
+            }
+            >
+            <PersonPlus style={{ cursor: 'pointer', marginLeft:'10px' }} onClick={() =>handleShow()}></PersonPlus>
+            </OverlayTrigger>
+            
+             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal title</Modal.Title>
+                <Modal.Title>Alta de Usuario</Modal.Title>
                 </Modal.Header>
-
                 <Modal.Body>
-                    <Form container>
+                <Form>
                         <Form.Group controlId="formBasicNombre">
                             <Form.Label>Nombre</Form.Label>
                             <Form.Control type="text" placeholder="Por favor ingrese nombre" />
@@ -145,21 +176,31 @@ export default function User() {
                             <Form.Label>Reingrese Contraseñá</Form.Label>
                             <Form.Control type="password" placeholder="Password" />
                         </Form.Group>
-
-                        <Button variant="primary" type="submit">
-                            Guardar
-                </Button>
-                        <Button variant="secondary" type="button">
-                            Cancelar
-                </Button>
                     </Form>
                 </Modal.Body>
-
                 <Modal.Footer>
-                    <Button variant="secondary">Close</Button>
-                    <Button variant="primary">Save changes</Button>
+                <Button variant="secondary" onClick={handleClose}>
+                    Close
+                </Button>
+                <Button variant="primary" onClick={handleClose}>
+                    Save Changes
+                </Button>
                 </Modal.Footer>
-            </Modal.Dialog>
+            </Modal>
+            <Modal show={showConfirm} onHide={handleCloseConfirm}>
+                <Modal.Header closeButton>
+                <Modal.Title>Modal heading</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                <Modal.Footer>
+                <Button variant="secondary" onClick={handleCloseConfirm}>
+                    Close
+                </Button>
+                <Button variant="primary" onClick={handleCloseConfirm}>
+                    Save Changes
+                </Button>
+                </Modal.Footer>
+            </Modal>
 
         </div>
     )
