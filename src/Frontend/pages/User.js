@@ -1,61 +1,59 @@
 import React from 'react';
 import './User.css';
 import { Table, Form, Button, Modal, OverlayTrigger, Tooltip } from 'react-bootstrap';
-
-
 import { useState, useEffect } from 'react';
 import { PencilSquare, ArrowDownUp, X, PersonPlus } from 'react-bootstrap-icons';
 
 export default function User() {
 
-    const [usuarios, setUsuarios] = useState([])
+    const [users, setUsers] = useState([])
 
     useEffect(() => {
-        setUsuarios([{
+        setUsers([{
             Id:1,
-            Nombre: 'Juan',
-            Apellido: 'Perez',
+            Name: 'Juan',
+            LastName: 'Perez',
             Email: 'juanperez@email.com',
-            Perfil: 'Administrador'
+            Profile: 'Administrador'
         },
         {
-            id:2,
-            Nombre: 'Alan',
-            Apellido: 'Martinez',
+            Id:2,
+            Name: 'Alan',
+            LastName: 'Martinez',
             Email: 'alanmartinez@email.com',
-            Perfil: 'Manager'
+            Profile: 'Manager'
         }
         ])
 
     }, [])
     const [directionName, setDirectionName] = useState(false)
     const sortByName = () => {
-        setUsuarios([
-            ...usuarios.sort((a, b) => {
+        setUsers([
+            ...users.sort((a, b) => {
                 setDirectionName(!directionName)
-                if (a.Nombre < b.Nombre)
+                if (a.Name < b.Name)
                     return directionName ? -1 : 1
-                else if (a.Nombre > b.Nombre)
+                else if (a.Name > b.Name)
                     return directionName ? 1 : -1
                 return 0
             })])
     }
     const [directionLastName, setDirectionLastName] = useState(false)
     const sortByLastName = () => {
-        setUsuarios([
-            ...usuarios.sort((a, b) => {
+        setUsers([
+            ...users.sort((a, b) => {
                 setDirectionLastName(!directionLastName)
-                if (a.Apellido < b.Apellido)
+                if (a.LastName < b.LastName)
                     return directionLastName ? -1 : 1
-                else if (a.Apellido > b.Apellido)
+                else if (a.LastName > b.LastName)
                     return directionLastName ? 1 : -1
                 return 0
             })])
     }
     const [directionEmail, setDirectionEmail] = useState(false)
     const sortByEmail = () => {
-        setUsuarios([
-            ...usuarios.sort((a, b) => {
+        setUsers([
+            ...users.sort((a, b) => {
                 setDirectionEmail(!directionEmail)
                 if (a.Email < b.Email)
                     return directionEmail ? -1 : 1
@@ -64,15 +62,15 @@ export default function User() {
                 return 0
             })])
     }
-    const [directionPerfil, setDirectionPerfil] = useState(false)
-    const sortByPerfil = () => {
-        setUsuarios([
-            ...usuarios.sort((a, b) => {
-                setDirectionPerfil(!directionPerfil)
-                if (a.Perfil < b.Perfil)
-                    return directionPerfil ? -1 : 1
-                else if (a.Perfil > b.Perfil)
-                    return directionPerfil ? 1 : -1
+    const [directionProfile, setDirectionProfile] = useState(false)
+    const sortByProfile = () => {
+        setUsers([
+            ...users.sort((a, b) => {
+                setDirectionProfile(!directionProfile)
+                if (a.Profile < b.Profile)
+                    return directionProfile ? -1 : 1
+                else if (a.Profile > b.Profile)
+                    return directionProfile ? 1 : -1
                 return 0
             })])
     }
@@ -80,19 +78,53 @@ export default function User() {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const handleShowEdit = (id) => {
+        const user = users.find(u => u.id == id);
+        setUser({...user});
+        setShow(true);
+    };
     /** End Modal  */
     /** Modal  */
     const [showConfirm, setShowConfirm] = useState(false);
-    const handleCloseConfirm = () => setShowConfirm(false);
     const handleShowConfirm = () => setShowConfirm(true);
+    const [idToDelete,setIdToDelete] = useState(-1);
+    const handleConfirm = () => {
+        setUsers([...users.filter(e=> e.Id != idToDelete)]);
+        setShowConfirm(false);
+    };
+    const handleCloseConfirm = () => {
+        setIdToDelete(-1);
+        setShowConfirm(false);
+    };
     /** End Modal  */
     const handleDelete = (id) => {
+        setIdToDelete(id);
         setShowConfirm(true);
-        
-        //setUsuarios([...usuarios.filter(e=> e.Id != id)])
     };
-    console.log(show)
-;    return (
+    const [user, setUser] = useState({
+        Id:-1,
+        Name:'',
+        LastName:'',
+        Email:'',
+        Profile:''
+    })
+    const handleChangeName = (e) => setUser({
+        ...user,
+        Name: e.target.value
+    });
+    const handleChangeLastname = (e) => setUser({
+        ...user,
+        LastName: e.target.value
+    });
+    const handleChangeEmail = (e) => setUser({
+        ...user,
+        Email: e.target.value
+    });
+    const handleChangeProfile = (e) => setUser({
+        ...user,
+        Profile: e.target.value
+    });
+   return (
         <div>
             <Table striped bordered hover className="users">
                 <thead>
@@ -100,28 +132,28 @@ export default function User() {
                         <th>Nombre <ArrowDownUp onClick={() => sortByName()} style={{ cursor: 'pointer' }}></ArrowDownUp></th>
                         <th>Apellido <ArrowDownUp onClick={() => sortByLastName()} style={{ cursor: 'pointer' }}></ArrowDownUp></th>
                         <th>Email <ArrowDownUp onClick={() => sortByEmail()} style={{ cursor: 'pointer' }}></ArrowDownUp></th>
-                        <th>Perfil <ArrowDownUp onClick={() => sortByPerfil()} style={{ cursor: 'pointer' }}></ArrowDownUp></th>
+                        <th>Perfil <ArrowDownUp onClick={() => sortByProfile()} style={{ cursor: 'pointer' }}></ArrowDownUp></th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        usuarios.map(u => (
+                        users.map(u => (
                             <tr>
                                 <td>
-                                    {u.Nombre}
+                                    {u.Name}
                                 </td>
                                 <td>
-                                    {u.Apellido}
+                                    {u.LastName}
                                 </td>
                                 <td>
                                     {u.Email}
                                 </td>
                                 <td>
-                                    {u.Perfil}
+                                    {u.Profile}
                                 </td>
                                 <td>
-                                    <PencilSquare style={{ cursor: 'pointer' }} onClick={() =>handleShow()}></PencilSquare>
+                                    <PencilSquare style={{ cursor: 'pointer' }} onClick={() =>handleShowEdit(u.Id)}></PencilSquare>
                                     <X style={{ cursor: 'pointer', fontStyle: 'bold', fontSize: '20pt' }} onClick={()=> handleDelete(u.Id)}></X>
                                 </td>
                             </tr>
@@ -149,21 +181,26 @@ export default function User() {
                 <Form>
                         <Form.Group controlId="formBasicNombre">
                             <Form.Label>Nombre</Form.Label>
-                            <Form.Control type="text" placeholder="Por favor ingrese nombre" />
-                            <Form.Text className="text-muted">
-
+                            <Form.Control value={user.Name} type="text" placeholder="Por favor ingrese nombre" />
+                            <Form.Text name="name" className="text-muted" onChange={(e) => handleChangeName(e)}>
                             </Form.Text>
                         </Form.Group>
                         <Form.Group controlId="formBasicApellido">
                             <Form.Label>Apellido</Form.Label>
-                            <Form.Control type="text" placeholder="Por favor ingrese apellido" />
+                            <Form.Control value={user.LastName} name="lastname" type="text" onChange={(e) => handleChangeLastname(e)} placeholder="Por favor ingrese apellido" />
                             <Form.Text className="text-muted">
-
                             </Form.Text>
                         </Form.Group>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Correo Electrónico</Form.Label>
-                            <Form.Control type="email" placeholder="Por favor ingrese correo electrónico" />
+                            <Form.Control value={user.Email} name="email" type="email" onChange={(e) => handleChangeEmail(e)} placeholder="Por favor ingrese correo electrónico" />
+                            <Form.Text className="text-muted">
+                                Por favor ingrese un correo electrónico válido (@)
+                    </Form.Text>
+                        </Form.Group>
+                        <Form.Group controlId="formBasicProfile">
+                            <Form.Label>Profile</Form.Label>
+                            <Form.Control value={user.Profile} name="profile" type="text" onChange={(e) => handleChangeProfile(e)} placeholder="Por favor ingrese correo electrónico" />
                             <Form.Text className="text-muted">
                                 Por favor ingrese un correo electrónico válido (@)
                     </Form.Text>
@@ -172,7 +209,7 @@ export default function User() {
                             <Form.Label>Contraseñá</Form.Label>
                             <Form.Control type="password" placeholder="Password" />
                         </Form.Group>
-                        <Form.Group controlId="formBasicPassword">
+                        <Form.Group controlId="formBasicConfirmPassword">
                             <Form.Label>Reingrese Contraseñá</Form.Label>
                             <Form.Control type="password" placeholder="Password" />
                         </Form.Group>
@@ -189,15 +226,15 @@ export default function User() {
             </Modal>
             <Modal show={showConfirm} onHide={handleCloseConfirm}>
                 <Modal.Header closeButton>
-                <Modal.Title>Modal heading</Modal.Title>
+                <Modal.Title>Atencion!!</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                <Modal.Body>Esta seguro que desea borrar el usuario?</Modal.Body>
                 <Modal.Footer>
                 <Button variant="secondary" onClick={handleCloseConfirm}>
-                    Close
+                    Cerrar
                 </Button>
-                <Button variant="primary" onClick={handleCloseConfirm}>
-                    Save Changes
+                <Button variant="primary" onClick={handleConfirm}>
+                    Confirmar
                 </Button>
                 </Modal.Footer>
             </Modal>
