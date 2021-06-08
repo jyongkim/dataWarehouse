@@ -7,23 +7,29 @@ import { PencilSquare, ArrowDownUp, X, PersonPlus } from 'react-bootstrap-icons'
 export default function User() {
 
     const [users, setUsers] = useState([])
-
+    const [ABMtype, setABMtype] = useState("")
     useEffect(() => {
-        setUsers([{
-            Id:1,
-            Name: 'Juan',
-            LastName: 'Perez',
-            Email: 'juanperez@email.com',
-            Profile: 'Administrador'
-        },
-        {
-            Id:2,
-            Name: 'Alan',
-            LastName: 'Martinez',
-            Email: 'alanmartinez@email.com',
-            Profile: 'Manager'
-        }
-        ])
+        const fetchUsers = ()=> {return fetch("http://localhost:3200/user").then(
+            response => response.json()
+        )};
+        fetchUsers().then(data =>{
+            setUsers(data);
+        })
+        // setUsers([{
+        //     Id:1,
+        //     Name: 'Juan',
+        //     LastName: 'Perez',
+        //     Email: 'juanperez@email.com',
+        //     Profile: 'Administrador'
+        // },
+        // {
+        //     Id:2,
+        //     Name: 'Alan',
+        //     LastName: 'Martinez',
+        //     Email: 'alanmartinez@email.com',
+        //     Profile: 'Manager'
+        // }
+        // ])
 
     }, [])
     const [directionName, setDirectionName] = useState(false)
@@ -77,9 +83,16 @@ export default function User() {
     /** Modal  */
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleShowNew = () => {
+        setABMtype("Nuevo ");
+        setUser(initialStateUser);
+        setShow(true);
+    };
     const handleShowEdit = (id) => {
-        const user = users.find(u => u.id == id);
+        setABMtype("Edición ");
+        const user = users.find(u => u.Id == id);
+        console.log('id:',id);
+        console.log('user:',user);
         setUser({...user});
         setShow(true);
     };
@@ -101,13 +114,14 @@ export default function User() {
         setIdToDelete(id);
         setShowConfirm(true);
     };
-    const [user, setUser] = useState({
+    const initialStateUser = {
         Id:-1,
         Name:'',
         LastName:'',
         Email:'',
         Profile:''
-    })
+    };
+    const [user, setUser] = useState(initialStateUser);
     const handleChangeName = (e) => setUser({
         ...user,
         Name: e.target.value
@@ -124,6 +138,16 @@ export default function User() {
         ...user,
         Profile: e.target.value
     });
+    const handleSaveChanges = () =>{
+        if(user.Id>0){
+            const userToUpdate = users.find(u=> u.Id == user.Id);
+
+        }else{
+            console.log(user);
+            users.push(user);
+            setShow(false);
+        }
+    }
    return (
         <div>
             <Table striped bordered hover className="users">
@@ -170,19 +194,19 @@ export default function User() {
                 </Tooltip>
             }
             >
-            <PersonPlus style={{ cursor: 'pointer', marginLeft:'10px' }} onClick={() =>handleShow()}></PersonPlus>
+            <PersonPlus style={{ cursor: 'pointer', marginLeft:'10px' }} onClick={() =>handleShowNew()}></PersonPlus>
             </OverlayTrigger>
             
              <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                <Modal.Title>Alta de Usuario</Modal.Title>
+                <Modal.Title>{ABMtype}de Usuario</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                 <Form>
                         <Form.Group controlId="formBasicNombre">
                             <Form.Label>Nombre</Form.Label>
-                            <Form.Control value={user.Name} type="text" placeholder="Por favor ingrese nombre" />
-                            <Form.Text name="name" className="text-muted" onChange={(e) => handleChangeName(e)}>
+                            <Form.Control value={user.Name} type="text" placeholder="Por favor ingrese nombre"  onChange={(e) => handleChangeName(e)} />
+                            <Form.Text name="name" className="text-muted">
                             </Form.Text>
                         </Form.Group>
                         <Form.Group controlId="formBasicApellido">
@@ -199,18 +223,18 @@ export default function User() {
                     </Form.Text>
                         </Form.Group>
                         <Form.Group controlId="formBasicProfile">
-                            <Form.Label>Profile</Form.Label>
+                            <Form.Label>Perfil</Form.Label>
                             <Form.Control value={user.Profile} name="profile" type="text" onChange={(e) => handleChangeProfile(e)} placeholder="Por favor ingrese correo electrónico" />
                             <Form.Text className="text-muted">
                                 Por favor ingrese un correo electrónico válido (@)
                     </Form.Text>
                         </Form.Group>
                         <Form.Group controlId="formBasicPassword">
-                            <Form.Label>Contraseñá</Form.Label>
+                            <Form.Label>Contraseña</Form.Label>
                             <Form.Control type="password" placeholder="Password" />
                         </Form.Group>
                         <Form.Group controlId="formBasicConfirmPassword">
-                            <Form.Label>Reingrese Contraseñá</Form.Label>
+                            <Form.Label>Reingrese Contraseña</Form.Label>
                             <Form.Control type="password" placeholder="Password" />
                         </Form.Group>
                     </Form>
@@ -219,7 +243,7 @@ export default function User() {
                 <Button variant="secondary" onClick={handleClose}>
                     Close
                 </Button>
-                <Button variant="primary" onClick={handleClose}>
+                <Button variant="primary" onClick={handleSaveChanges}>
                     Save Changes
                 </Button>
                 </Modal.Footer>

@@ -17,18 +17,29 @@ User.create = (newUser, result) => {
 
 }
 
+// User.read = (result) => {
+//     dbConn.query(`SELECT
+//     u.id_user AS ID,
+//     role AS Rol,
+//     user_name AS Usuario,
+//     name AS Nombre,
+//     COUNT(c.id_user) AS Compañías,
+//     email AS "E-mail"
+//     FROM Users AS u
+//     JOIN Roles AS r ON u.id_role = r.id_role
+//     JOIN Companies AS c ON c.id_user = u.id_user
+//     GROUP BY c.id_user`, (err, res) => {
+//         err ? result(err, null) : result(null, res)
+// })}
+
 User.read = (result) => {
+    console.log('paso por aqui 2');
     dbConn.query(`SELECT
-    u.id_user AS ID,
-    role AS Rol,
-    user_name AS Usuario,
-    name AS Nombre,
-    COUNT(c.id_user) AS Compañías,
-    email AS "E-mail"
-    FROM Users AS u
-    JOIN Roles AS r ON u.id_role = r.id_role
-    JOIN Companies AS c ON c.id_user = u.id_user
-    GROUP BY c.id_user`, (err, res) => {
+    id_user AS Id,
+    user_name AS UserName,
+    name AS Name,
+    email AS Email
+    FROM Users`, (err, res) => {
         err ? result(err, null) : result(null, res)
 })}
 
