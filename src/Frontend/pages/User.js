@@ -9,28 +9,17 @@ export default function User() {
     const [users, setUsers] = useState([])
     const [ABMtype, setABMtype] = useState("")
     useEffect(() => {
+        let isCancelled = false;
         const fetchUsers = ()=> {return fetch("http://localhost:3200/user").then(
             response => response.json()
         )};
         fetchUsers().then(data =>{
-            setUsers(data);
+            if(!isCancelled)
+                setUsers(data);
         })
-        // setUsers([{
-        //     Id:1,
-        //     Name: 'Juan',
-        //     LastName: 'Perez',
-        //     Email: 'juanperez@email.com',
-        //     Profile: 'Administrador'
-        // },
-        // {
-        //     Id:2,
-        //     Name: 'Alan',
-        //     LastName: 'Martinez',
-        //     Email: 'alanmartinez@email.com',
-        //     Profile: 'Manager'
-        // }
-        // ])
-
+        return () => {
+            isCancelled = true;
+        }
     }, [])
     const [directionName, setDirectionName] = useState(false)
     const sortByName = () => {
@@ -90,11 +79,12 @@ export default function User() {
     };
     const handleShowEdit = (id) => {
         setABMtype("Edición ");
-        const user = users.find(u => u.Id == id);
         console.log('id:',id);
-        console.log('user:',user);
-        setUser({...user});
+        console.log('users:',users)
+        setUser({...users.find(u => u.Id == id)});
+        console.log('user:',users.find(u => u.Id == id));
         setShow(true);
+        return false;
     };
     /** End Modal  */
     /** Modal  */
@@ -102,8 +92,14 @@ export default function User() {
     const handleShowConfirm = () => setShowConfirm(true);
     const [idToDelete,setIdToDelete] = useState(-1);
     const handleConfirm = () => {
-        setUsers([...users.filter(e=> e.Id != idToDelete)]);
-        setShowConfirm(false);
+        const deleteUser = ()=> {return fetch("http://localhost:3200/user/" + idToDelete, {method: "DELETE"}).then(
+            response => response.json()
+        )};
+        deleteUser().then(data =>{
+            setUsers([...users.filter(e=> e.Id != idToDelete)]);
+            setShowConfirm(false);
+        })
+       
     };
     const handleCloseConfirm = () => {
         setIdToDelete(-1);
@@ -116,15 +112,15 @@ export default function User() {
     };
     const initialStateUser = {
         Id:-1,
-        Name:'',
+        FirstName:'',
         LastName:'',
         Email:'',
         Profile:''
     };
     const [user, setUser] = useState(initialStateUser);
-    const handleChangeName = (e) => setUser({
+    const handleChangeFirstName = (e) => setUser({
         ...user,
-        Name: e.target.value
+        FirstName: e.target.value
     });
     const handleChangeLastname = (e) => setUser({
         ...user,
@@ -143,8 +139,15 @@ export default function User() {
             const userToUpdate = users.find(u=> u.Id == user.Id);
 
         }else{
+            const addUser = ()=> {return fetch("http://localhost:3200/user/", {method: "POST"},user).then(
+            response => response.json()
+        )};
+        addUser().then(data =>{
+            //setUsers([...users.filter(e=> e.Id != idToDelete)]);
+            setShowConfirm(false);
+        })
             console.log(user);
-            users.push(user);
+            //users.push(user);
             setShow(false);
         }
     }
@@ -162,10 +165,10 @@ export default function User() {
                 </thead>
                 <tbody>
                     {
-                        users.map(u => (
+                        users && users.length > 0 && users.map(u => (
                             <tr>
                                 <td>
-                                    {u.Name}
+                                    {u.FirstName}
                                 </td>
                                 <td>
                                     {u.LastName}
@@ -174,10 +177,13 @@ export default function User() {
                                     {u.Email}
                                 </td>
                                 <td>
-                                    {u.Profile}
+                                    {u.Role}
                                 </td>
                                 <td>
-                                    <PencilSquare style={{ cursor: 'pointer' }} onClick={() =>handleShowEdit(u.Id)}></PencilSquare>
+                                    <PencilSquare style={{ cursor: 'pointer' }} onClick={(e) =>{
+                                        e.preventDefault();
+                                        handleShowEdit(u.Id)
+                                        }}></PencilSquare>
                                     <X style={{ cursor: 'pointer', fontStyle: 'bold', fontSize: '20pt' }} onClick={()=> handleDelete(u.Id)}></X>
                                 </td>
                             </tr>
@@ -205,8 +211,8 @@ export default function User() {
                 <Form>
                         <Form.Group controlId="formBasicNombre">
                             <Form.Label>Nombre</Form.Label>
-                            <Form.Control value={user.Name} type="text" placeholder="Por favor ingrese nombre"  onChange={(e) => handleChangeName(e)} />
-                            <Form.Text name="name" className="text-muted">
+                            <Form.Control value={user.FirstName} type="text" name="name" placeholder="Por favor ingrese nombre"  onChange={(e) => handleChangeFirstName(e)} />
+                            <Form.Text  className="text-muted">
                             </Form.Text>
                         </Form.Group>
                         <Form.Group controlId="formBasicApellido">

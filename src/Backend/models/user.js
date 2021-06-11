@@ -3,16 +3,17 @@ const sql = require('mysql');
 let User = function(user) {
     this.id_role = user.id_role
     this.user_name = user.user_name
-    this.name = user.name
+    this.first_name = user.first_name
+    this.last_name = user.last_name
     this.password = user.password
     this.email = user.email
 }
 
 User.create = (newUser, result) => {
-
-        let sql = "INSERT INTO Users SET `id_role` = ?,  `user_name` = ?,  `name` = ?,  `password` = ?,  `email` = ?";
-        dbConn.query(sql, [ newUser.id_role, newUser.user_name, newUser.name, newUser.password, newUser.email ],  function(err, rows) {
-        
+        console.log('newUser:', newUser);
+        let sql = "INSERT INTO `users` SET `id_role` = ?,  `first_name` = ?,`last_name` = ?,  `user_name` = ?,  `password` = ?,  `email` = ?";
+        dbConn.query(sql, [ newUser.id_role, newUser.first_name, newUser.last_name, newUser.user_name, newUser.password, newUser.email ],  function(err, rows) {
+            console.log(err);
         });
 
 }
@@ -35,11 +36,15 @@ User.create = (newUser, result) => {
 User.read = (result) => {
     console.log('paso por aqui 2');
     dbConn.query(`SELECT
-    id_user AS Id,
-    user_name AS UserName,
-    name AS Name,
-    email AS Email
-    FROM Users`, (err, res) => {
+    u.id_user AS Id,
+    u.last_name AS LastName,
+    u.first_name  AS FirstName,
+    u.user_name AS UserName,
+    u.email AS Email,
+    r.role AS Role
+    FROM users u 
+    INNER JOIN roles r
+    ON u.id_role = r.id_role`, (err, res) => {
         err ? result(err, null) : result(null, res)
 })}
 

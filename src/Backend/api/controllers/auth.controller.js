@@ -4,12 +4,14 @@ var bcrypt = require("bcryptjs");
 const User = require('../../models/user')
 const USER_ROLE = 3;
 exports.signup = (req, res) => {
+  
   const passwordHash = bcrypt.hashSync(req.body.password, 10);
-  console.log('passwordhash:',passwordHash.length);
+  console.log('body:',req.body);
   const user =  {
     id_role : USER_ROLE,
+    last_name : req.body.last_name,
+    first_name : req.body.first_name,
     user_name : req.body.username,
-    name : req.body.name,
     password : passwordHash,
     email : req.body.email
   };

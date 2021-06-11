@@ -1,11 +1,11 @@
 INSERT INTO Roles (`Role`) VALUES
 ('Admin'), ('Manager'), ('user'), ('Guest');
 
-INSERT INTO Users (`id_role`, `user_name`, `name`, `password`, `email`) VALUES
-(1, 'jonathan1', 'Jonathan Kim 1', '1234', 'jonathan1@jk.com'),
-(2, 'jonathan2', 'Jonathan Kim 2', '1234', 'jonathan2@jk.com'),
-(3, 'jonathan3', 'Jonathan Kim 3', '1234', 'jonathan3@jk.com'),
-(4, 'jonathan4', 'Jonathan Kim 4', '1234', 'jonathan4@jk.com');
+-- INSERT INTO Users (`id_role`, `first_name`, `last_name`, `user_name`,  `password`, `email`) VALUES
+-- (1, 'Juan', 'Perez', 'admin', '1234', 'jonathan1@jk.com'),
+-- (2, 'Carlos', 'Martinez', 'manager', '1234', 'jonathan2@jk.com'),
+-- (3, 'jonathan3', 'Jonathan Kim 3', '1234', 'jonathan3@jk.com'),
+-- (4, 'jonathan4', 'Jonathan Kim 4', '1234', 'jonathan4@jk.com');
 
 INSERT INTO Companies (`id_user`, `company`, `id_city`) VALUES 
 (1, 'Camelot', 7308),

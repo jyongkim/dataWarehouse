@@ -19,8 +19,9 @@ async function postData(url = '', data = {}) {
   return response.json();
 }
 
-const register = (name,username, email, password) => {
-  return postData(API_URL+'signup', { name:name,
+const register = (firstName,lastName,username, email, password) => {
+  return postData(API_URL+'signup', { first_name: firstName,
+                                      last_name: lastName,
                                       username: username,
                                       email: email,
                                       password: password});
