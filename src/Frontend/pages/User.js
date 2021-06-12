@@ -9,18 +9,19 @@ export default function User() {
     const [users, setUsers] = useState([])
     const [ABMtype, setABMtype] = useState("")
     useEffect(() => {
-        let isCancelled = false;
-        const fetchUsers = ()=> {return fetch("http://localhost:3200/user").then(
-            response => response.json()
-        )};
-        fetchUsers().then(data =>{
-            if(!isCancelled)
+        
+        fetch("http://localhost:3200/user").then(
+            (response) => {
+                response.json();
+            }
+            ).then(data =>{
                 setUsers(data);
-        })
+            });
+        
         return () => {
-            isCancelled = true;
+           
         }
-    }, [])
+    }, []);
     const [directionName, setDirectionName] = useState(false)
     const sortByName = () => {
         setUsers([
@@ -96,7 +97,7 @@ export default function User() {
             response => response.json()
         )};
         deleteUser().then(data =>{
-            setUsers([...users.filter(e=> e.Id != idToDelete)]);
+            // setUsers([...users.filter(e=> e.Id != idToDelete)]);
             setShowConfirm(false);
         })
        
@@ -165,7 +166,7 @@ export default function User() {
                 </thead>
                 <tbody>
                     {
-                        users && users.length > 0 && users.map(u => (
+                        users && users.map(u => (
                             <tr>
                                 <td>
                                     {u.FirstName}
