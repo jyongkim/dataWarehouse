@@ -15,7 +15,7 @@ exports.read = (req, res) => {
     console.log('paso por aqui');
     User.read((err, user) => {
         console.log('user:',user);
-        err ? res.send(err) : res.send(user)
+        err ? res.send(err) : res.send(user);
 })}
 
 exports.find = (req, res) => {

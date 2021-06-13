@@ -8,20 +8,23 @@ export default function User() {
 
     const [users, setUsers] = useState([])
     const [ABMtype, setABMtype] = useState("")
+    const [fetchData, setFetchData] = useState(false)
     useEffect(() => {
         
         fetch("http://localhost:3200/user").then(
-            (response) => {
-                response.json();
-            }
+            (response) => response.json()
             ).then(data =>{
+                console.log('data:',data);
                 setUsers(data);
+                setFetchData(!setFetchData)
+            }).catch((err)=>{
+                console.log('error:',err);
             });
         
         return () => {
            
         }
-    }, []);
+    }, [fetchData]);
     const [directionName, setDirectionName] = useState(false)
     const sortByName = () => {
         setUsers([
@@ -98,6 +101,7 @@ export default function User() {
         )};
         deleteUser().then(data =>{
             // setUsers([...users.filter(e=> e.Id != idToDelete)]);
+            setFetchData(true);
             setShowConfirm(false);
         })
        

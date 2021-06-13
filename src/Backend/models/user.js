@@ -45,7 +45,8 @@ User.read = (result) => {
     FROM users u 
     INNER JOIN roles r
     ON u.id_role = r.id_role`, (err, res) => {
-        err ? result(err, null) : result(null, res)
+        console.log(err);
+        err ? result(err, null) : result(null, res);
 })}
 
 User.find = (id, result) => {

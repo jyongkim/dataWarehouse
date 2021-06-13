@@ -18,22 +18,22 @@ Contact.create = (id, newContact, result) => {
 Contact.read = (id, result) => {
     dbConn.query(
         `SELECT 
-            CONCAT(last_name," " ,first_name) AS Contactos,
-            CONCAT(country, " - ", region) AS "País / Región",
-            company AS Compañía,
-            position AS Cargo,
-            GROUP_CONCAT(channel) AS "Canal preferido",
-            interest AS Interés    
-                FROM contact_preferences AS cp
-                    JOIN contacts AS con ON con.id_contact = cp.id_contact
-                    JOIN companies AS com ON com.id_company = con.id_company
-                    JOIN users AS u ON u.id_user = com.id_user
-                    JOIN contact_channel AS cc ON cc.id_channel = cp.id_channel
-                    JOIN cities AS c ON c.id_city = con.id_city
-                    JOIN countries AS p ON p.id_country = c.id_country
-                    JOIN regions AS r ON r.id_region = p.id_region
-                GROUP BY cp.id_contact
-                ORDER BY last_name;`,
+            CONCAT(CON.last_name," " ,CON.first_name) AS Contactos,
+            CONCAT(COUN.country, " - ", R.region) AS "País / Región",
+            COM.company AS Compañía,
+            CON.position AS Cargo,
+            GROUP_CONCAT(CC.channel) AS "Canal preferido",
+            CON.interest AS Interés    
+                FROM contact_preferences AS CP
+                    JOIN contacts AS CON ON CON.id_contact = CP.id_contact
+                    JOIN companies AS COM ON COM.id_company = CON.id_company
+                    JOIN users AS U ON U.id_user = COM.id_user
+                    JOIN contact_channel AS CC ON CC.id_channel = CP.id_channel
+                    JOIN cities AS C ON C.id_city = CON.id_city
+                    JOIN countries AS COUN ON COUN.id_country = C.id_country
+                    JOIN regions AS R ON R.id_region = COUN.id_region
+                GROUP BY CP.id_contact
+                ORDER BY CON.last_name;`,
 id, (err, res) => err ? result(err, null) : result(null, res)
 )}
 
