@@ -24,34 +24,35 @@ const register = (firstName,lastName,username, email, password) => {
                                       last_name: lastName,
                                       username: username,
                                       email: email,
-                                      password: password});
-};
+                                      password: password})
+}
 
 const login = (username, password) => {
    return postData(API_URL+'signin', {
     username: username,
     password: password})
     .then((data) => {
-      console.log('data:',data);
       if (data.accessToken) {
-        localStorage.setItem("user", JSON.stringify(data));
+        localStorage.setItem("user", JSON.stringify(data))
       }
+      return data
+    })
+}
 
-      return data;
-    });
-};
 
 const logout = () => {
-  localStorage.removeItem("user");
-};
+  localStorage.removeItem("user")
+}
 
 const getCurrentUser = () => {
-  return JSON.parse(localStorage.getItem("user"));
-};
+  return JSON.parse(localStorage.getItem("user"))
+}
+
 const AuthService = {
   register,
   login,
   logout,
   getCurrentUser,
-};
-export default AuthService;
+}
+
+export default AuthService

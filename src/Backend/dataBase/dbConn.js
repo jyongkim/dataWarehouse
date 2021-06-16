@@ -3,7 +3,7 @@ const mysql = require('mysql');
 const dbConn = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '',
+    password: null,
     database: 'Data_Warehouse',
 })
 

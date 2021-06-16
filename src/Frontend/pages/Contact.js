@@ -1,4 +1,5 @@
-import Table from '../components/Table';
+import React from 'react'
+import Table from '../components/Table'
 
 const Contact = ({contacts}) => {
     // const contacts = this.props.contacts;
@@ -6,8 +7,6 @@ const Contact = ({contacts}) => {
             <Table data={contacts}/> 
         )
     
-};
+}
 
-export default Contact;
-
-
+export default Contact

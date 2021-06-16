@@ -3,6 +3,23 @@ import authHeader from "./auth-header";
 
 const API_URL = "http://localhost:3000/";
 
+async function postData(url = '', data = {}) {
+  const response = await fetch(url, {
+    method: 'POST', 
+    mode: 'cors', 
+    cache: 'no-cache', 
+    credentials: 'same-origin', 
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+    body: JSON.stringify(data) 
+  });
+  return response.json();
+}
+
+
 const getPublicContent = () => {
   return fetch(API_URL + "all");
 };

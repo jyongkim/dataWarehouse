@@ -1,5 +1,5 @@
-import { Component } from 'react';
-import { Thead, Tbody } from './TableData';
+import React,{ Component } from 'react'
+import { Thead, Tbody } from './TableData'
 
 class Table extends Component{
     render() {
@@ -11,6 +11,4 @@ class Table extends Component{
             </table> : <p> No hay datos para mostrar. </p>
 )   }   }
 
-
-
-export default Table;
+export default Table
