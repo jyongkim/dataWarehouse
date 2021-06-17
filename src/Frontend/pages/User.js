@@ -8,6 +8,8 @@ import IconWithTooltip from '../components/IconWithTooltip'
 import UserLogic from './UserLogic'
 import ModalUser from '../components/user/ModalUser'
 import TableDataUsers from '../components/user/TableDataUsers'
+import UserService from "../services/user.service"
+
 
 export default function User() {
     
@@ -39,18 +41,18 @@ export default function User() {
     const handleClose = () => setShowModalUser(false)
 
     const handleSaveChanges = () =>{
+        console.log(user);
         if(user.Id>0){
             const userToUpdate = users.find(u=> u.Id == user.Id)
         }else{
-            console.log(user);
-            const addUser = ()=> {return fetch("http://localhost:3200/user/", {method: "POST"},user).then(
-            response => response.json()
-        )}
-        addUser().then(data =>{
+            const data = UserService.createUser(user.FirstName,user.LastName,user.Username, user.Email, user.Password)
+            //setMessage(data.message);
+            //setSuccessful(true);
             setShowModalUser(false)
-        })
+            setFetchData(true)
         }
     }
+    
 
    return (
         <div>

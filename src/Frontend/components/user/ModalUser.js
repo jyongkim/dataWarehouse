@@ -24,6 +24,11 @@ function ModalUser(props) {
         LastName: e.target.value
     })
 
+    const handleChangeUsername = (e) => setUser({
+        ...user,
+        Username: e.target.value
+    })
+
     const handleChangeEmail = (e) => setUser({
         ...user,
         Email: e.target.value
@@ -32,6 +37,11 @@ function ModalUser(props) {
     const handleChangeProfile = (e) => setUser({
         ...user,
         Profile: e.target.value
+    })
+
+    const handleChangePassword = (e) => setUser({
+        ...user,
+        Password: e.target.value
     })
     
 
@@ -54,6 +64,12 @@ function ModalUser(props) {
                             <Form.Text className="text-muted">
                             </Form.Text>
                         </Form.Group>
+                        <Form.Group controlId="formBasicUsername">
+                            <Form.Label>Nombre de Usuario</Form.Label>
+                            <Form.Control value={user.Username} name="username" type="text" onChange={(e) => handleChangeUsername(e)} placeholder="Por favor ingrese nombre de usuario" />
+                            <Form.Text className="text-muted">
+                            </Form.Text>
+                        </Form.Group>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Correo Electrónico</Form.Label>
                             <Form.Control value={user.Email} name="email" type="email" onChange={(e) => handleChangeEmail(e)} placeholder="Por favor ingrese correo electrónico" />
@@ -70,7 +86,7 @@ function ModalUser(props) {
                         </Form.Group>
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>Contraseña</Form.Label>
-                            <Form.Control type="password" placeholder="Password" />
+                            <Form.Control name="password" value={user.Password} type="password" onChange={(e) => handleChangePassword(e)}  placeholder="Password" />
                         </Form.Group>
                         <Form.Group controlId="formBasicConfirmPassword">
                             <Form.Label>Reingrese Contraseña</Form.Label>

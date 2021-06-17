@@ -1,18 +1,13 @@
 let dbConn = require('../dataBase/dbConn')
 const sql = require('mysql');
 let User = function(user) {
-    this.id_role = user.id_role
-    this.user_name = user.user_name
-    this.first_name = user.first_name
-    this.last_name = user.last_name
-    this.password = user.password
-    this.email = user.email
+    
 }
 
 User.create = (newUser, result) => {
         console.log('newUser:', newUser);
         let sql = "INSERT INTO `users` SET `id_role` = ?,  `first_name` = ?,`last_name` = ?,  `user_name` = ?,  `password` = ?,  `email` = ?";
-        dbConn.query(sql, [ newUser.id_role, newUser.first_name, newUser.last_name, newUser.user_name, newUser.password, newUser.email ],  function(err, rows) {
+        dbConn.query(sql, [ 1, newUser.first_name, newUser.last_name, newUser.username, newUser.password, newUser.email ],  function(err, rows) {
             console.log(err);
         });
 
