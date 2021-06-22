@@ -1,17 +1,19 @@
 import React from 'react';
+import { Button, Modal } from 'react-bootstrap';
 
 function ModalConfirm(props) {
+    const {show, handleCloseConfirm, title, message} = props
     return (
-        <Modal show={showConfirm} onHide={handleCloseConfirm}>
+        <Modal show={show} onHide={handleCloseConfirm}>
                 <Modal.Header closeButton>
-                <Modal.Title>Atencion!!</Modal.Title>
+                <Modal.Title>{title}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Esta seguro que desea borrar el usuario?</Modal.Body>
+                <Modal.Body>{message}}</Modal.Body>
                 <Modal.Footer>
                 <Button variant="secondary" onClick={handleCloseConfirm}>
                     Cerrar
                 </Button>
-                <Button variant="primary" onClick={handleConfirm}>
+                <Button variant="primary" onClick={handleCloseConfirm}>
                     Confirmar
                 </Button>
                 </Modal.Footer>

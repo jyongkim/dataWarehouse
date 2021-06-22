@@ -12,7 +12,6 @@ exports.create = (req, res) => {
 })})}
 
 exports.read = (req, res) => {
-    console.log('paso por aqui');
     User.read((err, user) => {
         console.log('user:',user);
         err ? res.send(err) : res.send(user);

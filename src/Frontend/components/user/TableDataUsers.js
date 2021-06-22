@@ -5,9 +5,10 @@ import { PencilSquare, ArrowDownUp, X } from 'react-bootstrap-icons';
 
 function TableDataUsers(props) {
 
-    const {users,setUsers} = props
+    const {users,setUsers,showModal, handleDelete} = props
     const [orderByName, setOrderByName] = useState(false)
     const [orderByLastName, setOrderByLastName] = useState(false)
+    const [orderByUsername, setOrderByUsername] = useState(false)
     const [orderByEmail, setOrderByEmail] = useState(false)
     const [orderByProfile, setOrderByProfile] = useState(false)
     
@@ -48,6 +49,18 @@ function TableDataUsers(props) {
             })])
     }
 
+    const sortByUsername = () => {
+        setUsers([
+            ...users.sort((a, b) => {
+                setOrderByUsername(!orderByUsername)
+                if (a.Username < b.Username)
+                    return orderByEmail ? -1 : 1
+                else if (a.Username > b.Username)
+                    return orderByUsername ? 1 : -1
+                return 0
+            })])
+    }
+
     const sortByProfile = () => {
         setUsers([
             ...users.sort((a, b) => {
@@ -66,6 +79,7 @@ function TableDataUsers(props) {
                     <tr>
                         <th>Nombre <ArrowDownUp onClick={() => sortByName()} style={{ cursor: 'pointer' }}></ArrowDownUp></th>
                         <th>Apellido <ArrowDownUp onClick={() => sortByLastName()} style={{ cursor: 'pointer' }}></ArrowDownUp></th>
+                        <th>Usuario <ArrowDownUp onClick={() => sortByUsername()} style={{ cursor: 'pointer' }}></ArrowDownUp></th>
                         <th>Email <ArrowDownUp onClick={() => sortByEmail()} style={{ cursor: 'pointer' }}></ArrowDownUp></th>
                         <th>Perfil <ArrowDownUp onClick={() => sortByProfile()} style={{ cursor: 'pointer' }}></ArrowDownUp></th>
                         <th>Acciones</th>
@@ -82,17 +96,19 @@ function TableDataUsers(props) {
                                     {u.LastName}
                                 </td>
                                 <td>
+                                    {u.Username}
+                                </td>
+                                <td>
                                     {u.Email}
                                 </td>
                                 <td>
                                     {u.Role}
                                 </td>
                                 <td>
-                                    {/* <PencilSquare style={{ cursor: 'pointer' }} onClick={(e) =>{
-                                        e.preventDefault();
-                                        handleShowEdit(u.Id)
+                                    <PencilSquare style={{ cursor: 'pointer' }} onClick={(e) =>{
+                                        showModal(u.Id)
                                         }}></PencilSquare>
-                                    <X style={{ cursor: 'pointer', fontStyle: 'bold', fontSize: '20pt' }} onClick={()=> handleDelete(u.Id)}></X> */}
+                                    <X style={{ cursor: 'pointer', fontStyle: 'bold', fontSize: '20pt' }} onClick={()=> handleDelete(u.Id)}></X>
                                 </td>
                             </tr>
                         ))

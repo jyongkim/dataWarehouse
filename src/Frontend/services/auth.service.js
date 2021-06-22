@@ -1,44 +1,19 @@
-//import { response } from "express";
-
-
-const API_URL = "http://localhost:3200/auth/";
-
-async function postData(url = '', data = {}) {
-  const response = await fetch(url, {
-    method: 'POST', 
-    mode: 'cors', 
-    cache: 'no-cache', 
-    credentials: 'same-origin', 
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    redirect: 'follow',
-    referrerPolicy: 'no-referrer',
-    body: JSON.stringify(data) 
-  });
-  return response.json();
-}
+import {API_URL, fetchData} from './common.service'
 
 const register = (firstName,lastName,username, email, password) => {
-  return postData(API_URL+'signup', { first_name: firstName,
+  return fetchData(API_URL+'auth/signup', { first_name: firstName,
                                       last_name: lastName,
-                                      username: username,
+                                      user_name: username,
                                       email: email,
-                                      password: password})
+                                      password: password},'POST')
 }
 
 const login = (username, password) => {
-   return postData(API_URL+'signin', {
+   return fetchData(API_URL+'auth/signin', {
     username: username,
-    password: password})
-    .then((data) => {
-      if (data.accessToken) {
-        localStorage.setItem("user", JSON.stringify(data))
-      }
-      return data
-    })
+    password: password},'POST')
+    
 }
-
 
 const logout = () => {
   localStorage.removeItem("user")

@@ -7,34 +7,18 @@ let User = function(user) {
 User.create = (newUser, result) => {
         console.log('newUser:', newUser);
         let sql = "INSERT INTO `users` SET `id_role` = ?,  `first_name` = ?,`last_name` = ?,  `user_name` = ?,  `password` = ?,  `email` = ?";
-        dbConn.query(sql, [ 1, newUser.first_name, newUser.last_name, newUser.username, newUser.password, newUser.email ],  function(err, rows) {
+        dbConn.query(sql, [ 1, newUser.first_name, newUser.last_name, newUser.user_name, newUser.password, newUser.email ],  function(err, rows) {
             console.log(err);
         });
 
 }
 
-// User.read = (result) => {
-//     dbConn.query(`SELECT
-//     u.id_user AS ID,
-//     role AS Rol,
-//     user_name AS Usuario,
-//     name AS Nombre,
-//     COUNT(c.id_user) AS Compañías,
-//     email AS "E-mail"
-//     FROM Users AS u
-//     JOIN Roles AS r ON u.id_role = r.id_role
-//     JOIN Companies AS c ON c.id_user = u.id_user
-//     GROUP BY c.id_user`, (err, res) => {
-//         err ? result(err, null) : result(null, res)
-// })}
-
 User.read = (result) => {
-    console.log('paso por aqui 2');
     dbConn.query(`SELECT
     u.id_user AS Id,
     u.last_name AS LastName,
     u.first_name  AS FirstName,
-    u.user_name AS UserName,
+    u.user_name AS Username,
     u.email AS Email,
     r.role AS Role
     FROM users u 
@@ -46,12 +30,12 @@ User.read = (result) => {
 
 User.find = (id, result) => {
     dbConn.query(`SELECT
-    u.id_user AS ID,
+    u.id_user AS Id,
     role AS Rol,
-    user_name AS Usuario,
-    name AS Nombre,
+    user_name AS Username,
+    name AS FirstName,
     COUNT(c.id_user) AS Compañías,
-    email AS "E-mail"
+    email AS Email
     FROM Users AS u
     JOIN Roles AS r ON u.id_role = r.id_role
     JOIN Companies AS c ON c.id_user = u.id_user
@@ -61,33 +45,14 @@ User.find = (id, result) => {
 })}
 
 
-// User.findByUserName = (name, result) => {
-//     dbConn.query(`SELECT
-//     u.id_user AS ID,
-//     role AS Rol,
-//     user_name AS Usuario,
-//     name AS Nombre,
-//     password as Password,
-//     COUNT(c.id_user) AS Compañías,
-//     email AS "E-mail"
-//     FROM Users AS u
-//     JOIN Roles AS r ON u.id_role = r.id_role
-//     JOIN Companies AS c ON c.id_user = u.id_user
-//     WHERE u.user_name = ?
-//     GROUP BY c.id_user`, name, (err, res) => {
-//         err ? result(err, null) : result(null, res)
-// })}
-
-
-
 User.findByUserName = (name, result) => {
     dbConn.query(`SELECT
-    id_user,
-    id_role,
-    user_name,
-    name,
-    password,
-    email
+    id_user AS Id,
+    id_role AS Rol,
+    user_name AS Username,
+    first_name AS FirstName,
+    password AS Password,
+    email AS Email
     FROM users 
     WHERE user_name = ?
     `, [name], (err, res) => {
@@ -101,7 +66,11 @@ User.findByUserName = (name, result) => {
 
 
 User.update = (id, user, result) => {
-    dbConn.query('UPDATE Users SET ? WHERE id_user = ?', [user, id], (err, res) => {
+    console.log('id:',id)
+    console.log('user:', user)
+    dbConn.query('UPDATE users SET first_name=?, last_name=?, email= ? WHERE id_user = ?', [user.first_name, user.last_name, user.email, id], (err, res) => {
+        console.log('error:',err)
+        console.log('res:', res)
         err ? result(err, null) : result(null, res)
 })}
 

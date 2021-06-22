@@ -1,135 +1,153 @@
-import './App.css';
-import {useEffect,useState} from 'react';
-import Contact from './Frontend/pages/Contact';
-import Login from './Frontend/pages/Login';
-import Register from './Frontend/pages/Register';
-import AuthService from './Frontend/services/auth.service';
-import React from "react";
+import './App.css'
+import { useEffect, useState } from 'react'
+import Contact from './Frontend/pages/Contact'
+import Login from './Frontend/pages/Login'
+import Register from './Frontend/pages/Register'
+import AuthService from './Frontend/services/auth.service'
+import React from "react"
+import {Redirect} from "react-router-dom"
+import {useHistory} from "react-router-dom"
+
+
+
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
-} from "react-router-dom";
-import User from './Frontend/pages/User';
+} from "react-router-dom"
+
+import Users from './Frontend/pages/Users'
 
 export default function App() {
-  const [contacts, setContacts] = useState([]);
+
+  const [contacts, setContacts] = useState([])
+  const history = useHistory()
+
   useEffect(() => {
-        let server = `http://localhost:3200/`;
+    let server = `http://localhost:3200/`
     fetch(server + 'contact/1')
       .then(response => response.json())
       .then(data => {
-        console.log(data);
-        setContacts(data)})
-    
+        console.log(data)
+        setContacts(data)
+      })
   }, [])
 
 
-  const [showModeratorBoard, setShowModeratorBoard] = useState(false);
-  const [showAdminBoard, setShowAdminBoard] = useState(false);
-  const [currentUser, setCurrentUser] = useState(undefined);
+  const [showModeratorBoard, setShowModeratorBoard] = useState(false)
+  const [showAdminBoard, setShowAdminBoard] = useState(false)
+  const [checkLogin, setCheckLogin] = useState(false)
+  const [currentUser, setCurrentUser] = useState(null)
 
   useEffect(() => {
-    // const user = AuthService.getCurrentUser();
 
-    // if (user) {
-    //   setCurrentUser(user);
-    //   setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
-    //   setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
-    // }
-    setCurrentUser({})
-  }, []);
+    const user = AuthService.getCurrentUser()
+
+    if (user) {
+      setCurrentUser(user)
+      //setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
+      //setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
+      //setCheckLogin(!checkLogin)
+
+    }
+    return () => {
+           
+    }
+  }, [])
+
+  const refreshLogin = () => {
+    const user = AuthService.getCurrentUser()
+
+    if (user) {
+      setCurrentUser(user)
+      //setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
+      //setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
+      //setCheckLogin(!checkLogin)
+
+    }
+  }
 
   const logOut = () => {
-    AuthService.logout();
-  };
+    AuthService.logout()
+  }
+
   return (
     <Router>
-      <div>
-        <nav>
-          <header>
-              <h1>Data Warehouse</h1>
-          </header>
-          <ul className="menu">
-            <li>
-              <Link to="/contact">Contactos</Link>
-            </li>
-            <li>
-              <Link to="/company">Compañías</Link>
-            </li>
-            <li>
-              <Link to="/users">Usuarios</Link>
-            </li>
-            <li>
-              <Link to="/pref">Región/Ciudad</Link>
-            </li>
-            {currentUser ? (
-          <div className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link to={"/profile"} className="nav-link">
-                {currentUser.username}
-              </Link>
-            </li>
-            <li className="nav-item">
-              <a href="/login" className="nav-link" onClick={logOut}>
-                LogOut
-              </a>
-            </li>
-          </div>
-        ) : (
-          <div className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link to={"/login"} className="nav-link">
-                Login
-              </Link>
-            </li>
 
-            <li className="nav-item">
-              <Link to={"/register"} className="nav-link">
-                Sign Up
-              </Link>
-            </li>
+        <nav className="navbar navbar-expand-lg menu">
+          <div className="container-fluid">
+            <div className="navbar-brand">Data Warehouse</div>
+            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              {currentUser ? (
+              <>
+                <li>
+                  <Link to="/contact">Contactos</Link>
+                </li>
+                <li>
+                  <Link to="/company">Compañías</Link>
+                </li>
+                <li>
+                  <Link to="/users">Usuarios</Link>
+                </li>
+                <li>
+                  <Link to="/pref">Región/Ciudad</Link>
+                </li>
+                <div className="navbar-nav ml-auto">
+                  <li className="nav-item">
+                    <Link to="/profile" className="nav-link">
+                      {currentUser.username}
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <a href="/login" className="nav-link" onClick={logOut}>
+                      LogOut
+              </a>
+                  </li>
+                </div>
+              </>
+            ) : (
+              <div className="navbar-nav ml-auto">
+                <li className="nav-item">
+                  <Link to={"/login"} className="nav-link">
+                    Iniciar Sesión
+                  </Link>
+                </li>
+
+                <li className="nav-item">
+                  <Link to={"/register"} className="nav-link">
+                    Registrarse
+                  </Link>
+                </li>
+              </div>
+            )}
+              </ul>
+              
+            </div>
           </div>
-        )}
-          </ul>
         </nav>
-        
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
         <Switch>
           <Route path="/contact">
-            <Contact contacts={contacts}/>
+            <Contact></Contact>
           </Route>
           <Route path="/company">
             <Users />
           </Route>
           <Route path="/users">
-            <User />
-          </Route>
-          <Route path="/pref">
-            <Home />
+            <Users />
           </Route>
           <Route path="/login">
-            <Login />
+            <Login refreshLogin={refreshLogin}/>
           </Route>
           <Route path="/register">
             <Register />
           </Route>
         </Switch>
-      </div>
     </Router>
-  );
+  )
 }
 
-function Home() {
-  return <h2>Home</h2>;
-}
-
-function About() {
-  return <h2>About</h2>;
-}
-
-function Users() {
-  return <h2>Users</h2>;
-}
