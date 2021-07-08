@@ -8,12 +8,12 @@ function ModalConfirm(props) {
                 <Modal.Header closeButton>
                 <Modal.Title>{title}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>{message}}</Modal.Body>
+                <Modal.Body>{message}</Modal.Body>
                 <Modal.Footer>
-                <Button variant="secondary" onClick={handleCloseConfirm}>
+                <Button variant="secondary" onClick={() => handleCloseConfirm(false)}>
                     Cerrar
                 </Button>
-                <Button variant="primary" onClick={handleCloseConfirm}>
+                <Button variant="primary" onClick={() => handleCloseConfirm(true)}>
                     Confirmar
                 </Button>
                 </Modal.Footer>

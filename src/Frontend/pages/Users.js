@@ -53,34 +53,37 @@ export default function Users() {
     const handleClose = () => setShowModalUser(false)
 
     const handleSaveChanges = () =>{
-        
+        let data;
         if(user.Id>0){
-            const userToUpdate = users.find(u=> u.Id == user.Id)
-            const data = UserService.updateUser(user.Id,user.FirstName,user.LastName,user.Username, user.Email, user.Password)
+            data = UserService.updateUser(user.Id,user.FirstName,user.LastName,user.Username, user.Email, user.Password)
         }else{
-            const data = AuthService.register(user.FirstName,user.LastName,user.Username, user.Email, user.Password)
+            data = AuthService.register(user.FirstName,user.LastName,user.Username, user.Email, user.Password)
         }
 
         setShowModalUser(false)
         setFetchData(true)
+        return data
 
     }
 
-    const handleConfirm = () => {
-        
-        const data = UserService.deleteUser(idToDelete)
-        setFetchData(true)
+    const handleCloseConfirm = (confirm) => {
+
+        if(confirm){
+            const data = UserService.deleteUser(idToDelete)
+            setFetchData(true)
+        }
         setShowModalConfirm(false)
        
     }
+
 
    return (
         <div>
             <TableDataUsers users={users} setUsers={setUsers} showModal={showModal} handleDelete={handleDeleteUser}></TableDataUsers>
             <IconWithTooltip Icon={PersonPlus} text="Agregar Nuevo" action={showModal}></IconWithTooltip>
-            <ModalUser showModalUser={showModalUser} handleClose={handleClose} handleSaveChanges={handleSaveChanges} user={user} setUser={setUser} initialStateUser={initialStateUser} >
+            <ModalUser showModalUser={showModalUser} handleClose={handleClose} handleSaveChanges={handleSaveChanges.bind(this)} user={user} setUser={setUser} initialStateUser={initialStateUser} >
             </ModalUser>
-            <ModalConfirm show={showModalConfirm} handleCloseConfirm={handleConfirm} title="Atención!" message="¿Desea borrar el usuario?"></ModalConfirm>
+            <ModalConfirm show={showModalConfirm} handleCloseConfirm={handleCloseConfirm} title="Atención!" message="¿Desea borrar el usuario?"></ModalConfirm>
         </div>
     )
 }

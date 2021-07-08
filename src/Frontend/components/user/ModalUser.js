@@ -17,7 +17,7 @@ function ModalUser(props) {
                 <Modal.Title>ABM de Usuario</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <FormUser onSubmit={handleRegister} user={user} setUser={setUser} isModal={true}></FormUser>
+                    <FormUser onSubmit={handleSaveChanges} user={user} setUser={setUser} isModal={true}></FormUser>
                 </Modal.Body>
                 <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
