@@ -7,8 +7,7 @@ import AuthService from './Frontend/services/auth.service'
 import React from "react"
 import {Redirect} from "react-router-dom"
 import {useHistory} from "react-router-dom"
-
-
+import Companies from './Frontend/pages/Companies'
 
 import {
   BrowserRouter as Router,
@@ -106,7 +105,7 @@ export default function App() {
                   <li className="nav-item">
                     <a href="/login" className="nav-link" onClick={logOut}>
                       LogOut
-              </a>
+                    </a>
                   </li>
                 </div>
               </>
@@ -125,8 +124,7 @@ export default function App() {
                 </li>
               </div>
             )}
-              </ul>
-              
+              </ul> 
             </div>
           </div>
         </nav>
@@ -135,7 +133,7 @@ export default function App() {
             <Contact></Contact>
           </Route>
           <Route path="/company">
-            <Users />
+            <Companies />
           </Route>
           <Route path="/users">
             <Users />

@@ -6,10 +6,10 @@ import { useState, useEffect } from 'react'
 import { PersonPlus } from 'react-bootstrap-icons'
 import IconWithTooltip from '../components/IconWithTooltip'
 import ModalConfirm from '../components/ModalConfirm'
-import UserLogic from './UsersLogic'
-import ModalUser from '../components/user/ModalUser'
-import TableDataUsers from '../components/user/TableDataUsers'
-import UserService from "../services/user.service"
+import CompanyLogic from './CompanyLogic'
+import ModalCompany from '../components/company/ModalCompany'
+import TableDataCompanies from '../components/company/TableDataCompanies'
+import CompanyService from "../services/company.service"
 import AuthService from "../services/auth.service";
 
 
@@ -54,7 +54,7 @@ export default function Companies() {
 
     const handleSaveChanges = () =>{
         let data;
-        if(user.Id>0){
+        if(company.Id>0){
             data = CompanyService.updateCompany(company.Id,company.FirstName,company.LastName,company.Username, company.Email, company.Password)
         }else{
             data = CompanyService.createCompany(company.FirstName,company.LastName,company.Username, company.Email, company.Password)

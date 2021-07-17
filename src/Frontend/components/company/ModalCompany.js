@@ -1,7 +1,8 @@
 import React, {useState,useRef} from 'react';
 import { Button, Modal} from 'react-bootstrap';
-import FormUser from './FormUser';
+import FormCompany from './FormCompany';
 import AuthService from "../../services/auth.service";
+import CompanyService from "../../services/company.service";
 
 
 function ModalCompany(props) {

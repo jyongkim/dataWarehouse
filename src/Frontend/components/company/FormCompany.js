@@ -24,11 +24,11 @@ function FormCompany(props) {
     
         form.current.validateAll()
 
-        if(user.Password != user.ConfirmPassword){
-            setMessage("La contraseña y su confirmación no coincide.")
-            setSuccessful(false)
-            return
-        }
+        // if(user.Password != user.ConfirmPassword){
+        //     setMessage("La contraseña y su confirmación no coincide.")
+        //     setSuccessful(false)
+        //     return
+        // }
     
         if (checkBtn.current.context._errors.length === 0) {
             onSubmit().then(data=>{
