@@ -22,19 +22,19 @@ export default function Companies() {
     const [idToDelete,setIdToDelete] = useState(-1)
     const [showModalConfirm,setShowModalConfirm] = useState(false)
 
-    useEffect(() => {
+    // useEffect(() => {
         
-        CompanyService.getCompanies().then(data =>{
-                setCompanies(data)
-                setFetchData(!setFetchData)
-            }).catch((err)=>{
-                console.log('error:',err);
-            })
-        
-        return () => {
+    //     CompanyService.getCompanies().then(data =>{
+    //             setCompanies(data)
+    //             setFetchData(!setFetchData)
+    //         }).catch((err)=>{
+    //             console.log('error:',err);
+    //         })
+    //     setFetchData(true)
+    //     return () => {
            
-        }
-    }, [fetchData])
+    //     }
+    // }, [fetchData])
 
     const showModal = (id) => {
            if(id>0){
