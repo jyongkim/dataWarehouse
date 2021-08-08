@@ -24,12 +24,8 @@ function FormCompany(props) {
     
         form.current.validateAll()
 
-        // if(user.Password != user.ConfirmPassword){
-        //     setMessage("La contraseña y su confirmación no coincide.")
-        //     setSuccessful(false)
-        //     return
-        // }
-    
+        onSubmit();
+
         if (checkBtn.current.context._errors.length === 0) {
             onSubmit().then(data=>{
                 setMessage(data.message)
@@ -120,7 +116,7 @@ function FormCompany(props) {
                 />
               </div>
               <div className="mb-3 form-group">
-                <label htmlFor="address" className="form-label">Address</label>
+                <label htmlFor="address" className="form-label">Dirección</label>
                 <Input
                   type="text"
                   className="form-control"
@@ -133,7 +129,7 @@ function FormCompany(props) {
 
              
               <div className="mb-3 form-group">
-                <button className="btn btn-primary btn-block">Grabar</button>
+                <button className="btn btn-primary btn-block" onClick={(e)=> handleSubmit(e)}>Grabar</button>
               </div>
             </div>
             )}

@@ -29,6 +29,7 @@ exports.signin = (req, res) => {
        })
        console.log('login:',user);
        var authorities = [];
+       console.log("user:",user.Username);
          return res.status(200).send({
            id: user.Id,
            username: user.Username,

@@ -7,7 +7,7 @@ function TableDataCompanies(props) {
 
     const {companies,setCompanies,showModal, handleDelete} = props
     const [orderByName, setOrderByName] = useState(false)
-    const [orderBy, setOrderByCountry] = useState(false)
+    const [orderByCountry, setOrderByCountry] = useState(false)
     const [orderByAddress, setOrderByAddress] = useState(false)
         
 
@@ -48,6 +48,7 @@ function TableDataCompanies(props) {
     }
 
     return (
+        <>
         <Table striped bordered hover className="companies">
                 <thead>
                     <tr>
@@ -81,6 +82,7 @@ function TableDataCompanies(props) {
                     }
                 </tbody>
             </Table>
+            </>
     );
 }
 

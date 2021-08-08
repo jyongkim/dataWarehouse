@@ -11,6 +11,7 @@ import ModalCompany from '../components/company/ModalCompany'
 import TableDataCompanies from '../components/company/TableDataCompanies'
 import CompanyService from "../services/company.service"
 import AuthService from "../services/auth.service";
+import { Button } from 'react-bootstrap'
 
 
 
@@ -79,8 +80,12 @@ export default function Companies() {
 
    return (
         <div>
+            <div style={{display:"flex", flexDirection:"row",margin:"2rem"}}>
+            <h4 style={{flex:"10"}}>Compañías</h4>
+            <Button onClick={showModal} style={{flex:"2", height:"2.25rem", with:"5rem", justifyContent:"flex-end"}}>Agregar Nuevo</Button>
+            </div>
             <TableDataCompanies companies={companies} setCompanies={setCompanies} showModal={showModal} handleDelete={handleDeleteCompany}></TableDataCompanies>
-            <IconWithTooltip Icon={PersonPlus} text="Agregar Nuevo" action={showModal}></IconWithTooltip>
+            {/* <IconWithTooltip Icon={PersonPlus} text="Agregar Nuevo" action={showModal}></IconWithTooltip> */}
             <ModalCompany showModalCompany={showModalCompany} handleClose={handleClose} handleSaveChanges={handleSaveChanges.bind(this)} company={company} setCompany={setCompany} initialStateCompany={initialStateCompany} >
             </ModalCompany>
             <ModalConfirm show={showModalConfirm} handleCloseConfirm={handleCloseConfirm} title="Atención!" message="¿Desea borrar la compañía?"></ModalConfirm>
