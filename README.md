@@ -15,3 +15,6 @@ Una vez descargada la aplicación, abrir la consola y ejecutar el comando "npm i
 - Instalar XAMPP y ejecutar el servicio MySQL.
 - Abrir MySQL Workbench.
 - Ejecutar el script que se encuentra en la ruta src\Backend\dataBase\dataBase.sql
+
+### 4) Ejecución del servidor.
+Abrir la carpeta en la consola y ejecutar el comando "npm start". Luego ejecutar una segunda consola y ejectuar "node src/Backend/server.js".
