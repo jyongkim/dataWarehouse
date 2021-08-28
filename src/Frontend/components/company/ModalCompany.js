@@ -8,9 +8,9 @@ import CompanyService from "../../services/company.service";
 function ModalCompany(props) {
     const {showModalCompany, handleClose,handleSaveChanges,company, setCompany} = props
     
-    const handleRegister = () => {
-        return CompanyService.create(company.Name,company.Country,company.Address)
-    }
+    // const handleRegister = () => {
+    //     return CompanyService.createCompany(company.Name,company.Country,company.Address)
+    // }
 
     return (
         <Modal show={showModalCompany} onHide={handleClose}>

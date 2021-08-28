@@ -21,7 +21,7 @@ function FormCompany(props) {
     
         setMessage("")
         setSuccessful(false)
-    
+        console.log(company)
         form.current.validateAll()
 
         onSubmit();

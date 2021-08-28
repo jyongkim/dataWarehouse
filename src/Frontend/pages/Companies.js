@@ -54,11 +54,12 @@ export default function Companies() {
     const handleClose = () => setShowModalCompany(false)
 
     const handleSaveChanges = () =>{
+        console.log('commpany:',company)
         let data;
         if(company.Id>0){
-            data = CompanyService.updateCompany(company.Id,company.FirstName,company.LastName,company.Username, company.Email, company.Password)
+            data = CompanyService.updateCompany(company.Id,company.Name,company.Country, company.Address)
         }else{
-            data = CompanyService.createCompany(company.FirstName,company.LastName,company.Username, company.Email, company.Password)
+            data = CompanyService.createCompany(company.Name,company.Country, company.Address)
         }
 
         setShowModalCompany(false)

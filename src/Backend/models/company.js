@@ -4,9 +4,12 @@ let Company = function(company) {
     this.company = company.company
     this.id_city = company.id_city
     this.address = company.address
+    this.phone = company.phone
+    this.email  = company.email
 }
 
 Company.create = (id, newCompany, result) => {
+    console.log('xxxxx')
     dbConn.query('INSERT INTO Companies SET id_user = ?, ?', [id, newCompany], (err, res) => {
         err ? result(err, null) : result(null, res)
 })}

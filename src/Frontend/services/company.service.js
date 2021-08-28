@@ -1,8 +1,9 @@
 import {API_URL, fetchData} from './common.service'
 
 
-const createCompany = (name, country, address) => {
-  return fetchData(`${API_URL}user`, { name: name,
+const createCompany = (idUser,name, country, address) => {
+  console.log('name:',name)
+  return fetchData(`${API_URL}company/${idUser}`, { name: name,
                                        country: country,
                                        address: address
                                       }, 'POST')
