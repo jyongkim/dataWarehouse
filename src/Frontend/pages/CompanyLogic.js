@@ -4,8 +4,8 @@ const CompanyLogic = () => {
     
     const initialStateCompany = {
         Id:-1,
-        Name:'',
-        Country:'',
+        Company:'',
+        IdCity:0,
         Address: ''
     }
 

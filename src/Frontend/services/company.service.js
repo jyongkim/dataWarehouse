@@ -1,4 +1,5 @@
 import {API_URL, fetchData} from './common.service'
+import AuthService from './auth.service'
 
 
 const createCompany = (idUser,name, country, address) => {
@@ -18,7 +19,8 @@ const deleteCompany = (id) => {
 }
 
 const getCompanies = () =>{
-  return fetchData(`${API_URL}user`, {},'GET')
+  const user = AuthService.getCurrentUser()
+  return fetchData(`${API_URL}company/${user.id}`, {},'GET')
 }
 
 

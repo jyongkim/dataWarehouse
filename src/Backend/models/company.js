@@ -17,9 +17,10 @@ Company.create = (id, newCompany, result) => {
 Company.read = (id, result) => {
     dbConn.query(`SELECT
         c.id_company AS ID,
-        company AS Compañía,
+        company AS Name,
         COUNT (cnts.id_company) AS Count,
-        CONCAT(city, ", ", country) AS "Ciudad / País"
+        address AS  Address,
+        CONCAT(city, ", ", country) AS Country
         FROM Companies AS c
         JOIN Contacts AS cnts ON cnts.id_company = c.id_company
         JOIN Cities AS cty ON cty.id_city = c.id_city

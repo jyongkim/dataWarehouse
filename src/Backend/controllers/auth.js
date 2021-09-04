@@ -27,13 +27,11 @@ exports.signin = (req, res) => {
        var token = jwt.sign({ id: user.id }, config.secret, {
          expiresIn: 86400 // 24 hours
        })
-       console.log('login:',user);
        var authorities = [];
-       console.log("user:",user.Username);
          return res.status(200).send({
-           id: user.Id,
-           username: user.Username,
-           email: user.Email,
+           id: user[0].Id,
+           username: user[0].Username,
+           email: user[0].Email,
            roles: [],
            accessToken: token
          })
