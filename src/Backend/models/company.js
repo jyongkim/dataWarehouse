@@ -18,13 +18,12 @@ Company.read = (id, result) => {
     dbConn.query(`SELECT
         c.id_company AS ID,
         company AS Name,
-        COUNT (cnts.id_company) AS Count,
         address AS  Address,
         CONCAT(city, ", ", country) AS Country
         FROM Companies AS c
-        JOIN Contacts AS cnts ON cnts.id_company = c.id_company
-        JOIN Cities AS cty ON cty.id_city = c.id_city
-        JOIN Countries AS ctry ON ctry.id_country = cty.id_country
+        LEFT JOIN Contacts AS cnts ON cnts.id_company = c.id_company
+        LEFT JOIN Cities AS cty ON cty.id_city = c.id_city
+        LEFT JOIN Countries AS ctry ON ctry.id_country = cty.id_country
         WHERE id_user = ?`, id, (err, res) => {
         err ? result(err, null) : result(null, res)
 })}

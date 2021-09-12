@@ -24,15 +24,12 @@ export default function Companies() {
     const [showModalConfirm,setShowModalConfirm] = useState(false)
 
     useEffect(() => {
-        console.info('paso por aca');
         CompanyService.getCompanies().then(data =>{
-            console.info('data',data)
                 setCompanies(data)
                 setFetchData(!setFetchData)
             }).catch((err)=>{
                 console.log('error:',err);
             })
-        setFetchData(true)
         return () => {
            
         }
@@ -56,11 +53,13 @@ export default function Companies() {
 
     const handleSaveChanges = () =>{
         console.log('commpany:',company)
+        let user = AuthService.getCurrentUser()
+        console.info(user)
         let data;
         if(company.Id>0){
-            data = CompanyService.updateCompany(company.Id,company.Name,company.Country, company.Address)
+            data = CompanyService.updateCompany(user.id,company.Id,company.Name,company.Country, company.Address)
         }else{
-            data = CompanyService.createCompany(company.Name,company.Country, company.Address)
+            data = CompanyService.createCompany(user.id,company.Name,company.Country, company.Address)
         }
 
         setShowModalCompany(false)

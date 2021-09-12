@@ -2,12 +2,28 @@ import {API_URL, fetchData} from './common.service'
 import AuthService from './auth.service'
 
 
-const createCompany = (idUser,name, country, address) => {
-  console.log('name:',name)
-  return fetchData(`${API_URL}company/${idUser}`, { name: name,
-                                       country: country,
-                                       address: address
-                                      }, 'POST')
+const createCompany = (idUser,name, country, address) => {  
+  const company =  {
+    company: name,
+     id_city: country,
+     address: address
+  }
+  let formBody = []
+
+  for (var property in company) {
+    const encodedKey = encodeURIComponent(property);
+    const encodedValue = encodeURIComponent(company[property]);
+    formBody.push(encodedKey + "=" + encodedValue);
+  } 
+
+  formBody = formBody.join("&");
+  return fetch(`${API_URL}company/${idUser}`, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+  },
+  body:formBody
+  })
 }
 
 const updateCompany = (id,name,country, address) => {
