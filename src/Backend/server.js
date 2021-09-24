@@ -3,6 +3,8 @@ const cors = require('cors');
 const user = require('./routes/user');
 const company = require('./routes/company');
 const contact = require('./routes/contact');
+const city = require('./routes/city');
+const country = require('./routes/country');
 const pref = require('./routes/pref');
 const auth = require('./routes/auth');
 const app = express();
@@ -40,5 +42,7 @@ app.get('/', (req, res) => {res.send({
 app.use('/user', user);
 app.use('/company', company);
 app.use('/contact', contact);
+app.use('/city', city);
+app.use('/country', country);
 app.use('/preference', pref);
 app.use('/auth', auth);

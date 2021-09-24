@@ -1,6 +1,7 @@
 import React, {useState, useRef} from 'react'
 import Form from "react-validation/build/form"
 import Input from "react-validation/build/input"
+import Select from "react-validation/build/select"
 import CheckButton from "react-validation/build/button"
 import { isEmail } from "validator"
 import {useHistory} from "react-router-dom";
@@ -14,6 +15,12 @@ function FormCompany(props) {
     const form = useRef()
     const checkBtn = useRef()
     const history = useHistory();
+    const cities = [
+      {
+        value:10000,
+        description:'Bs. As.'
+      }
+    ]
 
 
     const handleSubmit = (e) => {
@@ -114,6 +121,18 @@ function FormCompany(props) {
                   onChange={onChangeCountry}
                   validations={[required, vcountry]}
                 />
+              </div>
+              <div className="form-group">
+              <label htmlFor="cities" className="form-label">Ciudad</label>
+                <Select className="form-control" name="cities">
+                      {cities.map((e)=>{
+                        return (
+                          <option value={e.value}>{e.description}</option>
+                        )
+                      }
+                      )
+                    }
+                </Select>
               </div>
               <div className="mb-3 form-group">
                 <label htmlFor="address" className="form-label">Dirección</label>
