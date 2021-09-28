@@ -1,7 +1,7 @@
 import React from 'react'
 import './Users.css'
 // import { Table, Form, Button, Modal, OverlayTrigger, Tooltip } from 'react-bootstrap';
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback} from 'react'
 //import { PencilSquare, ArrowDownUp, X, PersonPlus } from 'react-bootstrap-icons';
 import { PersonPlus } from 'react-bootstrap-icons'
 import IconWithTooltip from '../components/IconWithTooltip'
@@ -10,6 +10,8 @@ import CompanyLogic from './CompanyLogic'
 import ModalCompany from '../components/company/ModalCompany'
 import TableDataCompanies from '../components/company/TableDataCompanies'
 import CompanyService from "../services/company.service"
+import CountryService from "../services/country.service"
+import CityService from "../services/city.service"
 import AuthService from "../services/auth.service";
 import { Button } from 'react-bootstrap'
 
@@ -22,6 +24,8 @@ export default function Companies() {
     const [fetchData, setFetchData] = useState(false)
     const [idToDelete,setIdToDelete] = useState(-1)
     const [showModalConfirm,setShowModalConfirm] = useState(false)
+    const [countries, setCountries] = useState([])
+    const [cities, setCities] = useState([])
 
     useEffect(() => {
         CompanyService.getCompanies().then(data =>{
@@ -34,6 +38,34 @@ export default function Companies() {
            
         }
     }, [fetchData])
+    
+    const getCountries = useCallback(() =>{
+        CountryService.getCountries().then(data =>{
+            setCountries(data)
+        }).catch((err)=>{
+            console.log('error:',err);
+        })
+
+    },[])
+    const getCities = useCallback(() =>{
+        CityService.getCities(company.IdCountry).then(data =>{
+            setCities(data)
+        }).catch((err)=>{
+            console.log('error:',err);
+        })
+
+    },[company.IdCountry])
+
+    useEffect(() =>{
+        getCountries()
+    })
+
+    useEffect(() =>{
+        getCities(company.IdCountry)
+    },[getCities,company.IdCountry])
+
+
+
 
     const showModal = (id) => {
            if(id>0){
@@ -87,7 +119,7 @@ export default function Companies() {
             </div>
             <TableDataCompanies companies={companies} setCompanies={setCompanies} showModal={showModal} handleDelete={handleDeleteCompany}></TableDataCompanies>
             {/* <IconWithTooltip Icon={PersonPlus} text="Agregar Nuevo" action={showModal}></IconWithTooltip> */}
-            <ModalCompany showModalCompany={showModalCompany} handleClose={handleClose} handleSaveChanges={handleSaveChanges.bind(this)} company={company} setCompany={setCompany} initialStateCompany={initialStateCompany} >
+            <ModalCompany showModalCompany={showModalCompany} handleClose={handleClose} handleSaveChanges={handleSaveChanges.bind(this)} company={company} setCompany={setCompany} initialStateCompany={initialStateCompany} countries={countries}>
             </ModalCompany>
             <ModalConfirm show={showModalConfirm} handleCloseConfirm={handleCloseConfirm} title="Atención!" message="¿Desea borrar la compañía?"></ModalConfirm>
         </div>

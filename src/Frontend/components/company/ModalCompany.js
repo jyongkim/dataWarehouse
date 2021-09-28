@@ -6,7 +6,7 @@ import CompanyService from "../../services/company.service";
 
 
 function ModalCompany(props) {
-    const {showModalCompany, handleClose,handleSaveChanges,company, setCompany} = props
+    const {showModalCompany, handleClose,handleSaveChanges,company, setCompany, countries} = props
     
     // const handleRegister = () => {
     //     return CompanyService.createCompany(company.Name,company.Country,company.Address)
@@ -18,7 +18,7 @@ function ModalCompany(props) {
                 <Modal.Title>ABM de Compañía</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <FormCompany onSubmit={handleSaveChanges} company={company} setCompany={setCompany} isModal={true}></FormCompany>
+                    <FormCompany onSubmit={handleSaveChanges} company={company} setCompany={setCompany} isModal={true} countries={countries}></FormCompany>
                 </Modal.Body>
                 <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>

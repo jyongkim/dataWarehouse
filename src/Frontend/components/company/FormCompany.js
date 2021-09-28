@@ -9,7 +9,7 @@ import {useHistory} from "react-router-dom";
 
 function FormCompany(props) {
 
-    const {onSubmit, company, setCompany, isModal} = props
+    const {onSubmit, company, setCompany, isModal, countries} = props
     const [message,setMessage] = useState("")
     const [successful, setSuccessful] = useState(false)
     const form = useRef()
@@ -89,7 +89,8 @@ function FormCompany(props) {
       }
     
       const onChangeCountry = (e) => {
-        setCompany({...company, Country:e.target.value})
+        console.log('idCountry:',e.target.value)
+        setCompany({...company, IdCountry:e.target.value})
       }
     
       const onChangeAddress = (e) => {
@@ -111,23 +112,26 @@ function FormCompany(props) {
                     validations={[required, vname]}
                     />
                </div>
-               <div className="mb-3 form-group">
-                <label htmlFor="country" className="form-label">País</label>
-                <Input
-                  type="text"
-                  className="form-control"
-                  name="country"
-                  value={company.Country}
-                  onChange={onChangeCountry}
-                  validations={[required, vcountry]}
-                />
+              <div className="form-group">
+              <label htmlFor="countries" className="form-label">País</label>
+                <Select className="form-control" name="countries" onChange={onChangeCountry}>
+                   <option>Ingrese País</option>
+                      {countries.map((e)=>{
+                        return (
+                          <option value={e.ID}>{e.Country}</option>
+                        )
+                      }
+                      )
+                    }
+                </Select>
               </div>
               <div className="form-group">
               <label htmlFor="cities" className="form-label">Ciudad</label>
                 <Select className="form-control" name="cities">
+                     <option>Ingrese Ciudad</option>
                       {cities.map((e)=>{
                         return (
-                          <option value={e.value}>{e.description}</option>
+                          <option value={e.ID}>{e.City}</option>
                         )
                       }
                       )

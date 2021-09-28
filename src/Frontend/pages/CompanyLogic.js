@@ -6,7 +6,9 @@ const CompanyLogic = () => {
         Id:-1,
         Company:'',
         IdCity:0,
-        Address: ''
+        Address: '',
+        IdCountry:0
+
     }
 
     const [company, setCompany] = useState(initialStateCompany)
