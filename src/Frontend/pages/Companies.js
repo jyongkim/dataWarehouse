@@ -1,7 +1,7 @@
 import React from 'react'
 import './Users.css'
 // import { Table, Form, Button, Modal, OverlayTrigger, Tooltip } from 'react-bootstrap';
-import { useState, useEffect, useCallback} from 'react'
+import { useState, useEffect, useCallback } from 'react'
 //import { PencilSquare, ArrowDownUp, X, PersonPlus } from 'react-bootstrap-icons';
 import { PersonPlus } from 'react-bootstrap-icons'
 import IconWithTooltip from '../components/IconWithTooltip'
@@ -18,62 +18,63 @@ import { Button } from 'react-bootstrap'
 
 
 export default function Companies() {
-    
-    const {company,setCompany,initialStateCompany, companies, setCompanies} = CompanyLogic()    
+
+    const { company, setCompany, initialStateCompany, companies, setCompanies } = CompanyLogic()
     const [showModalCompany, setShowModalCompany] = useState(false)
     const [fetchData, setFetchData] = useState(false)
-    const [idToDelete,setIdToDelete] = useState(-1)
-    const [showModalConfirm,setShowModalConfirm] = useState(false)
+    const [idToDelete, setIdToDelete] = useState(-1)
+    const [showModalConfirm, setShowModalConfirm] = useState(false)
     const [countries, setCountries] = useState([])
     const [cities, setCities] = useState([])
 
     useEffect(() => {
-        CompanyService.getCompanies().then(data =>{
-                setCompanies(data)
-                setFetchData(!setFetchData)
-            }).catch((err)=>{
-                console.log('error:',err);
-            })
+        CompanyService.getCompanies().then(data => {
+            setCompanies(data)
+            setFetchData(!setFetchData)
+        }).catch((err) => {
+            console.log('error:', err);
+        })
         return () => {
-           
+
         }
     }, [fetchData])
-    
-    const getCountries = useCallback(() =>{
-        CountryService.getCountries().then(data =>{
+
+    const getCountries = useCallback(() => {
+        CountryService.getCountries().then(data => {
             setCountries(data)
-        }).catch((err)=>{
-            console.log('error:',err);
+        }).catch((err) => {
+            console.log('error:', err);
         })
 
-    },[])
-    const getCities = useCallback(() =>{
-        CityService.getCities(company.IdCountry).then(data =>{
+    }, [])
+    const getCities = useCallback(() => {
+        CityService.getCities(company.IdCountry).then(data => {
             setCities(data)
-        }).catch((err)=>{
-            console.log('error:',err);
+        }).catch((err) => {
+            console.log('error:', err);
         })
 
-    },[company.IdCountry])
+    }, [company.IdCountry])
 
-    useEffect(() =>{
+    useEffect(() => {
         getCountries()
-    })
+    }, [getCountries])
 
-    useEffect(() =>{
+    useEffect(() => {
+
         getCities(company.IdCountry)
-    },[getCities,company.IdCountry])
+    }, [getCities, company.IdCountry])
 
 
 
 
     const showModal = (id) => {
-           if(id>0){
-                setCompany({...companies.find(u => u.Id == id)})
-           }else{
-               setCompany(initialStateCompany)
-           }
-           setShowModalCompany(true)
+        if (id > 0) {
+            setCompany({ ...companies.find(u => u.Id == id) })
+        } else {
+            setCompany(initialStateCompany)
+        }
+        setShowModalCompany(true)
     }
 
     const handleDeleteCompany = (id) => {
@@ -83,15 +84,15 @@ export default function Companies() {
 
     const handleClose = () => setShowModalCompany(false)
 
-    const handleSaveChanges = () =>{
-        console.log('commpany:',company)
+    const handleSaveChanges = () => {
+        console.log('commpany:', company)
         let user = AuthService.getCurrentUser()
         console.info(user)
         let data;
-        if(company.Id>0){
-            data = CompanyService.updateCompany(user.id,company.Id,company.Name,company.Country, company.Address)
-        }else{
-            data = CompanyService.createCompany(user.id,company.Name,company.Country, company.Address)
+        if (company.Id > 0) {
+            data = CompanyService.updateCompany(user.id, company.Id, company.Name, company.Country, company.Address)
+        } else {
+            data = CompanyService.createCompany(user.id, company.Name, company.Country, company.Address)
         }
 
         setShowModalCompany(false)
@@ -102,24 +103,24 @@ export default function Companies() {
 
     const handleCloseConfirm = (confirm) => {
 
-        if(confirm){
+        if (confirm) {
             const data = CompanyService.deleteCompany(idToDelete)
             setFetchData(true)
         }
         setShowModalConfirm(false)
-       
+
     }
 
 
-   return (
+    return (
         <div>
-            <div style={{display:"flex", flexDirection:"row",margin:"2rem"}}>
-            <h4 style={{flex:"10"}}>Compañías</h4>
-            <Button onClick={showModal} style={{flex:"2", height:"2.25rem", with:"5rem", justifyContent:"flex-end"}}>Agregar Nuevo</Button>
+            <div style={{ display: "flex", flexDirection: "row", margin: "2rem" }}>
+                <h4 style={{ flex: "10" }}>Compañías</h4>
+                <Button onClick={showModal} style={{ flex: "2", height: "2.25rem", with: "5rem", justifyContent: "flex-end" }}>Agregar Nuevo</Button>
             </div>
             <TableDataCompanies companies={companies} setCompanies={setCompanies} showModal={showModal} handleDelete={handleDeleteCompany}></TableDataCompanies>
             {/* <IconWithTooltip Icon={PersonPlus} text="Agregar Nuevo" action={showModal}></IconWithTooltip> */}
-            <ModalCompany showModalCompany={showModalCompany} handleClose={handleClose} handleSaveChanges={handleSaveChanges.bind(this)} company={company} setCompany={setCompany} initialStateCompany={initialStateCompany} countries={countries}>
+            <ModalCompany showModalCompany={showModalCompany} handleClose={handleClose} handleSaveChanges={handleSaveChanges.bind(this)} company={company} setCompany={setCompany} initialStateCompany={initialStateCompany} countries={countries} cities={cities}>
             </ModalCompany>
             <ModalConfirm show={showModalConfirm} handleCloseConfirm={handleCloseConfirm} title="Atención!" message="¿Desea borrar la compañía?"></ModalConfirm>
         </div>
