@@ -7,9 +7,10 @@ import { isEmail } from "validator"
 import { useHistory } from "react-router-dom";
 
 
-function FormCompany(props) {
+function FormCompany({ onSubmit, company,
+  setCompany, isModal,
+  regions, countries, cities }) {
 
-  const { onSubmit, company, setCompany, isModal, countries, cities } = props
   const [message, setMessage] = useState("")
   const [successful, setSuccessful] = useState(false)
   const form = useRef()
@@ -83,6 +84,11 @@ function FormCompany(props) {
     setCompany({ ...company, Name: e.target.value })
   }
 
+  const onChangeRegion = (e) => {
+    console.log('idRegion:', e.target.value)
+    setCompany({ ...company, IdRegion: e.target.value })
+  }
+
   const onChangeCountry = (e) => {
     console.log('idCountry:', e.target.value)
     setCompany({ ...company, IdCountry: e.target.value })
@@ -106,6 +112,19 @@ function FormCompany(props) {
               onChange={onChangeName}
               validations={[required, vname]}
             />
+          </div>
+          <div className="form-group">
+            <label htmlFor="regions" className="form-label">Región</label>
+            <Select className="form-control" name="regions" onChange={onChangeRegion}>
+              <option>Ingrese Región</option>
+              {regions.map((e) => {
+                return (
+                  <option value={e.ID}>{e.Region}</option>
+                )
+              }
+              )
+              }
+            </Select>
           </div>
           <div className="form-group">
             <label htmlFor="countries" className="form-label">País</label>

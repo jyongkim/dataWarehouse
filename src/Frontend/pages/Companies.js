@@ -11,6 +11,7 @@ import ModalCompany from '../components/company/ModalCompany'
 import TableDataCompanies from '../components/company/TableDataCompanies'
 import CompanyService from "../services/company.service"
 import CountryService from "../services/country.service"
+import RegionService from "../services/region.service"
 import CityService from "../services/city.service"
 import AuthService from "../services/auth.service";
 import { Button } from 'react-bootstrap'
@@ -24,6 +25,7 @@ export default function Companies() {
     const [fetchData, setFetchData] = useState(false)
     const [idToDelete, setIdToDelete] = useState(-1)
     const [showModalConfirm, setShowModalConfirm] = useState(false)
+    const [regions, setRegions] = useState([])
     const [countries, setCountries] = useState([])
     const [cities, setCities] = useState([])
 
@@ -39,16 +41,26 @@ export default function Companies() {
         }
     }, [fetchData])
 
-    const getCountries = useCallback(() => {
-        CountryService.getCountries().then(data => {
-            setCountries(data)
+    const getRegions = useCallback(() => {
+        RegionService.getRegions().then(data => {
+            setRegions(data)
         }).catch((err) => {
             console.log('error:', err);
         })
 
     }, [])
-    const getCities = useCallback(() => {
-        CityService.getCities(company.IdCountry).then(data => {
+
+    const getCountries = useCallback((idRegion) => {
+        CountryService.getCountries(idRegion).then(data => {
+            setCountries(data)
+        }).catch((err) => {
+            console.log('error:', err);
+        })
+
+    }, [company.IdRegion])
+
+    const getCities = useCallback((idCountry) => {
+        CityService.getCities(idCountry).then(data => {
             setCities(data)
         }).catch((err) => {
             console.log('error:', err);
@@ -57,8 +69,12 @@ export default function Companies() {
     }, [company.IdCountry])
 
     useEffect(() => {
-        getCountries()
-    }, [getCountries])
+        getRegions()
+    }, [getRegions])
+
+    useEffect(() => {
+        getCountries(company.IdRegion)
+    }, [getCountries, company.IdRegion])
 
     useEffect(() => {
 
@@ -120,7 +136,7 @@ export default function Companies() {
             </div>
             <TableDataCompanies companies={companies} setCompanies={setCompanies} showModal={showModal} handleDelete={handleDeleteCompany}></TableDataCompanies>
             {/* <IconWithTooltip Icon={PersonPlus} text="Agregar Nuevo" action={showModal}></IconWithTooltip> */}
-            <ModalCompany showModalCompany={showModalCompany} handleClose={handleClose} handleSaveChanges={handleSaveChanges.bind(this)} company={company} setCompany={setCompany} initialStateCompany={initialStateCompany} countries={countries} cities={cities}>
+            <ModalCompany showModalCompany={showModalCompany} handleClose={handleClose} handleSaveChanges={handleSaveChanges.bind(this)} company={company} setCompany={setCompany} initialStateCompany={initialStateCompany} regions={regions} countries={countries} cities={cities}>
             </ModalCompany>
             <ModalConfirm show={showModalConfirm} handleCloseConfirm={handleCloseConfirm} title="Atención!" message="¿Desea borrar la compañía?"></ModalConfirm>
         </div>

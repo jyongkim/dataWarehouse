@@ -1,6 +1,7 @@
 const Country = require('../models/country')
 
 exports.read = (req, res) => {
-    Country.read( (err, country) => {
+    Country.read(req.params.id, (err, country) => {
         err ? res.send(err) : res.send(country)
-})}
+    })
+}
