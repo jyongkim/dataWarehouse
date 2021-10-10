@@ -50,8 +50,8 @@ export default function Companies() {
 
     }, [])
 
-    const getCountries = useCallback((idRegion) => {
-        CountryService.getCountries(idRegion).then(data => {
+    const getCountries = useCallback(() => {
+        CountryService.getCountries(company.IdRegion).then(data => {
             setCountries(data)
         }).catch((err) => {
             console.log('error:', err);
@@ -59,8 +59,8 @@ export default function Companies() {
 
     }, [company.IdRegion])
 
-    const getCities = useCallback((idCountry) => {
-        CityService.getCities(idCountry).then(data => {
+    const getCities = useCallback(() => {
+        CityService.getCities(company.IdCountry).then(data => {
             setCities(data)
         }).catch((err) => {
             console.log('error:', err);
@@ -73,13 +73,12 @@ export default function Companies() {
     }, [getRegions])
 
     useEffect(() => {
-        getCountries(company.IdRegion)
-    }, [getCountries, company.IdRegion])
+        getCountries()
+    }, [getCountries])
 
     useEffect(() => {
-
-        getCities(company.IdCountry)
-    }, [getCities, company.IdCountry])
+        getCities()
+    }, [getCities])
 
 
 

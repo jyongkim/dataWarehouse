@@ -1,8 +1,8 @@
-import {API_URL, fetchData} from './common.service'
+import { API_URL, fetchData } from './common.service'
 
 
-const getCountries = () =>{
-  return fetchData(`${API_URL}country`, {},'GET')
+const getCountries = (idRegion) => {
+  return fetchData(`${API_URL}country/${idRegion}`, {}, 'GET')
 }
 
 
