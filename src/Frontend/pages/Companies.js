@@ -107,7 +107,7 @@ export default function Companies() {
         if (company.Id > 0) {
             data = CompanyService.updateCompany(user.id, company.Id, company.Name, company.Country, company.Address)
         } else {
-            data = CompanyService.createCompany(user.id, company.Name, company.Country, company.Address)
+            data = CompanyService.createCompany(user.id, company.Name, company.IdCity, company.Address, company.Phone, company.Email)
         }
 
         setShowModalCompany(false)

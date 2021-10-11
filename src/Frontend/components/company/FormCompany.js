@@ -94,6 +94,11 @@ function FormCompany({ onSubmit, company,
     setCompany({ ...company, IdCountry: e.target.value })
   }
 
+  const onChangeCity = (e) => {
+    console.log('idCity:', e.target.value)
+    setCompany({ ...company, IdCity: e.target.value })
+  }
+
   const onChangeAddress = (e) => {
     setCompany({ ...company, Address: e.target.value })
   }
@@ -141,7 +146,7 @@ function FormCompany({ onSubmit, company,
           </div>
           <div className="form-group">
             <label htmlFor="cities" className="form-label">Ciudad</label>
-            <Select className="form-control" name="cities">
+            <Select className="form-control" name="cities" onChange={onChangeCity}>
               <option>Ingrese Ciudad</option>
               {cities.map((e) => {
                 return (

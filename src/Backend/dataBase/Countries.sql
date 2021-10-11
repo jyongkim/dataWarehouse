@@ -1,4 +1,4 @@
-INSERT INTO `Countries` (`id_country`, `Country`) VALUES
+INSERT INTO `Countries` (`id_country`, `id_region`, `Country`) VALUES
 ('AU', 6, 'Australia'),
 ('CN', 1, 'China'),
 ('JP', 1, 'Japan'),
@@ -120,7 +120,7 @@ INSERT INTO `Countries` (`id_country`, `Country`) VALUES
 ('MA', 3, 'Morocco'),
 ('DZ', 3, 'Algeria'),
 ('SO', 3, 'Somalia'),
-('NE', 3, 'Niger'),,
+('NE', 3, 'Niger'),
 ('CR', 7, 'Costa Rica'),
 ('JM', 7, 'Jamaica'),
 ('GT', 7, 'Guatemala'),
