@@ -79,6 +79,26 @@ function FormCompany({ onSubmit, company,
     }
   }
 
+  const vemail = (value) => {
+    if (value.length < 3 || value.length > 20) {
+      return (
+        <div className="alert alert-danger" role="alert">
+          El correo electrónico  debe contener entre 3 y 20 caracteres.
+        </div>
+      )
+    }
+  }
+
+  const vphone = (value) => {
+    if (value.length < 3 || value.length > 20) {
+      return (
+        <div className="alert alert-danger" role="alert">
+          El teléfono  debe contener entre 3 y 20 caracteres.
+        </div>
+      )
+    }
+  }
+
 
   const onChangeName = (e) => {
     setCompany({ ...company, Name: e.target.value })
@@ -101,6 +121,14 @@ function FormCompany({ onSubmit, company,
 
   const onChangeAddress = (e) => {
     setCompany({ ...company, Address: e.target.value })
+  }
+
+  const onChangeEmail = (e) => {
+    setCompany({ ...company, Email: e.target.value })
+  }
+
+  const onChangePhone = (e) => {
+    setCompany({ ...company, Phone: e.target.value })
   }
 
   return (
@@ -166,6 +194,28 @@ function FormCompany({ onSubmit, company,
               value={company.Address}
               onChange={onChangeAddress}
               validations={[required, vaddress]}
+            />
+          </div>
+          <div className="mb-3 form-group">
+            <label htmlFor="email" className="form-label">Correo Electrónico</label>
+            <Input
+              type="text"
+              className="form-control"
+              name="email"
+              value={company.Email}
+              onChange={onChangeEmail}
+              validations={[required, vemail]}
+            />
+          </div>
+          <div className="mb-3 form-group">
+            <label htmlFor="phone" className="form-label">Teléfono</label>
+            <Input
+              type="text"
+              className="form-control"
+              name="phone"
+              value={company.Phone}
+              onChange={onChangePhone}
+              validations={[required, vphone]}
             />
           </div>
 

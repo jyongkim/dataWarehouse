@@ -9,6 +9,8 @@ const CompanyLogic = () => {
         Address: '',
         IdCountry: 0,
         IdRegion: 0,
+        Phone: '',
+        Email: '',
 
     }
 
