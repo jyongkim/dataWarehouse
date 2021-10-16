@@ -2,24 +2,24 @@ import React, { useState, useRef } from "react"
 import Form from "react-validation/build/form"
 import Input from "react-validation/build/input"
 import CheckButton from "react-validation/build/button"
-import {Container} from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 import AuthService from "../services/auth.service"
-import {useHistory} from "react-router-dom"
-import {Redirect} from "react-router-dom"
+import { useHistory } from "react-router-dom"
+import { Redirect } from "react-router-dom"
 
 
 const required = (value) => {
     if (!value) {
         return (
             <div className="alert alert-danger" role="alert">
-                Complete este campo!
+                Complete este campo.
             </div>
         );
     }
 };
 
 const Login = (props) => {
-    const {currentUser,refreshLogin} = props
+    const { currentUser, refreshLogin } = props
     const form = useRef()
     const checkBtn = useRef()
     const history = useHistory()
@@ -54,29 +54,29 @@ const Login = (props) => {
                 (data) => {
                     console.log('data:', data)
                     if (data.accessToken) {
-                          localStorage.setItem("user", JSON.stringify(data))
-                          setLoading(false)
-                          refreshLogin()
-                          setLoggedIn(true)
-                          
-                    }else{
+                        localStorage.setItem("user", JSON.stringify(data))
+                        setLoading(false)
+                        refreshLogin()
+                        setLoggedIn(true)
+
+                    } else {
                         setMessage(data.message)
                         setLoading(false)
                     }
 
                 })
                 .catch(
-                (error) => {
-                    const resMessage =
-                        (error.response &&
-                            error.response.data &&
-                            error.response.data.message) ||
-                        error.message ||
-                        error.toString()
+                    (error) => {
+                        const resMessage =
+                            (error.response &&
+                                error.response.data &&
+                                error.response.data.message) ||
+                            error.message ||
+                            error.toString()
 
-                    setLoading(false)
-                    setMessage(resMessage)
-                }
+                        setLoading(false)
+                        setMessage(resMessage)
+                    }
                 )
         } else {
             setLoading(false)
@@ -85,59 +85,59 @@ const Login = (props) => {
 
     return (
         <>
-        {loggedIn ? <Redirect to="/dashboard" />:
+            {loggedIn ? <Redirect to="/dashboard" /> :
 
-        <Container>
-            <div className="d-flex justify-content-center mt-5">
-                <div className="col-md-6">
-                        <Form onSubmit={handleLogin} ref={form}>
-                            <div className="mb-3 form-group">
-                                <label htmlFor="username" className="form-label">Username</label>
-                                <Input
-                                    type="text"
-                                    className="form-control"
-                                    name="username"
-                                    value={username}
-                                    onChange={onChangeUsername}
-                                    validations={[required]}
-                                />
-                            </div>
-
-                            <div className="mb-3 form-group">
-                                <label htmlFor="password" className="form-label">Password</label>
-                                <Input
-                                    type="password"
-                                    className="form-control"
-                                    name="password"
-                                    value={password}
-                                    onChange={onChangePassword}
-                                    validations={[required]}
-                                />
-                            </div>
-
-                            <div className="mb-3 form-group">
-                                <button className="btn btn-primary btn-block" disabled={loading}>
-                                    {loading && (
-                                        <span className="spinner-border spinner-border-sm"></span>
-                                    )}
-                                    <span>Login</span>
-                                </button>
-                            </div>
-
-                            {message && (
-                                <div className="form-group">
-                                    <div className="alert alert-danger" role="alert">
-                                        {message}
-                                    </div>
+                <Container>
+                    <div className="d-flex justify-content-center mt-5">
+                        <div className="col-md-6">
+                            <Form onSubmit={handleLogin} ref={form}>
+                                <div className="mb-3 form-group">
+                                    <label htmlFor="username" className="form-label">Username</label>
+                                    <Input
+                                        type="text"
+                                        className="form-control"
+                                        name="username"
+                                        value={username}
+                                        onChange={onChangeUsername}
+                                        validations={[required]}
+                                    />
                                 </div>
-                            )}
-                            <CheckButton style={{ display: "none" }} ref={checkBtn} />
-                        </Form>
-                </div>
-            </div>
 
-        </Container>
-        }
+                                <div className="mb-3 form-group">
+                                    <label htmlFor="password" className="form-label">Password</label>
+                                    <Input
+                                        type="password"
+                                        className="form-control"
+                                        name="password"
+                                        value={password}
+                                        onChange={onChangePassword}
+                                        validations={[required]}
+                                    />
+                                </div>
+
+                                <div className="mb-3 form-group">
+                                    <button className="btn btn-primary btn-block" disabled={loading}>
+                                        {loading && (
+                                            <span className="spinner-border spinner-border-sm"></span>
+                                        )}
+                                        <span>Login</span>
+                                    </button>
+                                </div>
+
+                                {message && (
+                                    <div className="form-group">
+                                        <div className="alert alert-danger" role="alert">
+                                            {message}
+                                        </div>
+                                    </div>
+                                )}
+                                <CheckButton style={{ display: "none" }} ref={checkBtn} />
+                            </Form>
+                        </div>
+                    </div>
+
+                </Container>
+            }
         </>
     );
 };

@@ -43,7 +43,7 @@ function FormCompany({ onSubmit, company,
     if (!value) {
       return (
         <div className="alert alert-danger" role="alert">
-          Por favor complete este campo!
+          Por favor, complete este campo.
         </div>
       )
     }
@@ -70,10 +70,10 @@ function FormCompany({ onSubmit, company,
   }
 
   const vaddress = (value) => {
-    if (value.length < 3 || value.length > 20) {
+    if (value.length < 3 || value.length > 50) {
       return (
         <div className="alert alert-danger" role="alert">
-          La dirección  debe contener entre 3 y 20 caracteres.
+          La dirección debe contener entre 3 y 100 caracteres.
         </div>
       )
     }
@@ -83,7 +83,7 @@ function FormCompany({ onSubmit, company,
     if (value.length < 3 || value.length > 20) {
       return (
         <div className="alert alert-danger" role="alert">
-          El correo electrónico  debe contener entre 3 y 20 caracteres.
+          El correo electrónico debe contener entre 3 y 100 caracteres.
         </div>
       )
     }
@@ -93,7 +93,7 @@ function FormCompany({ onSubmit, company,
     if (value.length < 3 || value.length > 20) {
       return (
         <div className="alert alert-danger" role="alert">
-          El teléfono  debe contener entre 3 y 20 caracteres.
+          El teléfono  debe contener entre 3 y 30 caracteres.
         </div>
       )
     }
@@ -149,7 +149,7 @@ function FormCompany({ onSubmit, company,
           <div className="form-group">
             <label htmlFor="regions" className="form-label">Región</label>
             <Select className="form-control" name="regions" onChange={onChangeRegion}>
-              <option>Ingrese Región</option>
+              <option>Ingrese la región</option>
               {regions.map((e) => {
                 return (
                   <option value={e.ID}>{e.Region}</option>
@@ -162,7 +162,7 @@ function FormCompany({ onSubmit, company,
           <div className="form-group">
             <label htmlFor="countries" className="form-label">País</label>
             <Select className="form-control" name="countries" onChange={onChangeCountry}>
-              <option>Ingrese País</option>
+              <option>Ingrese el país</option>
               {countries.map((e) => {
                 return (
                   <option value={e.ID}>{e.Country}</option>
@@ -175,7 +175,7 @@ function FormCompany({ onSubmit, company,
           <div className="form-group">
             <label htmlFor="cities" className="form-label">Ciudad</label>
             <Select className="form-control" name="cities" onChange={onChangeCity}>
-              <option>Ingrese Ciudad</option>
+              <option>Ingrese la ciudad</option>
               {cities.map((e) => {
                 return (
                   <option value={e.ID}>{e.City}</option>

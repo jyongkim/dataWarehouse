@@ -80,7 +80,7 @@ function TableDataCompanies(props) {
                         <th>Nombre <ArrowDownUp onClick={() => sortByName()} style={{ cursor: 'pointer' }}></ArrowDownUp></th>
                         <th>País <ArrowDownUp onClick={() => sortByCountry()} style={{ cursor: 'pointer' }}></ArrowDownUp></th>
                         <th>Dirección <ArrowDownUp onClick={() => sortByAddress()} style={{ cursor: 'pointer' }}></ArrowDownUp></th>
-                        <th>Correo Electrónico <ArrowDownUp onClick={() => sortByEmail()} style={{ cursor: 'pointer' }}></ArrowDownUp></th>
+                        <th>Correo electrónico <ArrowDownUp onClick={() => sortByEmail()} style={{ cursor: 'pointer' }}></ArrowDownUp></th>
                         <th>Teléfono <ArrowDownUp onClick={() => sortByPhone()} style={{ cursor: 'pointer' }}></ArrowDownUp></th>
                         <th>Acciones</th>
                     </tr>

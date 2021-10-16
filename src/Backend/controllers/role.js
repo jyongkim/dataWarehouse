@@ -7,14 +7,17 @@ exports.create = (req, res) => {
             code: 'Error: 400.'
         }) : Role.create(req.body, (err, role) => {
             err ? res.send(err) : res.json({
-                message: '¡El rol se registró con éxito!',
+                message: 'El rol se registró con éxito.',
                 data: role
-})})}
+            })
+        })
+}
 
 exports.read = (req, res) => {
     Role.read((err, role) => {
         err ? res.send(err) : res.send(role)
-})}
+    })
+}
 
 exports.update = (req, res) => {
     (req.body.constructor == Object && Object.keys(req.body) == 0) ?
@@ -25,11 +28,15 @@ exports.update = (req, res) => {
             err ? res.send(err) : res.json({
                 message: 'El rol se actualizó con éxito.',
                 data: role
-})})}
+            })
+        })
+}
 
 exports.delete = (req, res) => {
     Role.delete(req.params.id, (err, role) => {
         err ? res.send(err) : res.send({
             message: 'El rol se eliminó con éxito.',
             data: role
-})})}
+        })
+    })
+}
