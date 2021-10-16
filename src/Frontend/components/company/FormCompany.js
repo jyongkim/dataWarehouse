@@ -24,7 +24,6 @@ function FormCompany({ onSubmit, company,
 
     setMessage("")
     setSuccessful(false)
-    console.log(company)
     form.current.validateAll()
 
     onSubmit();
@@ -105,17 +104,14 @@ function FormCompany({ onSubmit, company,
   }
 
   const onChangeRegion = (e) => {
-    console.log('idRegion:', e.target.value)
     setCompany({ ...company, IdRegion: e.target.value })
   }
 
   const onChangeCountry = (e) => {
-    console.log('idCountry:', e.target.value)
     setCompany({ ...company, IdCountry: e.target.value })
   }
 
   const onChangeCity = (e) => {
-    console.log('idCity:', e.target.value)
     setCompany({ ...company, IdCity: e.target.value })
   }
 

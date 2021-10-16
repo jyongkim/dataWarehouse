@@ -106,9 +106,9 @@ function TableDataCompanies(props) {
                                 </td>
                                 <td>
                                     <PencilSquare style={{ cursor: 'pointer' }} onClick={(e) => {
-                                        showModal(c.Id)
+                                        showModal(c.ID)
                                     }}></PencilSquare>
-                                    <X style={{ cursor: 'pointer', fontStyle: 'bold', fontSize: '20pt' }} onClick={() => handleDelete(c.Id)}></X>
+                                    <X style={{ cursor: 'pointer', fontStyle: 'bold', fontSize: '20pt' }} onClick={() => handleDelete(c.ID)}></X>
                                 </td>
                             </tr>
                         ))

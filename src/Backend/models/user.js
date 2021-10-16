@@ -1,15 +1,15 @@
 let dbConn = require('../dataBase/dbConn')
 const sql = require('mysql');
-let User = function(user) {
-    
+let User = function (user) {
+
 }
 
 User.create = (newUser, result) => {
-        console.log('newUser:', newUser);
-        let sql = "INSERT INTO `users` SET `id_role` = ?,  `first_name` = ?,`last_name` = ?,  `user_name` = ?,  `password` = ?,  `email` = ?";
-        dbConn.query(sql, [ 1, newUser.first_name, newUser.last_name, newUser.user_name, newUser.password, newUser.email ],  function(err, rows) {
-            console.log(err);
-        });
+    console.log('newUser:', newUser);
+    let sql = "INSERT INTO `users` SET `id_role` = ?,  `first_name` = ?,`last_name` = ?,  `user_name` = ?,  `password` = ?,  `email` = ?";
+    dbConn.query(sql, [1, newUser.first_name, newUser.last_name, newUser.user_name, newUser.password, newUser.email], function (err, rows) {
+        console.log(err);
+    });
 
 }
 
@@ -26,7 +26,8 @@ User.read = (result) => {
     ON u.id_role = r.id_role`, (err, res) => {
         console.log(err);
         err ? result(err, null) : result(null, res);
-})}
+    })
+}
 
 User.find = (id, result) => {
     dbConn.query(`SELECT
@@ -42,7 +43,8 @@ User.find = (id, result) => {
     WHERE u.id_user = ?
     GROUP BY c.id_user`, id, (err, res) => {
         err ? result(err, null) : result(null, res)
-})}
+    })
+}
 
 
 User.findByUserName = (name, result) => {
@@ -57,7 +59,8 @@ User.findByUserName = (name, result) => {
     WHERE user_name = ?
     `, [name], (err, res) => {
         err ? result(err, null) : result(null, res)
-})}
+    })
+}
 
 
 
@@ -66,13 +69,10 @@ User.findByUserName = (name, result) => {
 
 
 User.update = (id, user, result) => {
-    console.log('id:',id)
-    console.log('user:', user)
     dbConn.query('UPDATE users SET first_name=?, last_name=?, email= ? WHERE id_user = ?', [user.first_name, user.last_name, user.email, id], (err, res) => {
-        console.log('error:',err)
-        console.log('res:', res)
         err ? result(err, null) : result(null, res)
-})}
+    })
+}
 
 User.delete = (id, result) => {
     // Elimina las preferencias consultando contactos y consultando compañías.
@@ -89,6 +89,7 @@ User.delete = (id, result) => {
     // Una vez eliminado todo, elimina el usuario y realiza el callback.
     dbConn.query('DELETE FROM Users WHERE id_user = ?', id, (err, res) => {
         err ? result(err, null) : result(null, res)
-})}
+    })
+}
 
 module.exports = User;

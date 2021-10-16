@@ -52,7 +52,6 @@ const Login = (props) => {
         if (checkBtn.current.context._errors.length === 0) {
             AuthService.login(username, password).then(
                 (data) => {
-                    console.log('data:', data)
                     if (data.accessToken) {
                         localStorage.setItem("user", JSON.stringify(data))
                         setLoading(false)

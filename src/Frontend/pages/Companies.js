@@ -85,7 +85,7 @@ export default function Companies() {
 
     const showModal = (id) => {
         if (id > 0) {
-            setCompany({ ...companies.find(u => u.Id == id) })
+            setCompany({ ...companies.find(c => c.ID === id) })
         } else {
             setCompany(initialStateCompany)
         }
@@ -100,12 +100,10 @@ export default function Companies() {
     const handleClose = () => setShowModalCompany(false)
 
     const handleSaveChanges = () => {
-        console.log('commpany:', company)
         let user = AuthService.getCurrentUser()
-        console.info(user)
         let data;
-        if (company.Id > 0) {
-            data = CompanyService.updateCompany(user.id, company.Id, company.Name, company.Country, company.Address)
+        if (company.ID > 0) {
+            data = CompanyService.updateCompany(company.ID, company.Name, company.IdCity, company.Address, company.Phone, company.Email)
         } else {
             data = CompanyService.createCompany(user.id, company.Name, company.IdCity, company.Address, company.Phone, company.Email)
         }

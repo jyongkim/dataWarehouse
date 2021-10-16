@@ -202,7 +202,7 @@ function FormUser(props) {
               type="password"
               className="form-control"
               name="confirmPassword"
-              value={user.ConfirmPasswor}
+              value={user.ConfirmPasswords}
               onChange={onChangeConfirmPassword}
               validations={[required, vconfirmPassword]}
             />

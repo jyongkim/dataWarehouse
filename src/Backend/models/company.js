@@ -9,7 +9,6 @@ let Company = function (company) {
 }
 
 Company.create = (id, newCompany, result) => {
-    console.log('new company:', newCompany)
     dbConn.query('INSERT INTO Companies SET id_user = ?, ?', [id, newCompany], (err, res) => {
         err ? result(err, null) : result(null, res)
     })
