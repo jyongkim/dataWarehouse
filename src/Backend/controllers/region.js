@@ -5,3 +5,8 @@ exports.read = (req, res) => {
         err ? res.send(err) : res.send(region)
     })
 }
+exports.getTree = (req, res) => {
+    Region.getTree((err, region) => {
+        err ? res.send(err) : res.send(region)
+    })
+}
