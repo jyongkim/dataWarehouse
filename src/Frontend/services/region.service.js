@@ -5,9 +5,13 @@ const getRegions = () => {
     return fetchData(`${API_URL}region`, {}, 'GET')
 }
 
+const getTreeRegions = () => {
+    return fetchData(`${API_URL}region/tree`, {}, 'GET')
+}
 
 const RegionService = {
-    getRegions
+    getRegions,
+    getTreeRegions,
 }
 
 export default RegionService;

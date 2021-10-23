@@ -8,6 +8,7 @@ import React from "react"
 import { Redirect } from "react-router-dom"
 import { useHistory } from "react-router-dom"
 import Companies from './Frontend/pages/Companies'
+import Regions from './Frontend/pages/Regions'
 
 import {
   BrowserRouter as Router,
@@ -93,7 +94,7 @@ export default function App() {
                     <Link to="/users">Usuarios</Link>
                   </li>
                   <li>
-                    <Link to="/pref">Región/Ciudad</Link>
+                    <Link to="/regions">Región/Ciudad</Link>
                   </li>
                   <div className="navbar-nav ml-auto">
                     <li className="nav-item">
@@ -142,6 +143,9 @@ export default function App() {
         </Route>
         <Route path="/register">
           <Register />
+        </Route>
+        <Route path="/regions">
+          <Regions />
         </Route>
       </Switch>
     </Router>
