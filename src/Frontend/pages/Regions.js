@@ -9,7 +9,9 @@ export default function Regions(params) {
     const [regions, setRegions] = useState([])
 
     useEffect(() => {
-        RegionService.getTreeRegions().then((data) => setRegions(data))
+        RegionService.getTreeRegions().then((data) =>
+            setRegions(data)
+        )
     }, [])
 
     const toggleOpen = item => {

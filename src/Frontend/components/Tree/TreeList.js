@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
 
@@ -41,6 +41,10 @@ function TreeItem({ item, funcs }) {
 
 
 export default function TreeList({ item, tree, funcs }) {
+    useEffect(() => {
+        tree.forEach((region) =>
+            region.children = { name: "hijo" })
+    }, [])
     return (
         <ul>
             {tree.map(child => (

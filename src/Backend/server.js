@@ -12,6 +12,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const port = process.env.PORT || 3200;
 
+
 // Endpoints.
 //app.use(cors());
 app.use(express.json());
@@ -41,6 +42,9 @@ app.get('/', (req, res) => {
     documentation: 'https://localhost:3200/api-docs'
   })
 });
+
+
+
 
 app.use('/user', user);
 app.use('/company', company);
