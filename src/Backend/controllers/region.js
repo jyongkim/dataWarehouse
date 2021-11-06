@@ -9,6 +9,9 @@ exports.read = (req, res) => {
 exports.getTree = (req, res) => {
     //res.send('hello');
     db.Region.findAll(({
-        include: [{association: 'countries', include : [{association: 'cities'}]}]
-        })).then(results=> res.send(results));
+        include: [{ association: 'countries', include: [{ association: 'cities' }] }]
+    })).then(results => {
+        const tree = results.map(r => ({ name: r.region, children: r.countries.map(c => ({ name: c.country, children: c.cities.map(ct => ({ name: ct.city })) })) }))
+        res.send(tree)
+    });
 }

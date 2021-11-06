@@ -1,4 +1,5 @@
 const Company = require('../models/company')
+const db = require('../data/models')
 
 exports.create = (req, res) => {
     (req.body.constructor == Object && Object.keys(req.body) == 0) ?
@@ -9,12 +10,17 @@ exports.create = (req, res) => {
             err ? res.send(err) : res.json({
                 message: '¡La empresa se registró con éxito!',
                 data: company
-})})}
+            })
+        })
+}
 
 exports.read = (req, res) => {
-    Company.read(req.params.id, (err, company) => {
-        err ? res.send(err) : res.send(company)
-})}
+    db.Company.findAll(({
+        // include: [{ association: 'countries', include: [{ association: 'cities' }] }]
+    })).then(results => {
+        res.send(results)
+    })
+}
 
 exports.update = (req, res) => {
     (req.body.constructor == Object && Object.keys(req.body) == 0) ?
@@ -25,7 +31,9 @@ exports.update = (req, res) => {
             err ? res.send(err) : res.json({
                 message: 'La empresa se actualizó con éxito.',
                 data: company
-})})}
+            })
+        })
+}
 
 exports.delete = (req, res) => {
     Company.delete(req.params.id, (err, company) => {
@@ -33,4 +41,5 @@ exports.delete = (req, res) => {
             message: 'La empresa se eliminó con éxito.',
             data: company
         })
-})}
+    })
+}

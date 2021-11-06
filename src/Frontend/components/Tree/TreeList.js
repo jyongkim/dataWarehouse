@@ -41,10 +41,10 @@ function TreeItem({ item, funcs }) {
 
 
 export default function TreeList({ item, tree, funcs }) {
-    useEffect(() => {
-        tree.forEach((region) =>
-            region.children = { name: "hijo" })
-    }, [])
+    // useEffect(() => {
+    //     tree.forEach((region) =>
+    //         region.children = { name: "hijo" })
+    // }, [])
     return (
         <ul>
             {tree.map(child => (
