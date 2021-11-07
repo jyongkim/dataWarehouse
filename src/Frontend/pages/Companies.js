@@ -31,6 +31,7 @@ export default function Companies() {
 
     useEffect(() => {
         CompanyService.getCompanies().then(data => {
+            console.log(data)
             setCompanies(data)
             setFetchData(!setFetchData)
         }).catch((err) => {

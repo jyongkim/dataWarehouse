@@ -61,6 +61,8 @@ CREATE TABLE Companies(
     `company` VARCHAR (100) NOT NULL,
     `id_city` INT NOT NULL,
     `address` VARCHAR (100),
+    `email` VARCHAR (100),
+    `phone` VARCHAR (100),
     PRIMARY KEY (`id_company`),
     UNIQUE KEY (`company`),
     FOREIGN KEY (`id_city`) REFERENCES Cities (`id_city`),

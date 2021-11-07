@@ -16,7 +16,7 @@ exports.create = (req, res) => {
 
 exports.read = (req, res) => {
     db.Company.findAll(({
-        // include: [{ association: 'countries', include: [{ association: 'cities' }] }]
+        include: [{ association: 'city', include: [{ association: 'country' }] }]
     })).then(results => {
         res.send(results)
     })

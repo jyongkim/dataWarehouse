@@ -90,19 +90,19 @@ function TableDataCompanies(props) {
                         companies && companies.map(c => (
                             <tr>
                                 <td>
-                                    {c.Name}
+                                    {c.company}
                                 </td>
                                 <td>
-                                    {c.Country}
+                                    {c.city.country.country}
                                 </td>
                                 <td>
-                                    {c.Address}
+                                    {c.address}
                                 </td>
                                 <td>
-                                    {c.Email}
+                                    {c.email}
                                 </td>
                                 <td>
-                                    {c.Phone}
+                                    {c.phone}
                                 </td>
                                 <td>
                                     <PencilSquare style={{ cursor: 'pointer' }} onClick={(e) => {

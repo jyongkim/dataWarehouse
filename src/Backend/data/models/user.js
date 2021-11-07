@@ -1,13 +1,29 @@
 const db = require('./index')
 module.exports = (sequelize, dataTypes) => {
-    let alias = "Region";
+    let alias = "User";
     let cols = {
-        id_region: {
+        id_user: {
             autoIncrement: true,
             primaryKey: true,
             type: dataTypes.INTEGER,
         },
-        region: {
+        user_name: {
+            allowNull: false,
+            type: dataTypes.STRING,
+        },
+        first_name: {
+            allowNull: false,
+            type: dataTypes.STRING,
+        },
+        last_name: {
+            allowNull: false,
+            type: dataTypes.STRING,
+        },
+        password: {
+            allowNull: false,
+            type: dataTypes.STRING,
+        },
+        email: {
             allowNull: false,
             type: dataTypes.STRING,
         }
