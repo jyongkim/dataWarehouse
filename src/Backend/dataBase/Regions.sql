@@ -1,7 +1,3 @@
-CREATE TABLE IF NOT EXISTS Regions (
-    `id_region` INT NOT NULL PRIMARY KEY,
-    `Region` VARCHAR(150) CHARACTER SET utf8
-);
 INSERT INTO Regions VALUES
     (1,'Asia'),
     (2,'Asia del Oeste y África del Norte'),

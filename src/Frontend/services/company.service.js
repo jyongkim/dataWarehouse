@@ -11,6 +11,8 @@ const createCompany = (idUser, name, idCity, address, phone, email) => {
     email: email
   }
   let formBody = []
+  console.log(company)
+  console.log(idUser)
 
   for (var property in company) {
     const encodedKey = encodeURIComponent(property);

@@ -85,8 +85,20 @@ export default function Companies() {
 
 
     const showModal = (id) => {
+        console.log(id)
         if (id > 0) {
-            setCompany({ ...companies.find(c => c.ID === id) })
+            let companyToUpdate = companies.find(c => c.id_company === id)
+            setCompany({
+                ID: companyToUpdate.id_company,
+                Name: companyToUpdate.company,
+                IdCity: companyToUpdate.id_city,
+                Address: companyToUpdate.address,
+                IdCountry: companyToUpdate.city.id_country,
+                IdRegion: companyToUpdate.city.country.id_region,
+                Phone: companyToUpdate.phone,
+                Email: companyToUpdate.email,
+            })
+
         } else {
             setCompany(initialStateCompany)
         }

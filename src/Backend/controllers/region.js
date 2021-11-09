@@ -1,4 +1,5 @@
 const db = require('../data/models')
+const Region = require('../models/region')
 
 exports.read = (req, res) => {
     Region.read((err, region) => {

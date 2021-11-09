@@ -3,8 +3,8 @@ import { useState } from 'react'
 const CompanyLogic = () => {
 
     const initialStateCompany = {
-        Id: -1,
-        Company: '',
+        ID: -1,
+        Name: '',
         IdCity: 0,
         Address: '',
         IdCountry: 0,

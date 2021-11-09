@@ -8,15 +8,7 @@ CREATE TABLE Regions (
 	PRIMARY KEY (id_region),
     UNIQUE KEY (region)
 );
-INSERT INTO Regions(region)
-VALUES
-	('East Asia & Pacific'),
-	('Europe & Central Asia'),
-	('Latin America & Caribbean'),
-	('Middle East & North Africa'),
-	('North America'),
-	('South Asia'),
-	('Sub-Saharan Africa');
+
 
 CREATE TABLE IF NOT EXISTS `Countries`(
     `id_region` INT DEFAULT 3,
