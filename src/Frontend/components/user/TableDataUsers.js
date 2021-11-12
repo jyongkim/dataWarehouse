@@ -1,17 +1,17 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { Table } from 'react-bootstrap';
 import { PencilSquare, ArrowDownUp, X } from 'react-bootstrap-icons';
 
 
 function TableDataUsers(props) {
 
-    const {users,setUsers,showModal, handleDelete} = props
+    const { users, setUsers, showModal, handleDelete } = props
     const [orderByName, setOrderByName] = useState(false)
     const [orderByLastName, setOrderByLastName] = useState(false)
     const [orderByUsername, setOrderByUsername] = useState(false)
     const [orderByEmail, setOrderByEmail] = useState(false)
     const [orderByProfile, setOrderByProfile] = useState(false)
-    
+
 
     const sortByName = () => {
         setUsers([
@@ -24,7 +24,7 @@ function TableDataUsers(props) {
                 return 0
             })])
     }
-        
+
     const sortByLastName = () => {
         setUsers([
             ...users.sort((a, b) => {
@@ -75,46 +75,46 @@ function TableDataUsers(props) {
 
     return (
         <Table striped bordered hover className="users">
-                <thead>
-                    <tr>
-                        <th>Nombre <ArrowDownUp onClick={() => sortByName()} style={{ cursor: 'pointer' }}></ArrowDownUp></th>
-                        <th>Apellido <ArrowDownUp onClick={() => sortByLastName()} style={{ cursor: 'pointer' }}></ArrowDownUp></th>
-                        <th>Usuario <ArrowDownUp onClick={() => sortByUsername()} style={{ cursor: 'pointer' }}></ArrowDownUp></th>
-                        <th>Email <ArrowDownUp onClick={() => sortByEmail()} style={{ cursor: 'pointer' }}></ArrowDownUp></th>
-                        <th>Perfil <ArrowDownUp onClick={() => sortByProfile()} style={{ cursor: 'pointer' }}></ArrowDownUp></th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        users && users.map(u => (
-                            <tr>
-                                <td>
-                                    {u.FirstName}
-                                </td>
-                                <td>
-                                    {u.LastName}
-                                </td>
-                                <td>
-                                    {u.Username}
-                                </td>
-                                <td>
-                                    {u.Email}
-                                </td>
-                                <td>
-                                    {u.Role}
-                                </td>
-                                <td>
-                                    <PencilSquare style={{ cursor: 'pointer' }} onClick={(e) =>{
-                                        showModal(u.Id)
-                                        }}></PencilSquare>
-                                    <X style={{ cursor: 'pointer', fontStyle: 'bold', fontSize: '20pt' }} onClick={()=> handleDelete(u.Id)}></X>
-                                </td>
-                            </tr>
-                        ))
-                    }
-                </tbody>
-            </Table>
+            <thead>
+                <tr>
+                    <th>Nombre <ArrowDownUp onClick={() => sortByName()} style={{ cursor: 'pointer' }}></ArrowDownUp></th>
+                    <th>Apellido <ArrowDownUp onClick={() => sortByLastName()} style={{ cursor: 'pointer' }}></ArrowDownUp></th>
+                    <th>Usuario <ArrowDownUp onClick={() => sortByUsername()} style={{ cursor: 'pointer' }}></ArrowDownUp></th>
+                    <th>Email <ArrowDownUp onClick={() => sortByEmail()} style={{ cursor: 'pointer' }}></ArrowDownUp></th>
+                    <th>Perfil <ArrowDownUp onClick={() => sortByProfile()} style={{ cursor: 'pointer' }}></ArrowDownUp></th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {
+                    users && users.map(u => (
+                        <tr>
+                            <td>
+                                {u.first_name}
+                            </td>
+                            <td>
+                                {u.last_name}
+                            </td>
+                            <td>
+                                {u.user_name}
+                            </td>
+                            <td>
+                                {u.email}
+                            </td>
+                            <td>
+                                {u.role.role}
+                            </td>
+                            <td>
+                                <PencilSquare style={{ cursor: 'pointer' }} onClick={(e) => {
+                                    showModal(u.id_user)
+                                }}></PencilSquare>
+                                <X style={{ cursor: 'pointer', fontStyle: 'bold', fontSize: '20pt' }} onClick={() => handleDelete(u.id_user)}></X>
+                            </td>
+                        </tr>
+                    ))
+                }
+            </tbody>
+        </Table>
     );
 }
 

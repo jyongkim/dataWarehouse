@@ -26,19 +26,22 @@ module.exports = (sequelize, dataTypes) => {
         email: {
             allowNull: false,
             type: dataTypes.STRING,
+        },
+        id_role: {
+            allowNull: false,
+            type: dataTypes.INTEGER,
         }
     };
     let config = {
-        tableName: "regions",
+        tableName: "users",
         timestamps: false,
     };
-    const Region = sequelize.define(alias, cols, config);
-    Region.associate = function (models) {
-        Region.hasMany(models.Country, {
-            as: "countries",
-            foreignKey: "id_region"
-
+    const User = sequelize.define(alias, cols, config);
+    User.associate = function (models) {
+        User.belongsTo(models.Role, {
+            as: 'role',
+            foreignKey: 'id_role'
         });
     };
-    return Region;
+    return User;
 }

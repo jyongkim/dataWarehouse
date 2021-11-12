@@ -1,4 +1,5 @@
 const User = require('../models/user')
+const db = require('../data/models')
 
 exports.create = (req, res) => {
     (req.body.constructor == Object && Object.keys(req.body) == 0) ?
@@ -14,9 +15,10 @@ exports.create = (req, res) => {
 }
 
 exports.read = (req, res) => {
-    User.read((err, user) => {
-        console.log('user:', user);
-        err ? res.send(err) : res.send(user);
+    db.User.findAll(({
+        include: [{ association: 'role' }]
+    })).then(results => {
+        res.send(results)
     })
 }
 

@@ -144,7 +144,7 @@ function FormCompany({ onSubmit, company,
           </div>
           <div className="form-group">
             <label htmlFor="regions" className="form-label">Región</label>
-            <Select className="form-control" name="regions" onChange={onChangeRegion}>
+            <Select className="form-control" name="regions" onChange={onChangeRegion} value={company.IdRegion}>
               <option>Ingrese la región</option>
               {regions.map((e) => {
                 return (
@@ -157,7 +157,7 @@ function FormCompany({ onSubmit, company,
           </div>
           <div className="form-group">
             <label htmlFor="countries" className="form-label">País</label>
-            <Select className="form-control" name="countries" onChange={onChangeCountry}>
+            <Select className="form-control" name="countries" onChange={onChangeCountry} value={company.IdCountry}>
               <option>Ingrese el país</option>
               {countries.map((e) => {
                 return (
@@ -170,7 +170,7 @@ function FormCompany({ onSubmit, company,
           </div>
           <div className="form-group">
             <label htmlFor="cities" className="form-label">Ciudad</label>
-            <Select className="form-control" name="cities" onChange={onChangeCity}>
+            <Select className="form-control" name="cities" onChange={onChangeCity} value={company.IdCity}>
               <option>Ingrese la ciudad</option>
               {cities.map((e) => {
                 return (

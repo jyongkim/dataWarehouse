@@ -1,4 +1,5 @@
 const Role = require('../models/role')
+const db = require('../data/models')
 
 exports.create = (req, res) => {
     (req.body.constructor == Object && Object.keys(req.body) == 0) ?
@@ -14,9 +15,10 @@ exports.create = (req, res) => {
 }
 
 exports.read = (req, res) => {
-    Role.read((err, role) => {
-        err ? res.send(err) : res.send(role)
-    })
+    db.Role.findAll(({
+    })).then(results => {
+        res.send(results)
+    });
 }
 
 exports.update = (req, res) => {

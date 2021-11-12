@@ -88,6 +88,7 @@ export default function Companies() {
         console.log(id)
         if (id > 0) {
             let companyToUpdate = companies.find(c => c.id_company === id)
+            console.log('companytoupdate:', companyToUpdate)
             setCompany({
                 ID: companyToUpdate.id_company,
                 Name: companyToUpdate.company,
