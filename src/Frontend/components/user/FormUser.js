@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import Form from "react-validation/build/form"
 import Input from "react-validation/build/input"
+import Select from "react-validation/build/select"
 import CheckButton from "react-validation/build/button"
 import { isEmail } from "validator"
 import { useHistory } from "react-router-dom";
@@ -8,7 +9,7 @@ import { useHistory } from "react-router-dom";
 
 function FormUser(props) {
 
-  const { onSubmit, user, setUser, isModal } = props
+  const { onSubmit, user, setUser, isModal, roles } = props
   const [message, setMessage] = useState("")
   const [successful, setSuccessful] = useState(false)
   const form = useRef()
@@ -111,27 +112,31 @@ function FormUser(props) {
   }
 
   const onChangeFirstName = (e) => {
-    setUser({ ...user, FirstName: e.target.value })
+    setUser({ ...user, first_name: e.target.value })
   }
 
   const onChangeUsername = (e) => {
-    setUser({ ...user, Username: e.target.value })
+    setUser({ ...user, username: e.target.value })
   }
 
   const onChangeLastName = (e) => {
-    setUser({ ...user, LastName: e.target.value })
+    setUser({ ...user, last_name: e.target.value })
   }
 
   const onChangeEmail = (e) => {
-    setUser({ ...user, Email: e.target.value })
+    setUser({ ...user, email: e.target.value })
+  }
+
+  const onChangeRole = (e) => {
+    setUser({ ...user, id_role: e.target.value })
   }
 
   const onChangePassword = (e) => {
-    setUser({ ...user, Password: e.target.value })
+    setUser({ ...user, password: e.target.value })
   }
 
   const onChangeConfirmPassword = (e) => {
-    setUser({ ...user, ConfirmPassword: e.target.value })
+    setUser({ ...user, confirmPassword: e.target.value })
   }
 
   return (
@@ -144,7 +149,7 @@ function FormUser(props) {
               type="text"
               className="form-control"
               name="first_name"
-              value={user.FirstName}
+              value={user.first_name}
               onChange={onChangeFirstName}
               validations={[required, vfirstname]}
             />
@@ -155,7 +160,7 @@ function FormUser(props) {
               type="text"
               className="form-control"
               name="last_name"
-              value={user.LastName}
+              value={user.last_name}
               onChange={onChangeLastName}
               validations={[required, vlastname]}
             />
@@ -166,7 +171,7 @@ function FormUser(props) {
               type="text"
               className="form-control"
               name="username"
-              value={user.Username}
+              value={user.username}
               onChange={onChangeUsername}
               validations={[required, vusername]}
             />
@@ -178,10 +183,24 @@ function FormUser(props) {
               type="email"
               className="form-control"
               name="email"
-              value={user.Email}
+              value={user.email}
               onChange={onChangeEmail}
               validations={[required, validEmail]}
             />
+          </div>
+
+          <div className="mb-3 form-group">
+            <label htmlFor="roles" className="form-label">Rol</label>
+            <Select className="form-control" name="roles" onChange={onChangeRole} value={user.id_role}>
+              <option>Ingrese el rol del Usuario</option>
+              {roles.map((e) => {
+                return (
+                  <option value={e.id_role}>{e.role}</option>
+                )
+              }
+              )
+              }
+            </Select>
           </div>
 
           <div className="mb-3 form-group">
@@ -190,7 +209,7 @@ function FormUser(props) {
               type="password"
               className="form-control"
               name="password"
-              value={user.Password}
+              value={user.password}
               onChange={onChangePassword}
               validations={[required, vpassword]}
             />
@@ -202,7 +221,7 @@ function FormUser(props) {
               type="password"
               className="form-control"
               name="confirmPassword"
-              value={user.ConfirmPasswords}
+              value={user.confirmPassword}
               onChange={onChangeConfirmPassword}
               validations={[required, vconfirmPassword]}
             />

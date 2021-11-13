@@ -23,8 +23,10 @@ exports.read = (req, res) => {
 }
 
 exports.find = (req, res) => {
-    User.find(req.params.id, (err, user) => {
-        err ? res.send(err) : res.send(user)
+    db.User.findById(req.params.id, ({
+        include: [{ association: 'role' }]
+    })).then(results => {
+        res.send(results)
     })
 }
 
