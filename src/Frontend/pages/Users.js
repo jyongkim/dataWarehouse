@@ -53,8 +53,12 @@ export default function Users() {
     }, [])
 
     const showModal = (id) => {
+        console.log('user_id:', id)
         if (id > 0) {
-            setUser({ ...users.find(u => u.user_id == id) })
+            const userToUpdate = {
+                ...users.find(u => u.id_user === id)
+            }
+            setUser({ ...userToUpdate, password: '' })
         } else {
             setUser(initialStateUser)
         }
@@ -71,7 +75,7 @@ export default function Users() {
     const handleSaveChanges = () => {
         let data;
         if (user.user_id > 0) {
-            data = UserService.updateUser(user.user_id, user.first_name, user.last_name, user.username, user.email, user.role_id, user.password)
+            data = UserService.updateUser(user.id_user, user.first_name, user.last_name, user.username, user.email, user.role_id, user.password)
         } else {
             data = AuthService.register(user.first_name, user.last_name, user.username, user.email, user.role_id, user.password)
         }

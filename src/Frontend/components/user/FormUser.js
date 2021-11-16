@@ -166,12 +166,12 @@ function FormUser(props) {
             />
           </div>
           <div className="mb-3 form-group">
-            <label htmlFor="username" className="form-label">Usuario</label>
+            <label htmlFor="user_name" className="form-label">Usuario</label>
             <Input
               type="text"
               className="form-control"
               name="username"
-              value={user.username}
+              value={user.user_name}
               onChange={onChangeUsername}
               validations={[required, vusername]}
             />

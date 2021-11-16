@@ -31,16 +31,22 @@ exports.find = (req, res) => {
 }
 
 exports.update = (req, res) => {
-    (req.body.constructor == Object && Object.keys(req.body) == 0) ?
-        res.status(400).send({
-            message: 'Todos los campos deben ser completados.',
-            code: 'Error: 400.'
-        }) : User.update(req.params.id, req.body, (err, user) => {
-            err ? res.send(err) : res.json({
-                message: 'El usuario se actualizó con éxito.',
-                data: user
-            })
-        })
+    // (req.body.constructor == Object && Object.keys(req.body) == 0) ?
+    //     res.status(400).send({
+    //         message: 'Todos los campos deben ser completados.',
+    //         code: 'Error: 400.'
+    //     }) : User.update(req.params.id, req.body, (err, user) => {
+    //         err ? res.send(err) : res.json({
+    //             message: 'El usuario se actualizó con éxito.',
+    //             data: user
+    //         })
+    //     })
+    db.User.update({
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+
+
+    }, { where: req.params.id }).then(u => res.send(u))
 }
 
 exports.delete = (req, res) => {
