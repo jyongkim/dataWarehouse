@@ -41,7 +41,6 @@ export default function Users() {
     useEffect(() => {
 
         RoleService.getRoles().then(data => {
-            console.log(data)
             setRoles(data)
         }).catch((err) => {
             console.log('error:', err);
@@ -53,7 +52,6 @@ export default function Users() {
     }, [])
 
     const showModal = (id) => {
-        console.log('user_id:', id)
         if (id > 0) {
             const userToUpdate = {
                 ...users.find(u => u.id_user === id)
@@ -74,10 +72,11 @@ export default function Users() {
 
     const handleSaveChanges = () => {
         let data;
-        if (user.user_id > 0) {
-            data = UserService.updateUser(user.id_user, user.first_name, user.last_name, user.username, user.email, user.role_id, user.password)
+        if (user.id_user > 0) {
+            console.log(user.id_role)
+            data = UserService.updateUser(user.id_user, user.first_name, user.last_name, user.username, user.email, user.id_role, user.password)
         } else {
-            data = AuthService.register(user.first_name, user.last_name, user.username, user.email, user.role_id, user.password)
+            data = AuthService.register(user.first_name, user.last_name, user.username, user.email, user.id_role, user.password)
         }
 
         setShowModalUser(false)

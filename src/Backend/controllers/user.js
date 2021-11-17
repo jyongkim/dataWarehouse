@@ -1,5 +1,6 @@
 const User = require('../models/user')
 const db = require('../data/models')
+var bcrypt = require("bcryptjs");
 
 exports.create = (req, res) => {
     (req.body.constructor == Object && Object.keys(req.body) == 0) ?
@@ -31,22 +32,16 @@ exports.find = (req, res) => {
 }
 
 exports.update = (req, res) => {
-    // (req.body.constructor == Object && Object.keys(req.body) == 0) ?
-    //     res.status(400).send({
-    //         message: 'Todos los campos deben ser completados.',
-    //         code: 'Error: 400.'
-    //     }) : User.update(req.params.id, req.body, (err, user) => {
-    //         err ? res.send(err) : res.json({
-    //             message: 'El usuario se actualizó con éxito.',
-    //             data: user
-    //         })
-    //     })
+    console.log(req.body.id_role)
+    const passwordHash = bcrypt.hashSync(req.body.password, 10)
     db.User.update({
         first_name: req.body.first_name,
         last_name: req.body.last_name,
-
-
-    }, { where: req.params.id }).then(u => res.send(u))
+        user_name: req.body.user_name,
+        password: passwordHash,
+        email: req.body.email,
+        id_role: req.body.id_role
+    }, { where: { id_user: req.params.id } }).then(u => res.send(u))
 }
 
 exports.delete = (req, res) => {

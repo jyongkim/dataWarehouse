@@ -8,7 +8,7 @@ const UsersLogic = () => {
         last_name: '',
         username: '',
         email: '',
-        role_id: ''
+        id_role: ''
     }
 
     const [user, setUser] = useState(initialStateUser)
