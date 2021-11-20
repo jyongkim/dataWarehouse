@@ -38,7 +38,6 @@ const getUsers = () => {
   return fetchData(`${API_URL}user`, {}, 'GET')
 }
 
-
 const UserService = {
   createUser,
   updateUser,

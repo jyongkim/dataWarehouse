@@ -1,18 +1,21 @@
-import {API_URL, fetchData} from './common.service'
+import { API_URL, fetchData } from './common.service'
 
-const register = (firstName,lastName,username, email, password) => {
-  return fetchData(API_URL+'auth/signup', { first_name: firstName,
-                                      last_name: lastName,
-                                      user_name: username,
-                                      email: email,
-                                      password: password},'POST')
+const register = (firstName, lastName, username, email, password) => {
+  return fetchData(API_URL + 'auth/signup', {
+    first_name: firstName,
+    last_name: lastName,
+    user_name: username,
+    email: email,
+    password: password
+  }, 'POST')
 }
 
 const login = (username, password) => {
-   return fetchData(API_URL+'auth/signin', {
+  return fetchData(API_URL + 'auth/signin', {
     username: username,
-    password: password},'POST')
-    
+    password: password
+  }, 'POST')
+
 }
 
 const logout = () => {

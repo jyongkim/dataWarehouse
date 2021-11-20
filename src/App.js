@@ -90,9 +90,12 @@ export default function App() {
                   <li>
                     <Link to="/company">Compañías</Link>
                   </li>
-                  <li>
-                    <Link to="/users">Usuarios</Link>
-                  </li>
+                  {currentUser.rol === 1 ? (
+                    <li>
+                      <Link to="/users">Usuarios</Link>
+                    </li>
+                  ) : (<></>)
+                  }
                   <li>
                     <Link to="/regions">Región/Ciudad</Link>
                   </li>
