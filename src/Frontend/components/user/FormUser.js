@@ -19,10 +19,8 @@ function FormUser(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
     setMessage("")
     setSuccessful(false)
-
     form.current.validateAll()
 
     if (user.Password != user.ConfirmPassword) {
@@ -36,10 +34,8 @@ function FormUser(props) {
         setMessage(data.message)
         setSuccessful(true)
       })
-
     }
   }
-
 
   const required = (value) => {
     if (!value) {
@@ -228,7 +224,7 @@ function FormUser(props) {
           </div>
 
           <div className="mb-3 form-group">
-            <button className="btn btn-primary btn-block">Registrar Usuario</button>
+            <button className="btn btn-primary btn-block">Registrar usuario</button>
           </div>
         </div>
       )}

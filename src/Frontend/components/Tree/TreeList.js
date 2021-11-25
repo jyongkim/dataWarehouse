@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import ReactDOM from "react-dom";
+import { Button } from 'react-bootstrap';
+import { PencilSquare, X } from 'react-bootstrap-icons';
 import styled from "styled-components";
 
 const TreeLine = styled.button`
@@ -27,10 +28,11 @@ function TreeItem({ item, funcs }) {
         <li>
             <TreeLine
                 onClick={() => toggleOpen(item)}
-                onDoubleClick={() => makeParent(item)}
             >
-                {item.name}
                 {item.children && <span>{item.isOpen ? "[-]" : "[+]"}</span>}
+                &nbsp;{item.name}
+                &nbsp;<PencilSquare style={{ cursor: 'pointer' }} ></PencilSquare>&nbsp;
+                <X style={{ cursor: 'pointer', fontStyle: 'bold', fontSize: '20pt' }}></X>
             </TreeLine>
             {item.children && item.isOpen && (
                 <TreeList item={item} tree={item.children} funcs={funcs} />
@@ -46,11 +48,13 @@ export default function TreeList({ item, tree, funcs }) {
     //         region.children = { name: "hijo" })
     // }, [])
     return (
-        <ul>
-            {tree.map(child => (
-                <TreeItem item={child} funcs={funcs} />
-            ))}
-            <AddItem parent={item} funcs={funcs} />
-        </ul>
+        <>
+            &nbsp;<Button className="btn btn-primary sm-button" size="sm">Agregar</Button>
+            <ul style={{ listStyleType: 'none' }}>
+                {tree.map(child => (
+                    <TreeItem item={child} funcs={funcs} />
+                ))}
+            </ul>
+        </>
     );
 }
