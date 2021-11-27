@@ -1,26 +1,25 @@
 import React, { useState, useRef } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
-import FormUser from './FormUser';
-import AuthService from "../../services/auth.service";
+
 
 
 function ModalUser(props) {
-    const { showModalUser, handleClose, handleSaveChanges, user, setUser, roles } = props
+    const { showModalTree, handleClose, handleSaveChanges, region, setRegion } = props
 
-    // const handleRegister = () => {
-    //     return AuthService.register(user.FirstName, user.LastName, user.Username, user.Email, user.Password)
-    // }
+    const onChangeName = (e) => {
+        setRegion({ ...region, region: e.target.value })
+    }
 
     return (
-        <Modal show={showModalUser} onHide={handleClose}>
+        <Modal show={showModalTree} onHide={handleClose}>
             <Modal.Header closeButton>
                 <Modal.Title>Agregar</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Form>
+                <Form onSubmit={handleSaveChanges}>
                     <Form.Group className="mb-3" controlId="formBasicRegion">
                         <Form.Label>Nombre</Form.Label>
-                        <Form.Control type="text" placeholder="Ingrese nombre" />
+                        <Form.Control type="text" placeholder="Ingrese nombre" onChange={onChangeName} />
                     </Form.Group>
                     <Button variant="primary" type="submit">
                         Guardar

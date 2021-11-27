@@ -16,3 +16,8 @@ exports.getTree = (req, res) => {
         res.send(tree)
     });
 }
+
+exports.create = (req, res) => {
+    console.log(req.body)
+    db.Region.create(req.body).then((result) => console.log(result))
+}

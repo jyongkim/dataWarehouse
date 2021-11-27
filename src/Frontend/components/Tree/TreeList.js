@@ -22,7 +22,7 @@ function AddItem({ parent, funcs }) {
     );
 }
 
-function TreeItem({ item, funcs }) {
+function TreeItem({ item, funcs, showModal }) {
     const { toggleOpen, makeParent } = funcs;
     return (
         <li>
@@ -42,17 +42,14 @@ function TreeItem({ item, funcs }) {
 }
 
 
-export default function TreeList({ item, tree, funcs }) {
-    // useEffect(() => {
-    //     tree.forEach((region) =>
-    //         region.children = { name: "hijo" })
-    // }, [])
+export default function TreeList({ item, tree, funcs, showModal }) {
+
     return (
         <>
-            &nbsp;<Button className="btn btn-primary sm-button" size="sm">Agregar</Button>
+            &nbsp;<Button className="btn btn-primary sm-button" size="sm" onClick={() => showModal()}>Agregar</Button>
             <ul style={{ listStyleType: 'none' }}>
                 {tree.map(child => (
-                    <TreeItem item={child} funcs={funcs} />
+                    <TreeItem item={child} funcs={funcs} showModal={showModal} />
                 ))}
             </ul>
         </>
