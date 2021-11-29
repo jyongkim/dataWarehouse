@@ -9,14 +9,24 @@ const getTreeRegions = () => {
     return fetchData(`${API_URL}region/tree`, {}, 'GET')
 }
 
-const createRegion = () => {
-    return fetchData(`${API_URL}region/create`, {}, 'POST')
+const createRegion = (region) => {
+    return fetchData(`${API_URL}region/create`, region, 'POST')
+}
+
+const updateRegion = (region) => {
+    return fetchData(`${API_URL}region/edit`, region, 'PUT')
+}
+
+const deleteRegion = (id) => {
+    return fetchData(`${API_URL}region/delete/${id}`, {}, 'DELETE')
 }
 
 const RegionService = {
     getRegions,
     getTreeRegions,
-    createRegion
+    createRegion,
+    updateRegion,
+    deleteRegion
 }
 
 export default RegionService;

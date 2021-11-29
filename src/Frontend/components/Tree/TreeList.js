@@ -22,7 +22,7 @@ function AddItem({ parent, funcs }) {
     );
 }
 
-function TreeItem({ item, funcs, showModal }) {
+function TreeItem({ item, funcs, showModal, handleDelete }) {
     const { toggleOpen, makeParent } = funcs;
     return (
         <li>
@@ -31,8 +31,8 @@ function TreeItem({ item, funcs, showModal }) {
             >
                 {item.children && <span>{item.isOpen ? "[-]" : "[+]"}</span>}
                 &nbsp;{item.name}
-                &nbsp;<PencilSquare style={{ cursor: 'pointer' }} ></PencilSquare>&nbsp;
-                <X style={{ cursor: 'pointer', fontStyle: 'bold', fontSize: '20pt' }}></X>
+                &nbsp;<PencilSquare style={{ cursor: 'pointer' }} onClick={() => showModal(item.id_region)}></PencilSquare>&nbsp;
+                <X style={{ cursor: 'pointer', fontStyle: 'bold', fontSize: '20pt' }} onClick={() => handleDelete(item.id_region)}></X>
             </TreeLine>
             {item.children && item.isOpen && (
                 <TreeList item={item} tree={item.children} funcs={funcs} />
@@ -42,14 +42,14 @@ function TreeItem({ item, funcs, showModal }) {
 }
 
 
-export default function TreeList({ item, tree, funcs, showModal }) {
+export default function TreeList({ item, tree, funcs, showModal, handleDelete }) {
 
     return (
         <>
             &nbsp;<Button className="btn btn-primary sm-button" size="sm" onClick={() => showModal()}>Agregar</Button>
             <ul style={{ listStyleType: 'none' }}>
                 {tree.map(child => (
-                    <TreeItem item={child} funcs={funcs} showModal={showModal} />
+                    <TreeItem item={child} funcs={funcs} showModal={showModal} handleDelete={handleDelete} />
                 ))}
             </ul>
         </>

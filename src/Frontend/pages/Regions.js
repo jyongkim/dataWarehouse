@@ -11,12 +11,14 @@ export default function Regions(params) {
     const [region, setRegion] = useState({
         region: ''
     })
+    const [fetchData, setFetchData] = useState(false)
 
     useEffect(() => {
         RegionService.getTreeRegions().then((data) =>
             setRegions(data)
         )
-    }, [])
+        setFetchData(false)
+    }, [fetchData])
 
     const toggleOpen = item => {
         const newTree = [...regions];
@@ -40,7 +42,13 @@ export default function Regions(params) {
         setRegions(newTree);
     };
 
-    const showModal = () => {
+    const showModal = (id) => {
+        console.log(id)
+        if (id >= 0) {
+            const regionToUpdate = regions.find(r => r.id_region == id)
+            console.log(regionToUpdate)
+            setRegion(regionToUpdate)
+        }
         setShowModalTree(true)
     }
     const handleClose = () => {
@@ -49,8 +57,16 @@ export default function Regions(params) {
 
     const handleSaveChanges = (e) => {
         e.preventDefault()
-        RegionService.createRegion(region)
-        console.log(region)
+        if (region.id_region > 0) {
+            RegionService.updateRegion({ id_region: region.id_region, region: region.name })
+        } else {
+            RegionService.createRegion({ id_region: region.id_region, region: region.name })
+        }
+        handleClose();
+        setFetchData(true)
+    }
+    const handleDelete = (id) => {
+        RegionService.deleteRegion(id)
     }
     const funcs = {
         toggleOpen,
@@ -61,7 +77,7 @@ export default function Regions(params) {
     return (
         <div className="App">
             <h1>Regiones, paises y ciudades</h1>
-            <TreeList tree={regions} funcs={funcs} showModal={showModal} />
+            <TreeList tree={regions} funcs={funcs} showModal={showModal} handleDelete={handleDelete} />
             <ModalTree showModalTree={showModalTree} handleSaveChanges={handleSaveChanges} handleClose={handleClose} region={region} setRegion={setRegion}></ModalTree>
         </div>
     );
