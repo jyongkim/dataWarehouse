@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Button } from 'react-bootstrap';
 import { PencilSquare, X } from 'react-bootstrap-icons';
 import styled from "styled-components";
+import ModalConfirm from '../ModalConfirm'
 
 const TreeLine = styled.button`
   font-family: Menlo, Consolas, monospace;
@@ -42,7 +43,7 @@ function TreeItem({ item, funcs, showModal, handleDelete }) {
 }
 
 
-export default function TreeList({ item, tree, funcs, showModal, handleDelete }) {
+export default function TreeList({ item, tree, funcs, showModal, handleDelete, handleCloseConfirm, showModalConfirm }) {
 
     return (
         <>
@@ -52,6 +53,7 @@ export default function TreeList({ item, tree, funcs, showModal, handleDelete })
                     <TreeItem item={child} funcs={funcs} showModal={showModal} handleDelete={handleDelete} />
                 ))}
             </ul>
+            <ModalConfirm show={showModalConfirm} handleCloseConfirm={handleCloseConfirm} title="Atención!" message="¿Desea borrar la region?"></ModalConfirm>
         </>
     );
 }

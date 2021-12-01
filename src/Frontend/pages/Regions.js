@@ -12,6 +12,8 @@ export default function Regions(params) {
         region: ''
     })
     const [fetchData, setFetchData] = useState(false)
+    const [showModalConfirm, setShowModalConfirm] = useState(false)
+    const [idToDelete, setIdToDelete] = useState(-1)
 
     useEffect(() => {
         RegionService.getTreeRegions().then((data) =>
@@ -65,19 +67,27 @@ export default function Regions(params) {
         handleClose();
         setFetchData(true)
     }
-    const handleDelete = (id) => {
-        RegionService.deleteRegion(id)
-    }
+
     const funcs = {
         toggleOpen,
         addChild,
         makeParent
     };
-
+    const handleDelete = (id) => {
+        setIdToDelete(id)
+        setShowModalConfirm(true)
+    }
+    const handleCloseConfirm = (confirm) => {
+        if (confirm) {
+            const data = RegionService.deleteRegion(idToDelete)
+            setFetchData(true)
+        }
+        setShowModalConfirm(false)
+    }
     return (
         <div className="App">
             <h1>Regiones, paises y ciudades</h1>
-            <TreeList tree={regions} funcs={funcs} showModal={showModal} handleDelete={handleDelete} />
+            <TreeList tree={regions} funcs={funcs} showModal={showModal} showModalConfirm={showModalConfirm} handleDelete={handleDelete} handleCloseConfirm={handleCloseConfirm} />
             <ModalTree showModalTree={showModalTree} handleSaveChanges={handleSaveChanges} handleClose={handleClose} region={region} setRegion={setRegion}></ModalTree>
         </div>
     );

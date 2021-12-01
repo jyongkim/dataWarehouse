@@ -36,6 +36,10 @@ exports.edit = (req, res) => {
         )
 }
 exports.delete = (req, res) => {
-    console.log(req.body)
-    //  db.Region
+    console.log(req.params.id)
+    db.Region.destroy({
+        where: {
+            id_region: req.params.id
+        }
+    })
 }
