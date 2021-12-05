@@ -13,7 +13,7 @@ module.exports = (sequelize, dataTypes) => {
         },
         id_country: {
             allowNull: false,
-            type: dataTypes.STRING,
+            type: dataTypes.INTEGER,
         },
     };
     let config = {

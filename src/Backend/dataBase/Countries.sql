@@ -1,133 +1,138 @@
-INSERT INTO `Countries` (`id_country`, `id_region`, `Country`) VALUES
-('AU', 6, 'Australia'),
-('CN', 1, 'China'),
-('JP', 1, 'Japan'),
-('TH', 1, 'Thailand'),
-('IN', 1, 'India'),
-('MY', 1, 'Malaysia'),
-('KR', 1, 'Korea'),
-('HK', 1, 'Hong Kong'),
-('TW', 1, 'Taiwan'),
-('PH', 1, 'Philippines'),
-('VN', 1, 'Vietnam'),
-('FR', 5, 'France'),
-('DE', 5, 'Germany'),
-('SE', 5, 'Sweden'),
-('IT', 5, 'Italy'),
-('GR', 5, 'Greece'),
-('ES', 5, 'Spain'),
-('AT', 5, 'Austria'),
-('GB', 5, 'United Kingdom'),
-('NL', 5, 'Netherlands'),
-('BE', 5, 'Belgium'),
-('CH', 5, 'Switzerland'),
-('AE', 2, 'United Arab Emirates'),
-('IL', 2, 'Israel'),
-('UA', 4, 'Ukraine'),
-('RU', 4, 'Russian Federation'),
-('KZ', 4, 'Kazakhstan'),
-('PT', 5, 'Portugal'),
-('SA', 2, 'Saudi Arabia'),
-('DK', 5, 'Denmark'),
-('IR', 2, 'Iran'),
-('NO', 5, 'Norway'),
-('US', 6, 'United States'),
-('MX', 7, 'Mexico'),
-('CA', 6, 'Canada'),
-('SY', 2, 'Syrian Arab Republic'),
-('CY', 5, 'Cyprus'),
-('CZ', 5, 'Czech Republic'),
-('IQ', 2, 'Iraq'),
-('TR', 2, 'Turkey'),
-('RO', 5, 'Romania'),
-('LB', 2, 'Lebanon'),
-('HU', 5, 'Hungary'),
-('GE', 4, 'Georgia'),
-('BR', 7, 'Brazil'),
-('AZ', 4, 'Azerbaijan'),
-('PS', 2, 'Palestinian Territory'),
-('LT', 5, 'Lithuania'),
-('OM', 2, 'Oman'),
-('SK', 5, 'Slovakia'),
-('RS', 5, 'Serbia'),
-('FI', 5, 'Finland'),
-('IS', 5, 'Iceland'),
-('BG', 5, 'Bulgaria'),
-('SI', 5, 'Slovenia'),
-('MD', 4, 'Moldov'),
-('MK', 5, 'Macedonia'),
-('LI', 5, 'Liechtenstein'),
-('PL', 5, 'Poland'),
-('HR', 5, 'Croatia'),
-('BA', 5, 'Bosnia and Herzegovina'),
-('EE', 5, 'Estonia'),
-('LV', 5, 'Latvia'),
-('JO', 2, 'Jordan'),
-('KG', 4, 'Kyrgyzstan'),
-('IE', 5, 'Ireland'),
-('LY', 2, 'Libya'),
-('LU', 5, 'Luxembourg'),
-('AM', 4, 'Armenia'),
-('YE', 2, 'Yemen'),
-('BY', 4, 'Belarus'),
-('PA', 7, 'Panama'),
-('DO', 7, 'Dominican Republic'),
-('PR', 7, 'Puerto Rico'),
-('MN', 1, 'Mongolia'),
-('NZ', 6, 'New Zealand'),
-('SG', 1, 'Singapore'),
-('ID', 1, 'Indonesia'),
-('NP', 1, 'Nepal'),
-('PG', 6, 'Papua New Guinea'),
-('PK', 1, 'Pakistan'),
-('BS', 7, 'Bahamas'),
-('AR', 7, 'Argentina'),
-('BD', 1, 'Bangladesh'),
-('MV', 1, 'Maldives'),
-('AF', 1, 'Afghanistan'),
-('FJ', 6, 'Fiji'),
-('QA', 2, 'Qatar'),
-('AL', 5, 'Albania'),
-('UZ', 4, 'Uzbekistan'),
-('KW', 2, 'Kuwait'),
-('ME', 5, 'Montenegro'),
-('PE', 7, 'Peru'),
-('CO', 7, 'Colombia'),
-('VE', 7, 'Venezuela'),
-('CL', 7, 'Chile'),
-('EC', 7, 'Ecuador'),
-('ZA', 3, 'South Africa'),
-('BO', 7, 'Bolivia'),
-('EG', 2, 'Egypt'),
-('ZW', 3, 'Zimbabwe'),
-('LR', 3, 'Liberia'),
-('KE', 3, 'Kenya'),
-('GH', 3, 'Ghana'),
-('NG', 3, 'Nigeria'),
-('TZ', 3, 'Tanzani'),
-('ZM', 3, 'Zambia'),
-('MG', 3, 'Madagascar'),
-('AO', 3, 'Angola'),
-('NA', 3, 'Namibia'),
-('CI', 3, 'Cote D''Ivoire'),
-('SD', 3, 'Sudan'),
-('CM', 3, 'Cameroon'),
-('MW', 3, 'Malawi'),
-('GA', 3, 'Gabon'),
-('ML', 3, 'Mali'),
-('CG', 3, 'Congo'),
-('UG', 3, 'Uganda'),
-('MA', 3, 'Morocco'),
-('DZ', 3, 'Algeria'),
-('SO', 3, 'Somalia'),
-('NE', 3, 'Niger'),
-('CR', 7, 'Costa Rica'),
-('JM', 7, 'Jamaica'),
-('GT', 7, 'Guatemala'),
-('PY', 7, 'Paraguay'),
-('SV', 7, 'El Salvador'),
-('HN', 7, 'Honduras'),
-('UY', 7, 'Uruguay'),
-('KP', 1, 'North Korea'),
-('FK', 7, 'Falkland Islands (Islas Malvinas)'),
-('CU', 7, 'Cuba')
+/*
+-- Query: SELECT * FROM data_warehouse.countries
+LIMIT 0, 1000
+
+-- Date: 2021-12-05 11:11
+*/
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (2,'United Arab Emirates',1);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (1,'Afghanistan',2);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Albania',3);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (4,'Armenia',4);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (3,'Angola',5);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (7,'Argentina',6);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Austria',7);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (6,'Australia',8);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (4,'Azerbaijan',9);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Bosnia and Herzegovina',10);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (1,'Bangladesh',11);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Belgium',12);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Bulgaria',13);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (7,'Bolivia',14);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (7,'Brazil',15);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (7,'Bahamas',16);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (4,'Belarus',17);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (6,'Canada',18);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (3,'Congo',19);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Switzerland',20);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (3,'Cote D\'Ivoire',21);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (7,'Chile',22);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (3,'Cameroon',23);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (1,'China',24);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (7,'Colombia',25);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (7,'Costa Rica',26);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (7,'Cuba',27);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Cyprus',28);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Czech Republic',29);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Germany',30);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Denmark',31);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (7,'Dominican Republic',32);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (3,'Algeria',33);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (7,'Ecuador',34);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Estonia',35);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (2,'Egypt',36);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Spain',37);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Finland',38);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (6,'Fiji',39);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (7,'Falkland Islands (Islas Malvinas)',40);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'France',41);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (3,'Gabon',42);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'United Kingdom',43);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (4,'Georgia',44);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (3,'Ghana',45);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Greece',46);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (7,'Guatemala',47);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (1,'Hong Kong',48);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (7,'Honduras',49);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Croatia',50);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Hungary',51);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (1,'Indonesia',52);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Ireland',53);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (2,'Israel',54);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (1,'India',55);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (2,'Iraq',56);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (2,'Iran',57);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Iceland',58);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Italy',59);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (7,'Jamaica',60);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (2,'Jordan',61);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (1,'Japan',62);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (3,'Kenya',63);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (4,'Kyrgyzstan',64);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (1,'North Korea',65);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (1,'Korea',66);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (2,'Kuwait',67);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (4,'Kazakhstan',68);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (2,'Lebanon',69);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Liechtenstein',70);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (3,'Liberia',71);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Lithuania',72);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Luxembourg',73);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Latvia',74);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (2,'Libya',75);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (3,'Morocco',76);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (4,'Moldov',77);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Montenegro',78);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (3,'Madagascar',79);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Macedonia',80);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (3,'Mali',81);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (1,'Mongolia',82);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (1,'Maldives',83);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (3,'Malawi',84);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (7,'Mexico',85);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (1,'Malaysia',86);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (3,'Namibia',87);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (3,'Niger',88);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (3,'Nigeria',89);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Netherlands',90);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Norway',91);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (1,'Nepal',92);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (6,'New Zealand',93);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (2,'Oman',94);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (7,'Panama',95);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (7,'Peru',96);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (6,'Papua New Guinea',97);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (1,'Philippines',98);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (1,'Pakistan',99);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Poland',100);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (7,'Puerto Rico',101);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (2,'Palestinian Territory',102);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Portugal',103);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (7,'Paraguay',104);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (2,'Qatar',105);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Romania',106);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Serbia',107);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (4,'Russian Federation',108);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (2,'Saudi Arabia',109);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (3,'Sudan',110);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Sweden',111);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (1,'Singapore',112);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Slovenia',113);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (5,'Slovakia',114);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (3,'Somalia',115);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (7,'El Salvador',116);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (2,'Syrian Arab Republic',117);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (1,'Thailand',118);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (2,'Turkey',119);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (1,'Taiwan',120);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (3,'Tanzani',121);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (4,'Ukraine',122);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (3,'Uganda',123);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (6,'United States',124);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (7,'Uruguay',125);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (4,'Uzbekistan',126);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (7,'Venezuela',127);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (1,'Vietnam',128);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (2,'Yemen',129);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (3,'South Africa',130);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (3,'Zambia',131);
+INSERT INTO `` (`id_region`,`Country`,`id_country`) VALUES (3,'Zimbabwe',132);

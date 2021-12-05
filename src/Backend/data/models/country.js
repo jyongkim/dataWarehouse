@@ -4,7 +4,8 @@ module.exports = (sequelize, dataTypes) => {
     let cols = {
         id_country: {
             primaryKey: true,
-            type: dataTypes.STRING,
+            autoIncrement: true,
+            type: dataTypes.INTEGER,
         },
         country: {
             allowNull: false,
