@@ -32,11 +32,22 @@ function TreeItem({ item, funcs, showModal, handleDelete }) {
             >
                 {item.children && <span>{item.isOpen ? "[-]" : "[+]"}</span>}
                 &nbsp;{item.name}
-                &nbsp;<PencilSquare style={{ cursor: 'pointer' }} onClick={() => showModal(item.id_region)}></PencilSquare>&nbsp;
+                &nbsp;<PencilSquare style={{ cursor: 'pointer' }} onClick={(e) => {
+                    e.preventDefault();
+                    console.log(item.id_country);
+
+                    if (item.id_region)
+                        showModal(item.id_region)
+                    if (item.id_country)
+                        showModal(item.id_country)
+                    if (item.id_city)
+                        showModal(item.id_city)
+                }
+                }></PencilSquare>&nbsp;
                 <X style={{ cursor: 'pointer', fontStyle: 'bold', fontSize: '20pt' }} onClick={() => handleDelete(item.id_region)}></X>
             </TreeLine>
             {item.children && item.isOpen && (
-                <TreeList item={item} tree={item.children} funcs={funcs} />
+                <TreeList item={item} tree={item.children} funcs={funcs} showModal={showModal} />
             )}
         </li>
     );

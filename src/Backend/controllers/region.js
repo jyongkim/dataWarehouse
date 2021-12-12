@@ -12,7 +12,11 @@ exports.getTree = (req, res) => {
     db.Region.findAll(({
         include: [{ association: 'countries', include: [{ association: 'cities' }] }]
     })).then(results => {
-        const tree = results.map(r => ({ id_region: r.id_region, name: r.region, children: r.countries.map(c => ({ name: c.country, children: c.cities.map(ct => ({ name: ct.city })) })) }))
+        const tree = results.map(r => (
+            {
+                id_region: r.id_region, name: r.region,
+                children: r.countries.map(c => ({ name: c.country, id_country: c.id_country, children: c.cities.map(ct => ({ name: ct.city, id_city: ct.id_city })) }))
+            }))
         res.send(tree)
     });
 }
