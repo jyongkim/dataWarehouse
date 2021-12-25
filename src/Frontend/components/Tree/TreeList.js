@@ -47,7 +47,7 @@ function TreeItem({ item, funcs, showModalTreeRegion, showModalTreeCountry, show
                 <X style={{ cursor: 'pointer', fontStyle: 'bold', fontSize: '20pt' }} onClick={() => handleDelete(item.id_region)}></X>
             </TreeLine>
             {item.children && item.isOpen && (
-                <TreeList item={item} tree={item.children} funcs={funcs} showModal={showModalTreeRegion} />
+                <TreeList item={item} tree={item.children} funcs={funcs} showModalTreeRegion={showModalTreeRegion} showModalTreeCountry={showModalTreeCountry} showModalTreeCity={showModalTreeCity} />
             )}
         </li>
     );

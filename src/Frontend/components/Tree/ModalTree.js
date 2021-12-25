@@ -3,11 +3,11 @@ import { Button, Modal, Form } from 'react-bootstrap';
 
 
 
-function ModalUser(props) {
-    const { showModalTree, handleClose, handleSaveChanges, region, setRegion } = props
+function ModalTree(props) {
+    const { showModalTree, handleClose, handleSaveChanges, item, setItem } = props
 
     const onChangeName = (e) => {
-        setRegion({ ...region, name: e.target.value })
+        setItem({ ...item, name: e.target.value })
     }
 
     return (
@@ -19,7 +19,7 @@ function ModalUser(props) {
                 <Form onSubmit={handleSaveChanges}>
                     <Form.Group className="mb-3" controlId="formBasicRegion">
                         <Form.Label>Nombre</Form.Label>
-                        <Form.Control type="text" placeholder="Ingrese nombre" onChange={onChangeName} value={region.name} />
+                        <Form.Control type="text" placeholder="Ingrese nombre" onChange={onChangeName} value={item.name} />
                     </Form.Group>
                     <Button variant="primary" type="submit">
                         Guardar
@@ -35,4 +35,4 @@ function ModalUser(props) {
     )
 }
 
-export default ModalUser
+export default ModalTree
