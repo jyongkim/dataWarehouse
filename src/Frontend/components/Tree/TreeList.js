@@ -39,9 +39,9 @@ function TreeItem({ item, funcs, showModalTreeRegion, showModalTreeCountry, show
                     if (item.id_region)
                         showModalTreeRegion(item.id_region)
                     if (item.id_country)
-                        showModalTreeCountry(item.id_country)
+                        showModalTreeCountry(item.id_parent, item.id_country)
                     if (item.id_city)
-                        showModalTreeCity(item.id_city)
+                        showModalTreeCity(item.id_grandparent, item.id_parent, item.id_city)
                 }
                 }></PencilSquare>&nbsp;
                 <X style={{ cursor: 'pointer', fontStyle: 'bold', fontSize: '20pt' }} onClick={() => handleDelete(item.id_region)}></X>

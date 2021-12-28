@@ -15,7 +15,7 @@ exports.getTree = (req, res) => {
         const tree = results.map(r => (
             {
                 id_region: r.id_region, name: r.region,
-                children: r.countries.map(c => ({ name: c.country, id_country: c.id_country, children: c.cities.map(ct => ({ name: ct.city, id_city: ct.id_city })) }))
+                children: r.countries.map(c => ({ name: c.country, id_parent: r.id_region, id_country: c.id_country, children: c.cities.map(ct => ({ id_grandparent: r.id_region, id_parent: c.id_country, name: ct.city, id_city: ct.id_city })) }))
             }))
         res.send(tree)
     });

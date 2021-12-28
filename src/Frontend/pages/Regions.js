@@ -61,20 +61,18 @@ export default function Regions(params) {
         }
         setShowModalTreeRegion(true)
     }
-    const showModalCountry = (id) => {
-        console.log(id)
-        if (id >= 0) {
-            const countryToUpdate = regions.find(r => r.id_country == id)
+    const showModalCountry = (idRegion, idCountry) => {
+        if (idCountry >= 0) {
+            const countryToUpdate = regions.find(r => r.id_region === idRegion).children.find(c => c.id_country === idCountry)
             console.log(regions)
             console.log('countryToUpdate', countryToUpdate)
             setCountry(countryToUpdate)
         }
         setShowModalTreeCountry(true)
     }
-    const showModalCity = (id) => {
-        console.log(id)
-        if (id >= 0) {
-            const cityToUpdate = regions.find(r => r.id_city == id)
+    const showModalCity = (idRegion, idCountry, idCity) => {
+        if (idCity >= 0) {
+            const cityToUpdate = regions.find(r => r.id_region === idRegion).children.find(c => c.id_country === idCountry).children.find(r => r.id_city === idCity)
             console.log(cityToUpdate)
             setCity(cityToUpdate)
         }
