@@ -6,8 +6,13 @@ const getCountries = (idRegion) => {
 }
 
 
+const updateCountry = (country) => {
+  return fetchData(`${API_URL}country/edit`, country, 'PUT')
+}
+
 const CountryService = {
-  getCountries
+  getCountries,
+  updateCountry
 }
 
 export default CountryService;

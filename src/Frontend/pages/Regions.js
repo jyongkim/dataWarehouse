@@ -1,5 +1,7 @@
 import React from 'react'
 import RegionService from "../services/region.service"
+import CountryService from "../services/country.service"
+import CityService from "../services/city.service"
 import { useEffect, useState } from 'react'
 import TreeList from '../components/Tree/TreeList'
 import ModalTree from '../components/Tree/ModalTree'
@@ -21,7 +23,9 @@ export default function Regions(params) {
     })
     const [fetchData, setFetchData] = useState(false)
     const [showModalConfirm, setShowModalConfirm] = useState(false)
-    const [idToDelete, setIdToDelete] = useState(-1)
+    const [idRegionToDelete, setIdRegionToDelete] = useState(-1)
+    const [idCountryToDelete, setIdCountryToDelete] = useState(-1)
+    const [idCityToDelete, setIdCityToDelete] = useState(-1)
 
     useEffect(() => {
         RegionService.getTreeRegions().then((data) =>
@@ -105,9 +109,9 @@ export default function Regions(params) {
     const handleSaveChangesCountry = (e) => {
         e.preventDefault()
         if (country.id_country > 0) {
-            RegionService.updateCountry({ id_country: country.id_country, country: country.name })
+            CountryService.updateCountry({ id_country: country.id_country, country: country.name })
         } else {
-            RegionService.createCountry({ id_country: country.id_country, country: country.name })
+            CountryService.createCountry({ id_country: country.id_country, country: country.name })
         }
         handleCloseCountry();
         setFetchData(true)
@@ -117,9 +121,9 @@ export default function Regions(params) {
     const handleSaveChangesCity = (e) => {
         e.preventDefault()
         if (city.id_city > 0) {
-            RegionService.updateCity({ id_city: city.id_city, city: city.name })
+            CityService.updateCity({ id_city: city.id_city, city: city.name })
         } else {
-            RegionService.createCity({ id_city: city.id_city, city: city.name })
+            CityService.createCity({ id_city: city.id_city, city: city.name })
         }
         handleCloseCity();
         setFetchData(true)
@@ -132,21 +136,41 @@ export default function Regions(params) {
         makeParent
     };
 
-    const handleDelete = (id) => {
-        setIdToDelete(id)
+    const handleDeleteRegion = (idRegion) => {
+        setIdRegionToDelete(idRegion)
+        setShowModalConfirm(true)
+    }
+    const handleDeleteCountry = (idCountry) => {
+        setIdCountryToDelete(idCountry)
+        setShowModalConfirm(true)
+    }
+    const handleDeleteCity = (idCity) => {
+        console.log('idcity', idCity)
+        setIdCityToDelete(idCity)
         setShowModalConfirm(true)
     }
     const handleCloseConfirm = (confirm) => {
         if (confirm) {
-            const data = RegionService.deleteRegion(idToDelete)
-            setFetchData(true)
+            if (idRegionToDelete > 0) {
+                const data = RegionService.deleteRegion(idRegionToDelete)
+                setFetchData(true)
+            }
+            if (idCountryToDelete > 0) {
+                const data = CountryService.deleteCountry(idCountryToDelete)
+                setFetchData(true)
+            }
+            if (idCityToDelete > 0) {
+                const data = RegionService.deleteCity(idCityToDelete)
+                setFetchData(true)
+            }
+
         }
         setShowModalConfirm(false)
     }
     return (
         <div className="App">
             <h1>Regiones, paises y ciudades</h1>
-            <TreeList tree={regions} funcs={funcs} showModalTreeRegion={showModalRegion} showModalTreeCountry={showModalCountry} showModalTreeCity={showModalCity} showModalConfirm={showModalConfirm} handleDelete={handleDelete} handleCloseConfirm={handleCloseConfirm} />
+            <TreeList tree={regions} funcs={funcs} showModalTreeRegion={showModalRegion} showModalTreeCountry={showModalCountry} showModalTreeCity={showModalCity} showModalConfirm={showModalConfirm} handleDeleteRegion={handleDeleteRegion} handleDeleteCountry={handleDeleteCountry} handleDeleteCity={handleDeleteCity} handleCloseConfirm={handleCloseConfirm} />
             <ModalTree showModalTree={showModalTreeRegion} handleSaveChanges={handleSaveChangesRegion} handleClose={handleCloseRegion} item={region} setItem={setRegion}></ModalTree>
             <ModalTree showModalTree={showModalTreeCountry} handleSaveChanges={handleSaveChangesCountry} handleClose={handleCloseCountry} item={country} setItem={setCountry}></ModalTree>
             <ModalTree showModalTree={showModalTreeCity} handleSaveChanges={handleSaveChangesCity} handleClose={handleCloseCity} item={city} setItem={setCity}></ModalTree>

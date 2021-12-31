@@ -23,7 +23,7 @@ function AddItem({ parent, funcs }) {
     );
 }
 
-function TreeItem({ item, funcs, showModalTreeRegion, showModalTreeCountry, showModalTreeCity, handleDelete }) {
+function TreeItem({ item, funcs, showModalTreeRegion, showModalTreeCountry, showModalTreeCity, handleDeleteRegion, handleDeleteCountry, handleDeleteCity }) {
     const { toggleOpen, makeParent } = funcs;
     return (
         <li>
@@ -44,7 +44,16 @@ function TreeItem({ item, funcs, showModalTreeRegion, showModalTreeCountry, show
                         showModalTreeCity(item.id_grandparent, item.id_parent, item.id_city)
                 }
                 }></PencilSquare>&nbsp;
-                <X style={{ cursor: 'pointer', fontStyle: 'bold', fontSize: '20pt' }} onClick={() => handleDelete(item.id_region)}></X>
+                <X style={{ cursor: 'pointer', fontStyle: 'bold', fontSize: '20pt' }} onClick={() => {
+                    console.log('item', item)
+                    if (item.id_region)
+                        handleDeleteRegion(item.id_region)
+                    if (item.id_country)
+                        handleDeleteCountry(item.id_country)
+                    if (item._id_city)
+                        handleDeleteCity(item.id_city)
+                }
+                }></X>
             </TreeLine>
             {item.children && item.isOpen && (
                 <TreeList item={item} tree={item.children} funcs={funcs} showModalTreeRegion={showModalTreeRegion} showModalTreeCountry={showModalTreeCountry} showModalTreeCity={showModalTreeCity} />
@@ -54,14 +63,14 @@ function TreeItem({ item, funcs, showModalTreeRegion, showModalTreeCountry, show
 }
 
 
-export default function TreeList({ item, tree, funcs, showModalTreeRegion, showModalTreeCountry, showModalTreeCity, handleDelete, handleCloseConfirm, showModalConfirm }) {
+export default function TreeList({ item, tree, funcs, showModalTreeRegion, showModalTreeCountry, showModalTreeCity, handleDeleteRegion, handleDeleteCountry, handleDeleteCity, handleCloseConfirm, showModalConfirm }) {
 
     return (
         <>
             &nbsp;<Button className="btn btn-primary sm-button" size="sm" onClick={() => showModalTreeRegion()}>Agregar</Button>
             <ul style={{ listStyleType: 'none' }}>
                 {tree.map(child => (
-                    <TreeItem item={child} funcs={funcs} showModalTreeRegion={showModalTreeRegion} showModalTreeCountry={showModalTreeCountry} showModalTreeCity={showModalTreeCity} handleDelete={handleDelete} />
+                    <TreeItem item={child} funcs={funcs} showModalTreeRegion={showModalTreeRegion} showModalTreeCountry={showModalTreeCountry} showModalTreeCity={showModalTreeCity} handleDeleteRegion={handleDeleteRegion} handleDeleteCountry={handleDeleteCountry} handleDeleteCity={handleDeleteCity} />
                 ))}
             </ul>
             <ModalConfirm show={showModalConfirm} handleCloseConfirm={handleCloseConfirm} title="Atención!" message="¿Desea borrar la region?"></ModalConfirm>
