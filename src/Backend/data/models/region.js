@@ -20,7 +20,8 @@ module.exports = (sequelize, dataTypes) => {
     Region.associate = function (models) {
         Region.hasMany(models.Country, {
             as: "countries",
-            foreignKey: "id_region"
+            foreignKey: "id_region",
+            onDelete: 'cascade'
 
         });
     };

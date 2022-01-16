@@ -10,9 +10,19 @@ const updateCountry = (country) => {
   return fetchData(`${API_URL}country/edit`, country, 'PUT')
 }
 
+const deleteCountry = (id) => {
+  return fetchData(`${API_URL}country/delete/${id}`, {}, 'DELETE')
+}
+
+const createCountry = (country) => {
+  return fetchData(`${API_URL}country/create`, country, 'POST')
+}
+
 const CountryService = {
   getCountries,
-  updateCountry
+  createCountry,
+  updateCountry,
+  deleteCountry
 }
 
 export default CountryService;

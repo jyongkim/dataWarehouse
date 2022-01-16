@@ -41,9 +41,30 @@ exports.edit = (req, res) => {
 }
 exports.delete = (req, res) => {
     console.log(req.params.id)
-    db.Region.destroy({
+    db.Region.findAll(({
+        include: [{ association: 'countries', include: [{ association: 'cities' }] }],
         where: {
             id_region: req.params.id
         }
-    })
+    })).then(results => {
+        // results.countries.forEach(country => {
+        //     db.City.destroy({
+        //         where: {
+        //             id_country: country.id_country
+        //         }
+        //     })
+        //     db.Country.destroy({
+        //         where: {
+        //             id_region: req.params.id
+        //         }
+        //     })
+        // }
+        // )
+        db.Region.destroy({
+            where: {
+                id_region: req.params.id
+            }
+        })
+    });
+
 }

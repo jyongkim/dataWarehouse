@@ -11,9 +11,19 @@ const updateCity = (city) => {
   return fetchData(`${API_URL}city/edit`, city, 'PUT')
 }
 
+const createCity = (city) => {
+  return fetchData(`${API_URL}city/create`, city, 'POST')
+}
+
+const deleteCity = (id) => {
+  return fetchData(`${API_URL}city/delete/${id}`, {}, 'DELETE')
+}
+
 const CityService = {
   getCities,
-  updateCity
+  createCity,
+  updateCity,
+  deleteCity
 }
 
 export default CityService;

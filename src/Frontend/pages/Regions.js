@@ -12,15 +12,18 @@ export default function Regions(params) {
     const [showModalTreeRegion, setShowModalTreeRegion] = useState(false)
     const [showModalTreeCountry, setShowModalTreeCountry] = useState(false)
     const [showModalTreeCity, setShowModalTreeCity] = useState(false)
-    const [region, setRegion] = useState({
+    const initialStateRegion = {
         region: ''
-    })
-    const [country, setCountry] = useState({
+    }
+    const initialStateCountry = {
         country: ''
-    })
-    const [city, setCity] = useState({
+    }
+    const initialStateCity = {
         city: ''
-    })
+    }
+    const [region, setRegion] = useState(initialStateRegion)
+    const [country, setCountry] = useState(initialStateCountry)
+    const [city, setCity] = useState(initialStateCity)
     const [fetchData, setFetchData] = useState(false)
     const [showModalConfirm, setShowModalConfirm] = useState(false)
     const [idRegionToDelete, setIdRegionToDelete] = useState(-1)
@@ -57,7 +60,6 @@ export default function Regions(params) {
     };
 
     const showModalRegion = (id) => {
-        console.log(id)
         if (id >= 0) {
             const regionToUpdate = regions.find(r => r.id_region == id)
             console.log(regionToUpdate)
@@ -71,7 +73,13 @@ export default function Regions(params) {
             console.log(regions)
             console.log('countryToUpdate', countryToUpdate)
             setCountry(countryToUpdate)
+        } else {
+            setCountry({
+                ...country,
+                id_region: idRegion
+            })
         }
+
         setShowModalTreeCountry(true)
     }
     const showModalCity = (idRegion, idCountry, idCity) => {
@@ -79,6 +87,12 @@ export default function Regions(params) {
             const cityToUpdate = regions.find(r => r.id_region === idRegion).children.find(c => c.id_country === idCountry).children.find(r => r.id_city === idCity)
             console.log(cityToUpdate)
             setCity(cityToUpdate)
+        } else {
+            setCity({
+                ...city,
+                id_region: idRegion,
+                id_city: idCity
+            })
         }
         setShowModalTreeCity(true)
     }
@@ -100,20 +114,23 @@ export default function Regions(params) {
         if (region.id_region > 0) {
             RegionService.updateRegion({ id_region: region.id_region, region: region.name })
         } else {
-            RegionService.createRegion({ id_region: region.id_country, region: region.name })
+            RegionService.createRegion({ region: region.name })
         }
         handleCloseRegion();
+        setRegion(initialStateRegion);
         setFetchData(true)
     }
 
     const handleSaveChangesCountry = (e) => {
         e.preventDefault()
+        console.log('xxx', country.id_region)
         if (country.id_country > 0) {
             CountryService.updateCountry({ id_country: country.id_country, country: country.name })
         } else {
-            CountryService.createCountry({ id_country: country.id_country, country: country.name })
+            CountryService.createCountry({ id_region: country.id_region, country: country.name })
         }
         handleCloseCountry();
+        setCountry(initialStateCountry)
         setFetchData(true)
     }
 
@@ -123,9 +140,10 @@ export default function Regions(params) {
         if (city.id_city > 0) {
             CityService.updateCity({ id_city: city.id_city, city: city.name })
         } else {
-            CityService.createCity({ id_city: city.id_city, city: city.name })
+            CityService.createCity({ id_region: city.id_region, id_country: city.id_country, city: city.name })
         }
         handleCloseCity();
+        setCity(initialStateCity)
         setFetchData(true)
     }
 
@@ -160,7 +178,7 @@ export default function Regions(params) {
                 setFetchData(true)
             }
             if (idCityToDelete > 0) {
-                const data = RegionService.deleteCity(idCityToDelete)
+                const data = CityService.deleteCity(idCityToDelete)
                 setFetchData(true)
             }
 

@@ -44,19 +44,19 @@ function TreeItem({ item, funcs, showModalTreeRegion, showModalTreeCountry, show
                         showModalTreeCity(item.id_grandparent, item.id_parent, item.id_city)
                 }
                 }></PencilSquare>&nbsp;
-                <X style={{ cursor: 'pointer', fontStyle: 'bold', fontSize: '20pt' }} onClick={() => {
-                    console.log('item', item)
+                <X style={{ cursor: 'pointer', fontStyle: 'bold', fontSize: '20pt' }} onClick={(e) => {
+                    e.preventDefault()
                     if (item.id_region)
                         handleDeleteRegion(item.id_region)
                     if (item.id_country)
                         handleDeleteCountry(item.id_country)
-                    if (item._id_city)
+                    if (item.id_city)
                         handleDeleteCity(item.id_city)
                 }
                 }></X>
             </TreeLine>
             {item.children && item.isOpen && (
-                <TreeList item={item} tree={item.children} funcs={funcs} showModalTreeRegion={showModalTreeRegion} showModalTreeCountry={showModalTreeCountry} showModalTreeCity={showModalTreeCity} />
+                <TreeList item={item} tree={item.children} funcs={funcs} showModalTreeRegion={showModalTreeRegion} showModalTreeCountry={showModalTreeCountry} showModalTreeCity={showModalTreeCity} handleDeleteRegion={handleDeleteRegion} handleDeleteCountry={handleDeleteCountry} handleDeleteCity={handleDeleteCity} />
             )}
         </li>
     );
@@ -67,7 +67,18 @@ export default function TreeList({ item, tree, funcs, showModalTreeRegion, showM
 
     return (
         <>
-            &nbsp;<Button className="btn btn-primary sm-button" size="sm" onClick={() => showModalTreeRegion()}>Agregar</Button>
+            &nbsp;<Button className="btn btn-primary sm-button" size="sm" onClick={() => {
+
+                if (item.id_country)
+                    showModalTreeCity(item.id_country)
+                else if (item.id_region)
+                    showModalTreeCountry(item.id_region)
+                else
+                    showModalTreeRegion()
+            }
+
+
+            }>Agregar</Button>
             <ul style={{ listStyleType: 'none' }}>
                 {tree.map(child => (
                     <TreeItem item={child} funcs={funcs} showModalTreeRegion={showModalTreeRegion} showModalTreeCountry={showModalTreeCountry} showModalTreeCity={showModalTreeCity} handleDeleteRegion={handleDeleteRegion} handleDeleteCountry={handleDeleteCountry} handleDeleteCity={handleDeleteCity} />

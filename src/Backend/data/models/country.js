@@ -29,7 +29,8 @@ module.exports = (sequelize, dataTypes) => {
         });
         Country.hasMany(models.City, {
             as: "cities",
-            foreignKey: "id_country"
+            foreignKey: "id_country",
+            onDelete: 'cascade'
 
         });
     }

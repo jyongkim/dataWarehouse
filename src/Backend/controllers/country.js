@@ -28,6 +28,11 @@ exports.edit = (req, res) => {
 
 exports.delete = (req, res) => {
     console.log(req.params.id)
+    db.City.destroy({
+        where: {
+            id_country: req.params.id
+        }
+    })
     db.Country.destroy({
         where: {
             id_country: req.params.id
