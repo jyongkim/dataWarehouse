@@ -70,21 +70,19 @@ export default function TreeList({ item, tree, funcs, showModalTreeRegion, showM
             &nbsp;<Button className="btn btn-primary sm-button" size="sm" onClick={() => {
 
                 if (item.id_country)
-                    showModalTreeCity(item.id_country)
+                    showModalTreeCity(item.id_region, item.id_country)
                 else if (item.id_region)
                     showModalTreeCountry(item.id_region)
                 else
                     showModalTreeRegion()
             }
-
-
             }>Agregar</Button>
             <ul style={{ listStyleType: 'none' }}>
                 {tree.map(child => (
                     <TreeItem item={child} funcs={funcs} showModalTreeRegion={showModalTreeRegion} showModalTreeCountry={showModalTreeCountry} showModalTreeCity={showModalTreeCity} handleDeleteRegion={handleDeleteRegion} handleDeleteCountry={handleDeleteCountry} handleDeleteCity={handleDeleteCity} />
                 ))}
             </ul>
-            <ModalConfirm show={showModalConfirm} handleCloseConfirm={handleCloseConfirm} title="Atención!" message="¿Desea borrar la region?"></ModalConfirm>
+            <ModalConfirm show={showModalConfirm} handleCloseConfirm={handleCloseConfirm} title="Atención!" message="¿Desea borrar?"></ModalConfirm>
         </>
     );
 }
