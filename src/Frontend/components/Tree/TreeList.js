@@ -34,8 +34,6 @@ function TreeItem({ item, funcs, showModalTreeRegion, showModalTreeCountry, show
                 &nbsp;{item.name}
                 &nbsp;<PencilSquare style={{ cursor: 'pointer' }} onClick={(e) => {
                     e.preventDefault();
-                    console.log(item.id_country);
-
                     if (item.id_region)
                         showModalTreeRegion(item.id_region)
                     if (item.id_country)
@@ -46,17 +44,18 @@ function TreeItem({ item, funcs, showModalTreeRegion, showModalTreeCountry, show
                 }></PencilSquare>&nbsp;
                 <X style={{ cursor: 'pointer', fontStyle: 'bold', fontSize: '20pt' }} onClick={(e) => {
                     e.preventDefault()
+                    console.log(item)
                     if (item.id_region)
                         handleDeleteRegion(item.id_region)
-                    if (item.id_country)
+                    if (item.id_parent)
                         handleDeleteCountry(item.id_country)
-                    if (item.id_city)
+                    if (item.id_grandparent)
                         handleDeleteCity(item.id_city)
                 }
                 }></X>
             </TreeLine>
             {item.children && item.isOpen && (
-                <TreeList item={item} tree={item.children} funcs={funcs} showModalTreeRegion={showModalTreeRegion} showModalTreeCountry={showModalTreeCountry} showModalTreeCity={showModalTreeCity} handleDeleteRegion={handleDeleteRegion} handleDeleteCountry={handleDeleteCountry} handleDeleteCity={handleDeleteCity} />
+                <TreeList key={item.name} item={item} tree={item.children} funcs={funcs} showModalTreeRegion={showModalTreeRegion} showModalTreeCountry={showModalTreeCountry} showModalTreeCity={showModalTreeCity} handleDeleteRegion={handleDeleteRegion} handleDeleteCountry={handleDeleteCountry} handleDeleteCity={handleDeleteCity} />
             )}
         </li>
     );
@@ -68,18 +67,21 @@ export default function TreeList({ item, tree, funcs, showModalTreeRegion, showM
     return (
         <>
             &nbsp;<Button className="btn btn-primary sm-button" size="sm" onClick={() => {
-
-                if (item.id_country)
+                console.log(item)
+                if (item === undefined)
+                    showModalTreeRegion()
+                else if (item.id_country)
                     showModalTreeCity(item.id_region, item.id_country)
                 else if (item.id_region)
                     showModalTreeCountry(item.id_region)
-                else
-                    showModalTreeRegion()
+
+
+
             }
             }>Agregar</Button>
             <ul style={{ listStyleType: 'none' }}>
                 {tree.map(child => (
-                    <TreeItem item={child} funcs={funcs} showModalTreeRegion={showModalTreeRegion} showModalTreeCountry={showModalTreeCountry} showModalTreeCity={showModalTreeCity} handleDeleteRegion={handleDeleteRegion} handleDeleteCountry={handleDeleteCountry} handleDeleteCity={handleDeleteCity} />
+                    <TreeItem key={child.name} item={child} funcs={funcs} showModalTreeRegion={showModalTreeRegion} showModalTreeCountry={showModalTreeCountry} showModalTreeCity={showModalTreeCity} handleDeleteRegion={handleDeleteRegion} handleDeleteCountry={handleDeleteCountry} handleDeleteCity={handleDeleteCity} />
                 ))}
             </ul>
             <ModalConfirm show={showModalConfirm} handleCloseConfirm={handleCloseConfirm} title="Atención!" message="¿Desea borrar?"></ModalConfirm>

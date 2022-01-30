@@ -13,12 +13,12 @@ function ModalTree(props) {
     return (
         <Modal show={showModalTree} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>Agregar Ciudad</Modal.Title>
+                <Modal.Title>Agregar</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={handleSaveChanges}>
                     <Form.Group className="mb-3" controlId="formBasicRegion">
-                        <Form.Label>Nombre de Ciudad</Form.Label>
+                        <Form.Label>Nombre</Form.Label>
                         <Form.Control type="text" placeholder="Ingrese nombre" onChange={onChangeName} value={item.name} />
                     </Form.Group>
                     <Button variant="primary" type="submit">
