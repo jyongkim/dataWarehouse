@@ -1,0 +1,30 @@
+.filterForm {
+
+    width      : 800px;
+    min-width  : 800px;
+    border     : 2px solid rgb(151, 139, 139);
+    margin-left: 10px;
+    padding    : 20px !important;
+
+
+
+}
+
+.searchForm {
+
+    width      : 800px;
+    min-width  : 800px;
+    margin-left: 10px;
+    padding    : 20px !important;
+
+
+
+}
+
+.filterForm label {
+    white-space   : nowrap;
+    padding       : 8px;
+    vertical-align: middle;
+
+    width: 400px;
+}
