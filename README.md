@@ -1,4 +1,4 @@
-# Dataa Warehouse.
+# Data Warehouse.
 Cuarto proyecto de Acámica.
 
 ## Tecnologías utilizadas
